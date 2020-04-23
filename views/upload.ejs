@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>File Upload</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1><a href="/"><img src="/images/logo.jpg" alt="LexSol"></a></h1>
-    <h1>ファイルアップロード</h1>
+    <div class="top-wrapper">
+
+    <div class="top-image">
+        <h1><a href="/index"><img src="/images/logo.jpg" alt="LexSol"></a></h1>
+    </div>
+    <h1 class="title">ファイルアップロード</h1>
+
     <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file">
+        <input type="file" name="file" accept=".csv, .xlsx, .xls">
         <button type="submit">送信</button>
     </form>
+    <!-- javascriptを埋め込み。dataが送られてきたらpタグが表示される。 -->
+    <% if (typeof data !== 'undefined') { %>
+    <P><%= data %>のアップロードが完了しました。</P>
+    <% }%>
+    
+    <br>
+    <a href = "/index" class="button"  >ホームに戻る</a>
+    </div>
 </body>
 </html>

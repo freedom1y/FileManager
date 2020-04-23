@@ -17,9 +17,18 @@
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
     </p>
     <ul>
-        <li><a href = "/upload" class="button"  >ファイルをアップロードする</a></li>>
-        <li><a href = "/upload" class="button"  >勤怠時間を確認する</a></li>>
+        <li><a href = "/upload" class="button"  >ファイルをアップロードする</a></li><br>
+        <li><a href = "/upload" class="button"  >勤怠時間を確認する</a></li><br>
+        <li><a href = "/logout" class="button"  >ログアウト</a></li><br>
     </ul>
+    <% if (typeof fileName !== 'undefined') { %>
+        <p>データファイル一覧</p>
+        <P><%= fileName %></P>
+    <% }else{%>
+        <p>ファイルなし</p>
+    <% } %>
     </div>
+
+    
 </body>
 </html>

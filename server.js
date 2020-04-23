@@ -32,6 +32,7 @@ app.use(auth);
 
 
 app.get('/index', (req, res) => {
+  console.log('[' + new Date() + '] Requested by ' + req.connection.remoteAddress);
   const filenames = fs.readdirSync("./uploads");
 
   //calc.ranking();// このブロックは実行されているがこのライブラリ出力されない
@@ -50,6 +51,7 @@ app.post('/upload', upload.single('file'), function (req, res) {
 
 app.get('/logout', (req, res) => {
   res.writeHead(401, {'Content-Type': 'text/plain; charset=utf-8'})
+  console.log('[' + new Date() + '] logout ' + req.connection.remoteAddress);
   res.end('ログアウトしました');
   return;
 });

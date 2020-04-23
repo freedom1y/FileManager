@@ -21,11 +21,17 @@ const storage = multer.diskStorage({
 // const upload = multer({ dest: 'uploads/' })
 const upload = multer({ storage: storage });
 
+
+app.get('/', (req, res) => {
+  res.render('login.ejs');
+});
+
+
 app.use(express.static('public'));
 app.use(auth);
 
 
-app.get('/', (req, res) => {
+app.get('/index', (req, res) => {
   const filenames = fs.readdirSync("./uploads");
 
   //calc.ranking();// このブロックは実行されているがこのライブラリ出力されない

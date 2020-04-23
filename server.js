@@ -60,3 +60,5 @@ app.listen(port, function(){
 	console.log(`listening on port ${port}!`);
 });	
 
+
+//typoを修正

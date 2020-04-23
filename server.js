@@ -4,6 +4,7 @@ const express = require('express');
 const multer = require('multer');
 const calc = require('./lib/calc.js')
 const auth = require('./lib/auth');
+const fs = require('fs');
 
 const app = express();
 const port = 8000;
@@ -23,9 +24,12 @@ const upload = multer({ storage: storage });
 app.use(express.static('public'));
 app.use(auth);
 
+
 app.get('/', (req, res) => {
-  calc.ranking();// このブロックは実行されているがこのライブラリ出力されない
-  res.render('index.ejs');
+  const filenames = fs.readdirSync("./uploads");
+
+  //calc.ranking();// このブロックは実行されているがこのライブラリ出力されない
+  res.render('index.ejs', {fileName: filenames});
 });
 
 app.get('/upload', (req, res) => {

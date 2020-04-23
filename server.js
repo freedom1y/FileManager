@@ -33,7 +33,9 @@ app.get('/upload', (req, res) => {
 });
 
 app.post('/upload', upload.single('file'), function (req, res) {
-    res.send(req.file.originalname + 'ファイルのアップロードが完了しました。');
+    //res.send(req.file.originalname + 'ファイルのアップロードが完了しました。');
+    res.render('upload.ejs', {data: req.file.originalname});
+    //uploadにレンダーして、送ったファイル名＋アップロード完了を表示する
 });
 
 app.get('/logout', (req, res) => {

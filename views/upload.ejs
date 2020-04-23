@@ -11,5 +11,9 @@
         <input type="file" name="file" accept=".csv, .xlsx, .xls">
         <button type="submit">送信</button>
     </form>
+    <!-- javascriptを埋め込み。dataが送られてきたらpタグが表示される。 -->
+    <% if (typeof data !== 'undefined') { %>
+    <P><%= data %>のアップロードが完了しました。</P>
+    <% }%>
 </body>
 </html>

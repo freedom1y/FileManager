@@ -21,5 +21,9 @@
         <li><a href = "/upload" class="button"  >勤怠時間を確認する</a></li>>
     </ul>
     </div>
+
+    <% if (typeof filename !== 'undefined') { %>
+        <P><%= filename %></P>
+    <% }%>
 </body>
 </html>

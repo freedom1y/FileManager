@@ -2,7 +2,8 @@
 const path = require('path');
 const express = require('express');
 const multer = require('multer');
-const calc = require('./lib/calc.js')
+const calc = require('./lib/calc.js');
+const xlsx = require('./lib/analyzXlsx.js');
 const auth = require('./lib/auth');
 const fs = require('fs');
 
@@ -43,6 +44,7 @@ app.get('/upload', (req, res) => {
 });
 
 app.get('/chart', (req, res) => {
+  xlsx.analyzXlsx();
   res.render('chart.ejs');
 });
 

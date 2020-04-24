@@ -54,10 +54,15 @@ app.post('/upload', upload.single('file'), function (req, res) {
 });
 
 app.get('/logout', (req, res) => {
-  res.writeHead(401, {'Content-Type': 'text/plain; charset=utf-8'})
+  res.writeHead(401, {
+    'Content-Type': 'text/html; charset=utf-8'
+  });
   console.log('[' + new Date() + '] logout ' + req.connection.remoteAddress);
-  res.end('ログアウトしました');
-  return;
+  res.end('<!DOCTYPE html><html lang="ja"><body>' +
+    '<h1>ログアウトしました</h1>' +
+    '<a href="/posts">ログイン</a>' +
+    '</body></html>'
+  );
 });
 
 app.listen(port, function(){

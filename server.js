@@ -44,8 +44,8 @@ app.get('/upload', (req, res) => {
 });
 
 app.get('/chart', (req, res) => {
-  xlsx.analyzXlsx();
-  res.render('chart.ejs');
+  console.log(xlsx.analyzXlsx());
+  res.render('chart.ejs', {xlsx: xlsx.analyzXlsx()});
 });
 
 app.post('/upload', upload.single('file'), function (req, res) {

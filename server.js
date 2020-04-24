@@ -21,15 +21,13 @@ const storage = multer.diskStorage({
 // const upload = multer({ dest: 'uploads/' })
 const upload = multer({ storage: storage });
 
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.render('login.ejs');
 });
 
-
-app.use(express.static('public'));
 app.use(auth);
-
 
 app.get('/index', (req, res) => {
   console.log('[' + new Date() + '] Requested by ' + req.connection.remoteAddress);

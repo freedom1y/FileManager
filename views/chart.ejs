@@ -18,10 +18,10 @@
         <h1 class="title">ファイル内容表示</h1>
 
         <% if (typeof xlsx !== 'undefined') { %>
-        <P><%= xlsx %></P>
+            <% for (var i = 0; i < 5; i++) { %>
+                <P><%= xlsx[i]['A1'] %> <%= xlsx[i]['B1'] %> <%= xlsx[i]['C1'] %></P>
+            <% } %>
         <% }%>
-        <% console.log(xlsx) { %>
-
 
         <br>
         <a href="/index" class="button">ホームに戻る</a>

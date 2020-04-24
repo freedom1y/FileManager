@@ -7,7 +7,7 @@ const auth = require('./lib/auth');
 const fs = require('fs');
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 // ファイル名を変更して保存
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -57,6 +57,3 @@ app.get('/logout', (req, res) => {
 app.listen(port, function(){
 	console.log(`listening on port ${port}!`);
 });	
-
-
-//typoを修正

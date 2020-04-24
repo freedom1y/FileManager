@@ -1,0 +1,7 @@
+{
+  "name": "FileManager",
+  "description": "FileManager for LexSol.",
+  "repository": "https://github.com/freedom1y/FileManager",
+  "logo": "",
+  "keywords": ["node"]
+}

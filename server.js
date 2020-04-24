@@ -2,7 +2,8 @@
 const path = require('path');
 const express = require('express');
 const multer = require('multer');
-const calc = require('./lib/calc.js')
+const calc = require('./lib/calc.js');
+const xlsx = require('./lib/analyzXlsx.js');
 const auth = require('./lib/auth');
 const fs = require('fs');
 
@@ -21,13 +22,12 @@ const storage = multer.diskStorage({
 // const upload = multer({ dest: 'uploads/' })
 const upload = multer({ storage: storage });
 
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.render('login.ejs');
 });
 
-
-app.use(express.static('public'));
 app.use(auth);
 
 
@@ -41,6 +41,11 @@ app.get('/index', (req, res) => {
 
 app.get('/upload', (req, res) => {
   res.render('upload.ejs');
+});
+
+app.get('/chart', (req, res) => {
+  console.log(xlsx.analyzXlsx());
+  res.render('chart.ejs', {xlsx: xlsx.analyzXlsx()});
 });
 
 app.post('/upload', upload.single('file'), function (req, res) {

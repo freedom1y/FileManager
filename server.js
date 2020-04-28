@@ -65,6 +65,14 @@ app.get('/logout', (req, res) => {
   );
 });
 
+app.get('/favicon.ico', (req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'image/vnd.microsoft.icon'
+  });
+  const favicon = fs.readFileSync('./public/images/logo.jpg');
+  res.end(favicon);
+});
+
 app.listen(port, function(){
 	console.log(`listening on port ${port}!`);
 });	

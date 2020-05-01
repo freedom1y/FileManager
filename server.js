@@ -15,7 +15,8 @@ const port = process.env.PORT || 8000;
 
 // ルーティングハンドラ
 app.get('/', routes.login);
-app.use(lib.auth); // BASIC認証
+// BASIC認証
+app.use(lib.auth);
 app.get('/index', routes.index);
 app.get('/upload', routes.upload.Get);
 app.post('/upload', lib.renameFile.single(), routes.upload.Post);

@@ -1,11 +1,12 @@
-const analyze = require('../lib/analyze.js');
+const analyze = require('../lib/analyze');
+const Post = require('../lib/post');
 
 module.exports = (req, res) => {
-  let object = analyze.xlskObject();
-  console.log(object);
-  res.render('chart', {
-    sheet: object.sheet,
-    names: object.names,
-    end: object.end
+  analyze.xlskObject();
+  
+  Post.findAll().then((posts) => {
+    res.render('chart', {
+      xlsk: posts
+    });
   });
 }

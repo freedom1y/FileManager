@@ -1,3 +1,5 @@
+const analyze = require('../lib/analyze');
+
 // GETリクエスト
 function Get(req, res) {
   res.render('upload.ejs');
@@ -5,6 +7,7 @@ function Get(req, res) {
 
 // POSTリクエスト
 function Post(req, res) {
+  analyze.xlskObject();
   res.render('upload', {data: req.file.originalname});
 }
 

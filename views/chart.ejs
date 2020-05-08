@@ -41,7 +41,20 @@
                     <th><%= xlsk[row].manHour %></th>
                     <th><%= xlsk[row].taskType %></th>
                     <th><%= xlsk[row].note %></th>
+                    <th>
+                        <form action="/chart?edit=1" method="get">
+                            <input type="hidden"  >
+                            <button type="submit">編集</button>
+                        </form>
+                    </th>
+                    <th>
+                        <form action="/chart?delete=1" method="get">
+                            <input type="hidden"  >
+                            <button type="submit">削除</button>
+                        </form>
+                    </th>
                   </tr>
+                  
             <% } %>
         <% }%>
         </table>

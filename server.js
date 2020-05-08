@@ -1,4 +1,5 @@
 'use strict'
+const createError = require('http-errors');
 const path = require('path');
 const express = require('express');
 const all = require('require-all');
@@ -15,14 +16,29 @@ const port = process.env.PORT || 8000;
 
 // ルーティングハンドラ
 app.get('/', routes.login);
-// BASIC認証
-app.use(lib.auth);
+app.use(lib.auth); // BASIC認証
 app.get('/index', routes.index);
 app.get('/upload', routes.upload.Get);
 app.post('/upload', lib.renameFile.single(), routes.upload.Post);
 app.get('/chart', routes.chart);
 app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 app.listen(port, function(){
 	console.log(`listening on port ${port}!`);

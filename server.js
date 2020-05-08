@@ -21,7 +21,8 @@ app.get('/index', routes.index);
 app.get('/upload', routes.upload.Get);
 app.post('/upload', lib.renameFile.single(), routes.upload.Post);
 app.get('/chart', routes.chart);
-// app.get('/chart?delete=1', routes.delete);
+app.get('/chart?delete=1', routes.delete.handleDelete);
+app.get('/chart?edit=1', routes.edit.handleEdit);
 app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
 

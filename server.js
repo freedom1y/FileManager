@@ -2,11 +2,13 @@
 const createError = require('http-errors');
 const path = require('path');
 const express = require('express');
+const helmet = require('helmet');
 const all = require('require-all');
 const lib = all(__dirname + '/lib'); // libディレクトリ直下のファイルを一括読み込み
 const routes = all(__dirname + '/routes');
 
 const app = express();
+app.use(helmet());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

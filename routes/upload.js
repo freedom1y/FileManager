@@ -7,7 +7,7 @@ function Get(req, res) {
 
 // POSTリクエスト
 function Post(req, res) {
-  analyze.xlskObject();
+  analyze.xlskObject(req.file.originalname);
   res.render('upload', {data: req.file.originalname});
 }
 

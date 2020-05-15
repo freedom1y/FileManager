@@ -1,11 +1,5 @@
-function handleEdit(req, res){
-  console.log("test edit")
-  res.render('chart', {
-    xlsk: posts
+
+module.exports = (req, res) => {
+  res.render('chart/edit', {
   });
-}
-
-
-module.exports = {
-  handleEdit
 }

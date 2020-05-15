@@ -19,19 +19,21 @@
 
         <table border="1" width="50%" height="70%">
             <tr>
-              <th>対応</th>
-              <th>対応者</th>
-              <th>進捗</th>
-              <th>重要度</th>
-              <th>対応予定日</th>
-              <th>完了日</th>
-              <th>工数(人日)</th>
-              <th>種別</th>
-              <th>備考</th>
+                <th>プロジェクト</th>
+                <th>対応</th>
+                <th>対応者</th>
+                <th>進捗</th>
+                <th>重要度</th>
+                <th>対応予定日</th>
+                <th>完了日</th>
+                <th>工数(人日)</th>
+                <th>種別</th>
+                <th>備考</th>
             </tr>
         <% if (typeof xlsk !== 'undefined') { %>
             <% for ( row in xlsk ) { %>
                 <tr>
+                    <th><%= xlsk[row].project %></th>
                     <th><%= xlsk[row].task %></th>
                     <th><%= xlsk[row].person %></th>
                     <th><%= xlsk[row].progress %></th>

@@ -29,6 +29,7 @@ app.post('/upload', lib.renameFile.single(), routes.upload.Post);
 app.get('/chart', routes.chart);
 app.get('/edit', routes.edit.Get);
 app.post('/edit', routes.edit.Post);
+app.get('/approve', routes.approve);
 app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
 

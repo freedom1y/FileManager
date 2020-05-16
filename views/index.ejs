@@ -10,7 +10,7 @@
     <div class="top-image">
         <img src="/images/logo.jpg">
     </div>
-    <h1 class="title">勤怠管理システム</h1>
+    <h1 class="title">工数管理システム</h1>
         <%= userName + "としてログインしています" %>
     <p class="description">
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -18,8 +18,11 @@
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
     </p>
     <ul>
-        <li><a href = "/upload" class="button"  >ファイルをアップロードする</a></li><br>
-        <li><a href = "/chart" class="button"  >ファイル内容表示</a></li><br>
+        <li><a href = "/chart" class="button"  >工数</a></li><br>
+        <li><a href = "/upload" class="button"  >ファイルアップロード</a></li><br>
+        <% if ( userName === 'lexsol') { %>
+            <li><a href = "/approve" class="button"  >承認</a></li><br>
+        <% } %>
         <li><a href = "/logout" class="button"  >ログアウト</a></li><br>
     </ul>
     <% if (typeof fileName !== 'undefined') { %>

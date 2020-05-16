@@ -15,11 +15,10 @@
         <div class="top-image">
             <h1><a href="/index"><img src="/images/logo.jpg" alt="LexSol"></a></h1>
         </div>
-        <h1 class="title">ファイル内容表示</h1>
-
+        <h1 class="title">編集</h1>
+        <h2><%=editTarget.project %></h2>
         <table border="1" width="50%" height="70%">
             <tr>
-                <th>プロジェクト</th>
                 <th>対応</th>
                 <th>対応者</th>
                 <th>進捗</th>
@@ -30,32 +29,28 @@
                 <th>種別</th>
                 <th>備考</th>
             </tr>
-        <% if (typeof xlsk !== 'undefined') { %>
-            <form method="post"　action="/chart?edit=1">
-                <tr>
-                    <th><input type="text" name="project" size="30" maxlength="20" value="<%=  %>"></th>
-                    <th><input type="text" name="name" size="30" maxlength="20" value="対応"></th>
-                    <th><input type="text" name="name" size="30" maxlength="20" value="対応者"></th>
-                    <th><input type="text" name="name" size="30" maxlength="20" value="進捗"></th>
-                    <th><input type="text" name="name" size="30" maxlength="20" value="重要度"></th>
-                    <th><input type="text" name="name" size="30" maxlength="20" value="対応予定日"></th>
-                    <th><input type="text" name="name" size="30" maxlength="20" value="完了日"></th>
-                    <th><input type="text" name="name" size="30" maxlength="20" value="工数(人日)"></th>
-                    <th><input type="text" name="name" size="30" maxlength="20" value="種別"></th>
-                    <th><input type="text" name="name" size="30" maxlength="20" value="<%= 備考 %>"></th>
-                    <th>
-                        <input  >
-                        <button type="submit">編集を完了して更新する</button>
-                        <button type="submit">編集を破棄して戻る</button>
-                    </th>
-                </tr>
-            </form>
-        <% }%>
-        </table>
 
+            <form method="post"　action="/edit">
+                <tr>
+                    <th><input type="text" name="task" size="15" value="<%=editTarget.task %>"></th>
+                    <th><input type="text" name="person" size="15" value="<%=editTarget.person %>"></th>
+                    <th><input type="text" name="progress" size="15" value="<%=editTarget.progress %>"></th>
+                    <th><input type="text" name="importance" size="15" value="<%=editTarget.importance %>"></th>
+                    <th><input type="text" name="taskDate" size="15" value="<%=editTarget.taskDate %>"></th>
+                    <th><input type="text" name="compDate" size="15" value="<%=editTarget.compDate %>"></th>
+                    <th><input type="text" name="manHour" size="15" value="<%=editTarget.manHour %>"></th>
+                    <th><input type="text" name="taskType" size="15" value="<%=editTarget.taskType %>"></th>
+                    <th><input type="text" name="note" size="15" value="<%=editTarget.note %>"></th>
+                </tr>
+        </table>
+        <% if (typeof updateMsg !== 'undefined') { %>
+            <h3><%= updateMsg %></h3>
+        <% } %>
         <br>
-        <a href="/chart" class="button">一覧に戻る</a>
-        <a href="/index" class="button">ホームに戻る</a>
+            <input type="submit" value="編集を完了する" class="button">
+            <a href="/chart" class="button">戻る</a>
+        </form>
+        
     </div>
 </body>
 

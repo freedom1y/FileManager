@@ -49,18 +49,13 @@
                     <th><%= xlsk[row].taskType %></th>
                     <th><%= xlsk[row].note %></th>
                     <th>
-                        <form action="/chart?edit=1" method="get">
-                            <input type="submit" value="編集">
-                        </form>
+                       <a href="/edit?id=<%=xlsk[row].id %>">編集</a>
                     </th>
                     <th>
-                        <form action="/chart?delete=1" method="get">
-                            <input type="submit" value="削除">
-                        </form>
+                        <a href="/edit?id=<%=xlsk[row].id %>">削除</a>
                     </th>
                 </tr>                 
             <% } %>
-
         </table>
         <% }%>
 

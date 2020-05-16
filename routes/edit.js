@@ -29,7 +29,8 @@ function Post(req, res) {
       compDate: req.body.compDate,
       manHour: req.body.manHour,
       taskType: req.body.taskType,
-      note: req.body.note
+      note: req.body.note,
+      flag: 1
     });
     console.log("updated!")
     res.render('edit', {

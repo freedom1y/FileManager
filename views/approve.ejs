@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>File Upload</title>
+    <title>承認</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -49,17 +49,11 @@
                     <th><%= xlsk[row].taskType %></th>
                     <th><%= xlsk[row].note %></th>
                     <th>
-                        <form action="/chart?edit=1" method="get">
-                            <input type="hidden"  >
-                            <button type="submit">承認</button>
-                        </form>
-                    </th>
-                    <th>
-                        <form action="/chart?delete=1" method="get">
-                            <input type="hidden"  >
-                            <button type="submit">削除</button>
-                        </form>
-                    </th>
+                      <a href="/edit?id=<%=xlsk[row].id %>">承認</a>
+                   </th>
+                   <th>
+                       <a href="/edit?id=<%=xlsk[row].id %>">非承認</a>
+                   </th>
                 </tr>                 
             <% } %>
 

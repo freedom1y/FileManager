@@ -32,7 +32,7 @@ function Post(req, res) {
       note: req.body.note,
       flag: 1
     });
-    console.log("updated!")
+    console.log("updated!");
     res.render('edit', {
       editTarget: updateData,
       updateMsg: "更新しました"

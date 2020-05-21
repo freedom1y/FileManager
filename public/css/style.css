@@ -174,3 +174,23 @@ header {
   font-weight: 500;
   color: #8491a5;
 }
+
+.clear-decoration {
+  border: none;  /* 枠線を消す */
+  outline: none; /* クリックしたときに表示される枠線を消す */
+  background: transparent; /* 背景の灰色を消す */
+  font-family: 'Hiragino Sans', sans-serif;
+  text-decoration: none;
+  color: #2d3133;
+  font-size: 14px;
+  font-weight: bold; 
+  border: 0px;
+}
+
+.flag1 {
+  color: #ffe100;
+}
+
+.flag2 {
+  color: #ff0000;
+}

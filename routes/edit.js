@@ -35,7 +35,7 @@ function Post(req, res) {
     console.log("updated!")
     res.render('edit', {
       editTarget: updateData,
-      updateMsg: "更新しました"
+      updateMsg: "更新完了"
     });
   });
 }

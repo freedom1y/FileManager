@@ -7,6 +7,29 @@
     <meta charset="UTF-8">
     <title>工数</title>
     <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript">
+        
+        function disp(id){
+        
+            // 「OK」時の処理開始 ＋ 確認ダイアログの表示
+            if(window.confirm('本当に削除しますか？')){
+        
+                location.href = "/delete?id=" + id; // example_confirm.html へジャンプ
+        
+            }
+            // 「OK」時の処理終了
+        
+            // 「キャンセル」時の処理開始
+            else{
+        
+                window.alert('キャンセルされました'); // 警告ダイアログを表示
+        
+            }
+            // 「キャンセル」時の処理終了
+        
+        }
+        
+        </script>
 </head>
 
 <body>
@@ -19,26 +42,27 @@
 
 
         <% if (typeof xlsk !== 'undefined') { %>
-            <% var projectName = '' %>
-            <% for ( row in xlsk ) { %>
-                <% if (projectName !== xlsk[row].project) { %>
-                    <% projectName = xlsk[row].project %>
-                    </table>
-                    <h2><%= xlsk[row].project %></h2>
-                    <table border="1" width="50%" height="70%">
-                        <tr>
-                            <th>対応</th>
-                            <th>対応者</th>
-                            <th>進捗</th>
-                            <th>重要度</th>
-                            <th>対応予定日</th>
-                            <th>完了日</th>
-                            <th>工数(人日)</th>
-                            <th>種別</th>
-                            <th>備考</th>
-                        </tr>
-                <% } %>
-                <tr>
+        <% var projectName = '' %>
+        <% for ( row in xlsk ) { %>
+        <% if (projectName !== xlsk[row].project) { %>
+        <% projectName = xlsk[row].project %>
+        </table>
+        <h2><%= xlsk[row].project %></h2>
+        <table border="1" width="50%" height="70%">
+            <tr>
+                <th>対応</th>
+                <th>対応者</th>
+                <th>進捗</th>
+                <th>重要度</th>
+                <th>対応予定日</th>
+                <th>完了日</th>
+                <th>工数(人日)</th>
+                <th>種別</th>
+                <th>備考</th>
+            </tr>
+            <% } %>
+            <tr>
+                <div class='flag<%= xlsk[row].flag%>'>
                     <th><%= xlsk[row].task %></th>
                     <th><%= xlsk[row].person %></th>
                     <th><%= xlsk[row].progress %></th>
@@ -49,12 +73,13 @@
                     <th><%= xlsk[row].taskType %></th>
                     <th><%= xlsk[row].note %></th>
                     <th>
-                       <a href="/edit?id=<%=xlsk[row].id %>">編集</a>
-                    </th>
-                    <th>
-                        <a href="/edit?id=<%=xlsk[row].id %>">削除</a>
-                    </th>
-                </tr>                 
+                </div>
+                    <a href="/edit?id=<%=xlsk[row].id %>">編集</a>
+                </th>
+                <th>
+                    <input type="button" class="clear-decoration" value="削除" onClick="disp(<%= xlsk[row].id %>)">
+                </th>
+            </tr>
             <% } %>
         </table>
         <% }%>

@@ -28,6 +28,7 @@ app.get('/upload', routes.upload.Get);
 app.post('/upload', lib.renameFile.single(), routes.upload.Post);
 app.get('/chart', routes.chart);
 app.get('/edit', routes.edit.Get);
+app.get('/delete', routes.delete.Delete);
 app.post('/edit', routes.edit.Post);
 app.get('/approve', routes.approve);
 app.get('/unapprove', routes.unapprove);

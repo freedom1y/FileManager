@@ -6,7 +6,7 @@ function Delete(req, res){
       id: req.query.id
     }
   }).then((deleteData) =>{
-    console.log("delete rowid = " + req.query.id);
+    console.log("delete id = " + req.query.id);
     post.findAll({
       order: [['project', 'ASC']]
     }).then((posts) =>{

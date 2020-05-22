@@ -38,7 +38,7 @@ function Unapprove(req, res) {
       id: {[Op.ne]: req.query.id} //where id != req.query.id
     }
   }).then((posts) => {
-    res.render('unapprove', {
+    res.render('approve', {
       xlsk: posts,
       approveMsg: approveMsg
     });

@@ -8,28 +8,28 @@
     <title>工数</title>
     <link rel="stylesheet" href="/css/style.css">
     <script type="text/javascript">
-        
-        function disp(id){
-        
+
+        function disp(id) {
+
             // 「OK」時の処理開始 ＋ 確認ダイアログの表示
-            if(window.confirm('本当に削除しますか？')){
-        
+            if (window.confirm('本当に削除しますか？')) {
+
                 location.href = "/delete?id=" + id; // example_confirm.html へジャンプ
-        
+
             }
             // 「OK」時の処理終了
-        
+
             // 「キャンセル」時の処理開始
-            else{
-        
+            else {
+
                 window.alert('キャンセルされました'); // 警告ダイアログを表示
-        
+
             }
             // 「キャンセル」時の処理終了
-        
+
         }
-        
-        </script>
+
+    </script>
 </head>
 
 <body>
@@ -61,19 +61,17 @@
                 <th>備考</th>
             </tr>
             <% } %>
-            <tr>
-                <div class='flag<%= xlsk[row].flag%>'>
-                    <th><%= xlsk[row].task %></th>
-                    <th><%= xlsk[row].person %></th>
-                    <th><%= xlsk[row].progress %></th>
-                    <th><%= xlsk[row].importance %></th>
-                    <th><%= xlsk[row].taskDate %></th>
-                    <th><%= xlsk[row].compDate %></th>
-                    <th><%= xlsk[row].manHour %></th>
-                    <th><%= xlsk[row].taskType %></th>
-                    <th><%= xlsk[row].note %></th>
-                    <th>
-                </div>
+            <tr class='flag<%= xlsk[row].flag%>'>
+                <th><%= xlsk[row].task %></th>
+                <th><%= xlsk[row].person %></th>
+                <th><%= xlsk[row].progress %></th>
+                <th><%= xlsk[row].importance %></th>
+                <th><%= xlsk[row].taskDate %></th>
+                <th><%= xlsk[row].compDate %></th>
+                <th><%= xlsk[row].manHour %></th>
+                <th><%= xlsk[row].taskType %></th>
+                <th><%= xlsk[row].note %></th>
+                <th>
                     <a href="/edit?id=<%=xlsk[row].id %>">編集</a>
                 </th>
                 <th>

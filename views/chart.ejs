@@ -50,14 +50,14 @@
         <h2><%= xlsk[row].project %></h2>
         <table border="1" width="50%" height="70%">
             <tr>
-                <th>対応</th>
-                <th>対応者</th>
-                <th>進捗</th>
-                <th>重要度</th>
-                <th>対応予定日</th>
-                <th>完了日</th>
-                <th>工数(人日)</th>
-                <th>種別</th>
+                <th><a href="/chart/sortTask">対応</a></th>
+                <th><a href="/chart/sortPerson">対応者</a></th>
+                <th><a href="/chart/sortProgress">進捗</a></th>
+                <th><a href="/chart/sortImportance">重要度</a></th>
+                <th><a href="/chart/sortTaskDate">対応予定日</a></th>
+                <th><a href="/chart/sortCompDate">完了日</a></th>
+                <th><a href="/chart/sortManHour">工数(人日)</a></th>
+                <th><a href="/chart/sortTaskType">種別</a></th>
                 <th>備考</th>
             </tr>
             <% } %>

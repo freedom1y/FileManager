@@ -26,7 +26,15 @@ app.use(lib.auth); // BASIC認証
 app.get('/index', routes.index);
 app.get('/upload', routes.upload.Get);
 app.post('/upload', lib.renameFile.single(), routes.upload.Post);
-app.get('/chart', routes.chart);
+app.get('/chart', routes.chart.display);
+app.get('/chart/sortTask', routes.chart.sortTask);
+app.get('/chart/sortPerson', routes.chart.sortPerson);
+app.get('/chart/sortProgress', routes.chart.sortProgress);
+app.get('/chart/sortImportance', routes.chart.sortImportance);
+app.get('/chart/sortTaskDate', routes.chart.sortTaskDate);
+app.get('/chart/sortCompDate', routes.chart.sortCompDate);
+app.get('/chart/sortManHour', routes.chart.sortManHour);
+app.get('/chart/sortTaskType', routes.chart.sortTaskType);
 app.get('/edit', routes.edit.Get);
 app.get('/delete', routes.delete.Delete);
 app.post('/edit', routes.edit.Post);

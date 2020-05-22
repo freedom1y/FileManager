@@ -19,7 +19,11 @@
     </form>
     <!-- javascriptを埋め込み。dataが送られてきたらpタグが表示される。 -->
     <% if (typeof data !== 'undefined') { %>
-    <P><%= data %>のアップロードが完了しました。</P>
+        <% if(data.indexOf('_案件一覧') > -1){ %>
+            <P><%= data %>のアップロードが完了しました。</P>
+        <% }else{ %>
+            <P><%= data %>はファイル形式が不正です。</P>
+        <% }%>
     <% }%>
     
     <br>

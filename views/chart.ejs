@@ -59,6 +59,7 @@
                 <th><a href="/chart/sortManHour">工数(人日)</a></th>
                 <th><a href="/chart/sortTaskType">種別</a></th>
                 <th>備考</th>
+                <th>承認状態</th>
             </tr>
             <% } %>
             <tr class='flag<%= xlsk[row].flag%>'>
@@ -71,6 +72,14 @@
                 <th><%= xlsk[row].manHour %></th>
                 <th><%= xlsk[row].taskType %></th>
                 <th><%= xlsk[row].note %></th>
+                <th><% if(xlsk[row].flag === 1){ %>
+                        <p>承認待ち</p>
+                    <%}else if(xlsk[row].flag === 2){%>
+                        <p>非承認</p>
+                    <%} else{%>
+                        <p>承認済み</p>
+                    <%} %>
+                </th>
                 <th>
                     <a href="/edit?id=<%=xlsk[row].id %>">編集</a>
                 </th>

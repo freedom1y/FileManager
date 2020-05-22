@@ -13,7 +13,7 @@ function display(req, res) {
 function sortTask(req, res) {
   Post.findAll({
     order: [['project', 'ASC'],['task', 'ASC']]
-  //order の後の配列の中に配列を入れる
+  //order の後の配列の中に配列を入る．増やしていけば前から順にソートされていく．
   }).then((posts) => {
     res.render('chart', {
       xlsk: posts

@@ -19,23 +19,54 @@ function Get(req, res) {
 }
 
 // 承認
-function Approve(req, res) {
+function Post(req, res) {
   approveMsg = "承認しました";
-  post.findOne({
+
+  //承認したIDと非承認のIDを分ける
+  appIds = []
+  unappIds = []
+  for (let i = 0; i < Object.keys(req.body).length; i++) {
+    if (req.body[Object.keys(req.body)[i]] === 'y') {
+      appIds.push(Object.keys(req.body)[i])
+    } else if(req.body[Object.keys(req.body)[i]] === 'n') {
+      unappIds.push(Object.keys(req.body)[i])
+    }
+  }
+  console.log('sep is ok')
+
+  post.findAll({
     where: {
-      id: req.query.id
+      id: {
+        $in: [18, 17]
+        //ラジオボックスでチェクをつけたカラムのIDの配列を渡すことで，この中のどれかにマッチする
+      }
     }
   }).then((updateData) => {
+    console.log('select is ok')
     updateData.update({
       flag: 0
     });
     console.log("approved!");
   });
 
+  // post.findAll({
+  //   where: {
+  //     id: {
+  //       $in: unappIds
+  //       //ラジオボックスでチェクをつけたカラムのIDの配列を渡すことで，この中のどれかにマッチする
+  //     }
+  //   }
+  // }).then((updateData) => {
+  //   updateData.update({
+  //     flag: 2
+  //   });
+  //   console.log("approved!");
+  // });
+
   post.findAll({
     where: {
       flag: 1,
-      id: {[Op.ne]: req.query.id} //where id != req.query.id
+      id: { [Op.ne]: req.query.id } //where id != req.query.id
     }
   }).then((posts) => {
     res.render('approve', {
@@ -45,10 +76,6 @@ function Approve(req, res) {
   });
 }
 
-module.exports = (req, res) => {
-  if(req.query.id){
-    Approve(req, res);
-  }else{
-    Get(req, res);
-  }
+module.exports = {
+  Get, Post
 }

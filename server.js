@@ -30,7 +30,8 @@ app.get('/chart', routes.chart.display);
 app.get('/edit', routes.edit.Get);
 app.get('/delete', routes.delete.Delete);
 app.post('/edit', routes.edit.Post);
-app.get('/approve', routes.approve);
+app.get('/approve', routes.approve.Get);
+app.post('/approve', routes.approve.Post);
 app.get('/unapprove', routes.unapprove);
 app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
@@ -43,6 +44,8 @@ app.get('/chart/sortTaskDate', routes.chart.sortTaskDate);
 app.get('/chart/sortCompDate', routes.chart.sortCompDate);
 app.get('/chart/sortManHour', routes.chart.sortManHour);
 app.get('/chart/sortTaskType', routes.chart.sortTaskType);
+//test
+app.post('/aptest', routes.aptest.aptest);
 
 
 // catch 404 and forward to error handler

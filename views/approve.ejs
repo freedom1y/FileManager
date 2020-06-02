@@ -36,7 +36,9 @@
                             <th>工数(人日)</th>
                             <th>種別</th>
                             <th>備考</th>
+                            
                         </tr>
+                        <form action="/approve" method="post">
                 <% } %>
                 <tr>
                     <th><%= xlsk[row].task %></th>
@@ -49,14 +51,16 @@
                     <th><%= xlsk[row].taskType %></th>
                     <th><%= xlsk[row].note %></th>
                     <th>
-                      <a href="/approve?id=<%=xlsk[row].id %>">承認</a>
+                        <input type="radio" name='<%=xlsk[row].id%>' value='y'>承認
+                        <!-- <a href="/approve?id=<%=xlsk[row].id %>">承認</a> -->
                    </th>
                    <th>
-                       <a href="/unapprove?id=<%=xlsk[row].id %>">非承認</a>
+                        <input type="radio" name='<%=xlsk[row].id%>' value='n'>非承認
+                       <!-- <a href="/unapprove?id=<%=xlsk[row].id %>">非承認</a> -->
                    </th>
                 </tr>                 
             <% } %>
-
+        
         </table>
         <% }%>
 
@@ -64,7 +68,8 @@
             <h3><%= approveMsg %></h3>
         <% } %>
         <br>
-
+        <input type="submit" value="承認を確定" class='button'>
+        </form>
         <a href="/index" class="button">ホームに戻る</a>
     </div>
 </body>

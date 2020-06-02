@@ -93,5 +93,13 @@ function sortTaskType(req, res) {
 
 
 module.exports = {
-  display, sortTask, sortPerson, sortProgress, sortImportance, sortTaskDate, sortCompDate, sortManHour, sortTaskType
+  display, 
+  sortTask, 
+  sortPerson, 
+  sortProgress, 
+  sortImportance, 
+  sortTaskDate, 
+  sortCompDate, 
+  sortManHour, 
+  sortTaskType
 }

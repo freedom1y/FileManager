@@ -42,53 +42,53 @@
 
 
         <% if (typeof xlsk !== 'undefined') { %>
-        <% var projectName = '' %>
-        <% for ( row in xlsk ) { %>
-        <% if (projectName !== xlsk[row].project) { %>
-        <% projectName = xlsk[row].project %>
-        </table>
-        <h2><%= xlsk[row].project %></h2>
-        <table border="1" width="50%" height="70%">
-            <tr>
-                <th><a href="/chart/sortTask">対応</a></th>
-                <th><a href="/chart/sortPerson">対応者</a></th>
-                <th><a href="/chart/sortProgress">進捗</a></th>
-                <th><a href="/chart/sortImportance">重要度</a></th>
-                <th><a href="/chart/sortTaskDate">対応予定日</a></th>
-                <th><a href="/chart/sortCompDate">完了日</a></th>
-                <th><a href="/chart/sortManHour">工数(人日)</a></th>
-                <th><a href="/chart/sortTaskType">種別</a></th>
-                <th>備考</th>
-                <th>承認状態</th>
-            </tr>
+            <% var projectName = '' %>
+            <% for ( row in xlsk ) { %>
+                <% if (projectName !== xlsk[row].project) { %>
+                    <% projectName = xlsk[row].project %>
+                        </table>
+                        <h2><%= xlsk[row].project %></h2>
+                        <table border="1" width="50%" height="70%">
+                            <tr>
+                                <th><a href="/chart/sortTask">対応</a></th>
+                                <th><a href="/chart/sortPerson">対応者</a></th>
+                                <th><a href="/chart/sortProgress">進捗</a></th>
+                                <th><a href="/chart/sortImportance">重要度</a></th>
+                                <th><a href="/chart/sortTaskDate">対応予定日</a></th>
+                                <th><a href="/chart/sortCompDate">完了日</a></th>
+                                <th><a href="/chart/sortManHour">工数(人日)</a></th>
+                                <th><a href="/chart/sortTaskType">種別</a></th>
+                                <th>備考</th>
+                                <th>承認状態</th>
+                            </tr>
+                <% } %>
+                <tr class='flag<%= xlsk[row].flag%>'>
+                    <th><%= xlsk[row].task %></th>
+                    <th><%= xlsk[row].person %></th>
+                    <th><%= xlsk[row].progress %></th>
+                    <th><%= xlsk[row].importance %></th>
+                    <th><%= xlsk[row].taskDate %></th>
+                    <th><%= xlsk[row].compDate %></th>
+                    <th><%= xlsk[row].manHour %></th>
+                    <th><%= xlsk[row].taskType %></th>
+                    <th><%= xlsk[row].note %></th>
+                    <th><% if(xlsk[row].flag === 1){ %>
+                            <p>承認待ち</p>
+                        <%}else if(xlsk[row].flag === 2){%>
+                            <p>非承認</p>
+                        <%} else{%>
+                            <p>承認済み</p>
+                        <%} %>
+                    </th>
+                    <th>
+                        <a href="/edit?id=<%=xlsk[row].id %>">編集</a>
+                    </th>
+                    <th>
+                        <input type="button" class="clear-decoration" value="削除" onClick="disp(<%= xlsk[row].id %>)">
+                    </th>
+                </tr>
             <% } %>
-            <tr class='flag<%= xlsk[row].flag%>'>
-                <th><%= xlsk[row].task %></th>
-                <th><%= xlsk[row].person %></th>
-                <th><%= xlsk[row].progress %></th>
-                <th><%= xlsk[row].importance %></th>
-                <th><%= xlsk[row].taskDate %></th>
-                <th><%= xlsk[row].compDate %></th>
-                <th><%= xlsk[row].manHour %></th>
-                <th><%= xlsk[row].taskType %></th>
-                <th><%= xlsk[row].note %></th>
-                <th><% if(xlsk[row].flag === 1){ %>
-                        <p>承認待ち</p>
-                    <%}else if(xlsk[row].flag === 2){%>
-                        <p>非承認</p>
-                    <%} else{%>
-                        <p>承認済み</p>
-                    <%} %>
-                </th>
-                <th>
-                    <a href="/edit?id=<%=xlsk[row].id %>">編集</a>
-                </th>
-                <th>
-                    <input type="button" class="clear-decoration" value="削除" onClick="disp(<%= xlsk[row].id %>)">
-                </th>
-            </tr>
-            <% } %>
-        </table>
+            </table>
         <% }%>
 
         <br>

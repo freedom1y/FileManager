@@ -18,55 +18,55 @@ function Get(req, res) {
   });
 }
 
-// 承認
+// POSTリクエスト
 function Post(req, res) {
   approveMsg = "承認しました";
 
-  //承認したIDと非承認のIDを分ける
-  appIds = []
-  unappIds = []
+  //承認ID、非承認IDに分ける
+  let appIds = [];
+  let unappIds = [];
   for (let i = 0; i < Object.keys(req.body).length; i++) {
     if (req.body[Object.keys(req.body)[i]] === 'y') {
-      appIds.push(Object.keys(req.body)[i])
+      appIds.push(Number(Object.keys(req.body)[i]));
     } else if(req.body[Object.keys(req.body)[i]] === 'n') {
-      unappIds.push(Object.keys(req.body)[i])
+      unappIds.push(Number(Object.keys(req.body)[i]));
     }
   }
-  console.log('sep is ok')
 
-  post.findAll({
-    where: {
-      id: {
-        $in: [18, 17]
-        //ラジオボックスでチェクをつけたカラムのIDの配列を渡すことで，この中のどれかにマッチする
+  if(appIds.length){
+    post.findAll({
+      where: {
+        id: { [Op.in]: appIds }
       }
-    }
-  }).then((updateData) => {
-    console.log('select is ok')
-    updateData.update({
-      flag: 0
+    }).then((updateData) => {
+      updateData.forEach((data) => {
+        data.update({
+          flag: 0
+        });
+      });
+      console.log("approved!");
     });
-    console.log("approved!");
-  });
-
-  // post.findAll({
-  //   where: {
-  //     id: {
-  //       $in: unappIds
-  //       //ラジオボックスでチェクをつけたカラムのIDの配列を渡すことで，この中のどれかにマッチする
-  //     }
-  //   }
-  // }).then((updateData) => {
-  //   updateData.update({
-  //     flag: 2
-  //   });
-  //   console.log("approved!");
-  // });
+  };
+  
+  if(unappIds.length){
+    post.findAll({
+      where: {
+        id: { [Op.in]: unappIds }
+      }
+    }).then((updateData) => {
+      updateData.forEach((data) => {
+        data.update({
+          flag: 2
+        });
+      });
+      console.log("unapproved!");
+    });
+  }
 
   post.findAll({
     where: {
       flag: 1,
-      id: { [Op.ne]: req.query.id } //where id != req.query.id
+      id: { [Op.notIn]: appIds.concat(unappIds) }
     }
   }).then((posts) => {
     res.render('approve', {

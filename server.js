@@ -32,7 +32,6 @@ app.get('/delete', routes.delete.Delete);
 app.post('/edit', routes.edit.Post);
 app.get('/approve', routes.approve.Get);
 app.post('/approve', routes.approve.Post);
-app.get('/unapprove', routes.unapprove);
 app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
 //ソート処理のルーティング

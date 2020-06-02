@@ -44,14 +44,12 @@
         <% if (typeof xlsk !== 'undefined') { %>
             <% var projectName = '' %>
             <% for ( row in xlsk ) { %>
-                <form action="/edit" method="post">
                 <% if (projectName !== xlsk[row].project) { %>
                     <% projectName = xlsk[row].project %>
                         </table>
                         <h2><%= xlsk[row].project %></h2>
                         <table border="1" width="50%" height="70%">
                             <tr>
-                                <th>編集</th>
                                 <th><a href="/chart/sortTask">対応</a></th>
                                 <th><a href="/chart/sortPerson">対応者</a></th>
                                 <th><a href="/chart/sortProgress">進捗</a></th>
@@ -62,11 +60,11 @@
                                 <th><a href="/chart/sortTaskType">種別</a></th>
                                 <th>備考</th>
                                 <th>承認状態</th>
+                                <th>編集</th>
                                 <th>削除</th>
                             </tr>
                 <% } %>
                 <tr class='flag<%= xlsk[row].flag%>'>
-                    <th><input type="checkbox" name="" value=""></th>
                     <th><%= xlsk[row].task %></th>
                     <th><%= xlsk[row].person %></th>
                     <th><%= xlsk[row].progress %></th>
@@ -85,10 +83,10 @@
                         <%} %>
                     </th>
                     <th>
-                        <input type="button" class="clear-decoration" value="削除" onClick="disp(<%= xlsk[row].id %>)">
+                        <a href="/edit?id=<%=xlsk[row].id %>">編集</a>
                     </th>
                     <th>
-                        <a href="/edit?id=<%=xlsk[row].id %>">編集</a>
+                        <input type="button" class="clear-decoration" value="削除" onClick="disp(<%= xlsk[row].id %>)">
                     </th>
                 </tr>
             <% } %>
@@ -96,8 +94,6 @@
         <% }%>
 
         <br>
-        <input type="submit" value="編集を行う" class='button'>
-        </form>
         <a href="/index" class="button">ホームに戻る</a>
     </div>
 </body>

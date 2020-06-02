@@ -1,6 +1,6 @@
 const Post = require('../lib/post');
 
-function display(req, res) {
+function Get(req, res) {
   Post.findAll({
     order: [['project', 'ASC']]
   }).then((posts) => {
@@ -93,7 +93,7 @@ function sortTaskType(req, res) {
 
 
 module.exports = {
-  display, 
+  Get, 
   sortTask, 
   sortPerson, 
   sortProgress, 

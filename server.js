@@ -26,10 +26,10 @@ app.use(lib.auth); // BASIC認証
 app.get('/index', routes.index);
 app.get('/upload', routes.upload.Get);
 app.post('/upload', lib.renameFile.single(), routes.upload.Post);
-app.get('/chart', routes.chart.display);
+app.get('/chart', routes.chart.Get);
 app.get('/edit', routes.edit.Get);
-app.get('/delete', routes.delete.Delete);
 app.post('/edit', routes.edit.Post);
+app.get('/delete', routes.delete.Delete);
 app.get('/approve', routes.approve.Get);
 app.post('/approve', routes.approve.Post);
 app.get('/logout', routes.logout);

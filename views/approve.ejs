@@ -36,7 +36,8 @@
                             <th>完了日</th>
                             <th>工数(人日)</th>
                             <th>種別</th>
-                            <th>備考</th>                            
+                            <th>備考</th>
+                            <th>承認</th>                           
                         </tr>
                 <% } %>
                 <tr>
@@ -50,10 +51,8 @@
                     <th><%= xlsk[row].taskType %></th>
                     <th><%= xlsk[row].note %></th>
                     <th>
-                        <input type="radio" name='<%=xlsk[row].id%>' value='y'>承認
-                    </th>
-                    <th>
-                        <input type="radio" name='<%=xlsk[row].id%>' value='n'>非承認
+                        <input type="radio" name='<%=xlsk[row].id%>' value='y'>Y
+                        <input type="radio" name='<%=xlsk[row].id%>' value='n'>N
                     </th>
                 </tr>                 
             <% } %>

@@ -1,4 +1,5 @@
 const post = require('../lib/post');
+const mklog = require('../lib/mklog');
 
 function Delete(req, res){
   post.destroy({
@@ -6,7 +7,7 @@ function Delete(req, res){
       id: req.query.id
     }
   }).then((deleteData) =>{
-    console.log("delete id = " + req.query.id);
+    mklog.log("delete id = " + req.query.id, req);
     post.findAll({
       order: [['project', 'ASC']]
     }).then((posts) =>{
@@ -16,7 +17,7 @@ function Delete(req, res){
     });
     
   }).catch((err) => {
-    console.log("delete false");
+    mklog.log("delete false", req);
     post.findAll({
       order: [['project', 'ASC']]
     }).then((posts) =>{

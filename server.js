@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const lib = all(__dirname + '/lib'); // libディレクトリ直下のファイルを一括読み込み
 const routes = all(__dirname + '/routes');
 
+
 const app = express();
 app.use(helmet());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -19,6 +20,7 @@ app.set('view engine', 'ejs');
 //express.staticは引数のパスのファイルを静的なファイルとして利用できるようにする。フォルダのパスを書いたらその下のファイル全部使える。
 app.use(express.static('public'));
 const port = process.env.PORT || 8000;
+
 
 // ルーティングハンドラ
 app.get('/', routes.login);
@@ -64,5 +66,6 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(port, function(){
-	console.log(`listening on port ${port}!`);
+  console.log(`listening on port ${port}!`);
+  // mklog.log('[' + new Date() + '] ' + `listening on port ${port}!`);
 });	

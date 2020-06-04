@@ -2,6 +2,8 @@ const post = require('../lib/post');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 var approveMsg = "";
+const mklog = require('../lib/mklog');
+const auth = require('basic-auth');
 
 // GETリクエスト
 function Get(req, res) {
@@ -44,7 +46,7 @@ function Post(req, res) {
           flag: 0
         });
       });
-      console.log("approved!");
+      mklog.log('approve rowid=' + appIds, req);
     });
   };
   
@@ -59,10 +61,9 @@ function Post(req, res) {
           flag: 2
         });
       });
-      console.log("unapproved!");
+      mklog.log('unapprove rowid=' + unappIds, req);
     });
   }
-
   post.findAll({
     where: {
       flag: 1,

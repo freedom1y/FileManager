@@ -1,2 +1,4 @@
 node_modules
 heroku
+info.log
+error.log

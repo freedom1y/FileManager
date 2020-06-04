@@ -29,6 +29,7 @@ app.get('/index', routes.index);
 app.get('/upload', routes.upload.Get);
 app.post('/upload', lib.renameFile.single(), routes.upload.Post);
 app.get('/chart', routes.chart.Get);
+app.get('/projectList', routes.projectList.projectList);
 app.get('/edit', routes.edit.Get);
 app.post('/edit', routes.edit.Post);
 app.get('/delete', routes.delete.Delete);

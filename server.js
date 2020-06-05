@@ -48,7 +48,8 @@ app.get('/chart/sortManHour', routes.chart.sortManHour);
 app.get('/chart/sortTaskType', routes.chart.sortTaskType);
 //test
 app.post('/aptest', routes.aptest.aptest);
-
+app.get('/sheetJS', routes.sheetJS);
+app.post('/test', routes.test);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

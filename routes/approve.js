@@ -11,7 +11,8 @@ function Get(req, res) {
   post.findAll({
     where: {
       flag: 1
-    }
+    },
+    order: [['project', 'ASC']]
   }).then((posts) => {
     res.render('approve', {
       xlsk: posts,

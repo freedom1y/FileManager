@@ -1,4 +1,6 @@
 const post = require('../lib/post');
+const mklog = require('../lib/mklog');
+const auth = require('basic-auth');
 
 // GETリクエスト
 function Get(req, res) {
@@ -32,7 +34,8 @@ function Post(req, res) {
       note: req.body.note,
       flag: 1
     });
-    console.log("updated!");
+    const userInfo = auth(req); 
+    mklog.log('update rowid=' + req.query.id, req);
     res.render('edit', {
       editTarget: updateData,
       updateMsg: "更新完了"

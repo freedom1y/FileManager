@@ -2,7 +2,9 @@ const Post = require('../lib/post');
 
 function Get(req, res) {
   Post.findAll({
-    order: [['project', 'ASC']]
+    where: {
+      project: req.query.pname
+    }
   }).then((posts) => {
     res.render('chart', {
       xlsk: posts

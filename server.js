@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const lib = all(__dirname + '/lib'); // libディレクトリ直下のファイルを一括読み込み
 const routes = all(__dirname + '/routes');
 
+
 const app = express();
 app.use(helmet());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -20,6 +21,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 const port = process.env.PORT || 8000;
 
+
 // ルーティングハンドラ
 app.get('/', routes.login);
 app.use(lib.auth); // BASIC認証
@@ -27,6 +29,7 @@ app.get('/index', routes.index);
 app.get('/upload', routes.upload.Get);
 app.post('/upload', lib.renameFile.single(), routes.upload.Post);
 app.get('/chart', routes.chart.Get);
+app.get('/projectList', routes.projectList.projectList);
 app.get('/edit', routes.edit.Get);
 app.post('/edit', routes.edit.Post);
 app.get('/delete', routes.delete.Delete);
@@ -64,5 +67,6 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(port, function(){
-	console.log(`listening on port ${port}!`);
+  console.log(`listening on port ${port}!`);
+  // mklog.log('[' + new Date() + '] ' + `listening on port ${port}!`);
 });	

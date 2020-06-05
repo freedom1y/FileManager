@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>工数</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript">
+
+        function disp(id) {
+
+            // 「OK」時の処理開始 ＋ 確認ダイアログの表示
+            if (window.confirm('本当に削除しますか？')) {
+
+                location.href = "/delete?id=" + id; // example_confirm.html へジャンプ
+
+            }
+            // 「OK」時の処理終了
+
+            // 「キャンセル」時の処理開始
+            else {
+
+                window.alert('キャンセルされました'); // 警告ダイアログを表示
+
+            }
+            // 「キャンセル」時の処理終了
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="top-wrapper">
+
+        <div class="top-image">
+            <h1><a href="/index"><img src="/images/logo.jpg" alt="LexSol"></a></h1>
+        </div>
+        <h1 class="title">工数</h1>
+
+
+        <% if (typeof xlsk !== 'undefined') { %>
+            <% var projectName = '' %>
+            <% for ( row in xlsk ) { %>
+                <% if (projectName !== xlsk[row].project) { %>
+                  <% projectName = xlsk[row].project %>
+                    <a href="/chart?pname=<%=projectName%>"><%= projectName %></a>
+                <% } %>
+                
+            <% } %>
+        <% }%>
+
+        <br>
+        <a href="/index" class="button">ホームに戻る</a>
+    </div>
+</body>
+
+</html>

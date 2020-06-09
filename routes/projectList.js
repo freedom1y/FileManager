@@ -1,7 +1,6 @@
-// POSTリクエスト
 const Post = require('../lib/post');
 
-function projectList(req, res) {
+module.exports = function(req, res) {
   Post.findAll({
     order: [['project', 'ASC']]
   }).then((posts) => {
@@ -9,8 +8,4 @@ function projectList(req, res) {
       xlsk: posts
     });
   });
-}
-
-module.exports = {
-  projectList
 }

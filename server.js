@@ -29,7 +29,7 @@ app.get('/index', routes.index);
 app.get('/upload', routes.upload.Get);
 app.post('/upload', lib.renameFile.single(), routes.upload.Post);
 app.get('/chart', routes.chart.Get);
-app.get('/projectList', routes.projectList.projectList);
+app.get('/projectList', routes.projectList);
 app.get('/edit', routes.edit.Get);
 app.post('/edit', routes.edit.Post);
 app.get('/delete', routes.delete.Delete);
@@ -37,7 +37,7 @@ app.get('/approve', routes.approve.Get);
 app.post('/approve', routes.approve.Post);
 app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
-//ソート処理のルーティング
+// ソート処理のルーティング
 app.get('/chart/sortTask', routes.chart.sortTask);
 app.get('/chart/sortPerson', routes.chart.sortPerson);
 app.get('/chart/sortProgress', routes.chart.sortProgress);

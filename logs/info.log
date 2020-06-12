@@ -104,3 +104,14 @@
 [Thu Jun 11 2020 14:21:01 GMT+0900 (GMT+09:00)] lexsol login ::ffff:10.0.2.2
 [Thu Jun 11 2020 14:45:05 GMT+0900 (GMT+09:00)] lexsol login ::ffff:10.0.2.2
 [Thu Jun 11 2020 14:54:27 GMT+0900 (GMT+09:00)] lexsol login ::ffff:10.0.2.2
+[Fri Jun 12 2020 13:38:32 GMT+0900 (GMT+09:00)] lexsol UploadFile hamige_案件一覧.xlsx ::ffff:10.0.2.2
+[Fri Jun 12 2020 14:35:42 GMT+0900 (GMT+09:00)] lexsol delete id = 71 ::ffff:10.0.2.2
+[Fri Jun 12 2020 14:35:49 GMT+0900 (GMT+09:00)] lexsol delete id = 73 ::ffff:10.0.2.2
+[Fri Jun 12 2020 14:35:52 GMT+0900 (GMT+09:00)] lexsol delete id = 78 ::ffff:10.0.2.2
+[Fri Jun 12 2020 14:35:54 GMT+0900 (GMT+09:00)] lexsol delete id = 77 ::ffff:10.0.2.2
+[Fri Jun 12 2020 14:35:56 GMT+0900 (GMT+09:00)] lexsol delete id = 74 ::ffff:10.0.2.2
+[Fri Jun 12 2020 14:35:58 GMT+0900 (GMT+09:00)] lexsol delete id = 75 ::ffff:10.0.2.2
+[Fri Jun 12 2020 14:36:00 GMT+0900 (GMT+09:00)] lexsol delete id = 80 ::ffff:10.0.2.2
+[Fri Jun 12 2020 14:36:01 GMT+0900 (GMT+09:00)] lexsol delete id = 72 ::ffff:10.0.2.2
+[Fri Jun 12 2020 14:36:03 GMT+0900 (GMT+09:00)] lexsol delete id = 76 ::ffff:10.0.2.2
+[Fri Jun 12 2020 14:36:04 GMT+0900 (GMT+09:00)] lexsol delete id = 79 ::ffff:10.0.2.2

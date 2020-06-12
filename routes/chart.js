@@ -14,6 +14,9 @@ function Get(req, res) {
 
 function sortTask(req, res) {
   Post.findAll({
+    where: {
+      project: req.query.pname
+    },
     order: [['project', 'ASC'],['task', 'ASC']]
   //order の後の配列の中に配列を入る．増やしていけば前から順にソートされていく．
   }).then((posts) => {
@@ -25,6 +28,9 @@ function sortTask(req, res) {
 
 function sortPerson(req, res) {
   Post.findAll({
+    where: {
+      project: req.query.pname
+    },
     order: [['project', 'ASC'],['person', 'ASC']]
   }).then((posts) => {
     res.render('chart', {
@@ -35,6 +41,9 @@ function sortPerson(req, res) {
 
 function sortProgress(req, res) {
   Post.findAll({
+    where: {
+      project: req.query.pname
+    },
     order: [['project', 'ASC'],['progress', 'ASC']]
   }).then((posts) => {
     res.render('chart', {
@@ -45,6 +54,9 @@ function sortProgress(req, res) {
 
 function sortImportance(req, res) {
   Post.findAll({
+    where: {
+      project: req.query.pname
+    },
     order: [['project', 'ASC'],['importance', 'ASC']]
   }).then((posts) => {
     res.render('chart', {
@@ -55,6 +67,9 @@ function sortImportance(req, res) {
 
 function sortTaskDate(req, res) {
   Post.findAll({
+    where: {
+      project: req.query.pname
+    },
     order: [['project', 'ASC'],['taskDate', 'ASC']]
   }).then((posts) => {
     res.render('chart', {
@@ -65,6 +80,9 @@ function sortTaskDate(req, res) {
 
 function sortCompDate(req, res) {
   Post.findAll({
+    where: {
+      project: req.query.pname
+    },
     order: [['project', 'ASC'],['compDate', 'ASC']]
   }).then((posts) => {
     res.render('chart', {
@@ -75,6 +93,9 @@ function sortCompDate(req, res) {
 
 function sortManHour(req, res) {
   Post.findAll({
+    where: {
+      project: req.query.pname
+    },
     order: [['project', 'ASC'],['manHour', 'ASC']]
   }).then((posts) => {
     res.render('chart', {
@@ -85,6 +106,9 @@ function sortManHour(req, res) {
 
 function sortTaskType(req, res) {
   Post.findAll({
+    where: {
+      project: req.query.pname
+    },
     order: [['project', 'ASC']]
   }).then((posts) => {
     res.render('chart', {

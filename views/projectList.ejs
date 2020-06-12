@@ -46,7 +46,7 @@
             <% for ( row in xlsk ) { %>
                 <% if (projectName !== xlsk[row].project) { %>
                   <% projectName = xlsk[row].project %>
-                    <a href="/chart?pname=<%=projectName%>"><%= projectName %></a>
+                    <h2><a href="/chart?pname=<%=projectName%>"><%= projectName %></a></h2>
                 <% } %>
                 
             <% } %>

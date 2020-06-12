@@ -26,8 +26,8 @@ const port = process.env.PORT || 8000;
 app.get('/', routes.login);
 app.use(lib.auth); // BASIC認証
 app.get('/index', routes.index);
-app.get('/upload', routes.upload.Get);
-app.post('/upload', lib.renameFile.single(), routes.upload.Post);
+app.get('/upload', routes.sheetJS.Get);
+app.post('/upload', routes.sheetJS.Post);
 app.get('/chart', routes.chart.Get);
 app.get('/projectList', routes.projectList);
 app.get('/edit', routes.edit.Get);
@@ -48,7 +48,7 @@ app.get('/chart/sortManHour', routes.chart.sortManHour);
 app.get('/chart/sortTaskType', routes.chart.sortTaskType);
 //test
 app.post('/aptest', routes.aptest.aptest);
-app.get('/sheetJS', routes.sheetJS.Get);
+// app.get('/sheetJS', routes.sheetJS.Get);
 app.post('/sheetJS', routes.sheetJS.Post);
 app.post('/test', routes.test);
 app.get('/test', routes.test);

@@ -19,16 +19,18 @@
     <h3>ファイル名は'〇〇_案件一覧'という形式にしてください</h3>
   </div>
 
-  <div class="custom-file">
-    <input type="file" class="custom-file-input" id="customFile">
-    <label class="custom-file-label" for="customFile">Excelファイルを選択...</label>
-    
-  </div>
-  <div>
-    <h3>結果</h3>
-    <pre id="result">ここにJSONを出力します</pre>
-    <button type="submit">送信</button>
-  </div>
+  <form>
+    <div class="custom-file">
+      <input type="file" class="custom-file-input" id="customFile">
+      <label class="custom-file-label" for="customFile">Excelファイルを選択...</label>
+    </div>
+    <div>
+      <h3>結果</h3>
+      <pre id="result">ここにJSONを出力します</pre>
+      <button id="update" type="button">送信</button>
+    </div>
+  </form>
+
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.11.19/xlsx.full.min.js"></script>

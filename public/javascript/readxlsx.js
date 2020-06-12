@@ -1,5 +1,5 @@
 var X = XLSX;
-
+var output = "";
 // ファイル選択時のメイン処理
 function handleFile(e) {
 
@@ -15,16 +15,21 @@ function handleFile(e) {
       type: 'base64',
       cellDates: true,
     });
-
-    var output = "";
-    output = to_json(wb);// JSONが返ってくる
-    console.log(output);
-
-    $("pre#result").html(JSON.stringify(output, null, 2));
-    // $("#xlsx").val(output);
     
-  };
+    output = to_json(wb);// JSONが返ってくる
+    // console.log(output);
+    $("pre#result").html(JSON.stringify(output, null, 2));
 
+
+
+
+
+    // $("pre#result").html(JSON.stringify(output, null, 2));
+    // $("#xlsx").val(output);
+  };
+  ///////
+
+  ///////
   reader.readAsArrayBuffer(f);
 }
 
@@ -44,31 +49,59 @@ function to_json(workbook) {
   // var result = {};
   let sheetNameList = workbook.SheetNames;                       // シート名一覧オブジェクト
   let workSheet = workbook.Sheets[sheetNameList[0]];
-  let colNames = [workSheet['H4'].w,
+  // let colNames = [workSheet['H4'].w,
   workSheet['I4'].w,
-  workSheet['J4'].w,
-  workSheet['K4'].w,
-  workSheet['L4'].v,
-  workSheet['M4'].v,
-  workSheet['N4'].w,
-  workSheet['O4'].w,
-  workSheet['P4'].w];
+    workSheet['J4'].w,
+    workSheet['K4'].w,
+    workSheet['L4'].v,
+    workSheet['M4'].v,
+    workSheet['N4'].w,
+    workSheet['O4'].w,
+    workSheet['P4'].w;
 
   let endCol = workSheet['!ref'].match(/\:[A-Z+]([0-9]+)/)[1];  // エクセルデータの末端の行数を取得する
   workSheet['!ref'] = `H4:P${endCol}`;                          // 取得したいセルの範囲を指定し直す。H4からP列の末端行まで
   let workSheet_json = X.utils.sheet_to_json(workSheet);        // JSONオブジェクトとして取得
-  
+
   return workSheet_json;
 }
 
 // 画面初期化
 $(document).ready(function () {
-  console.log('done3');
   // ファイル選択欄 選択イベント
   // http://cccabinet.jpn.org/bootstrap4/javascript/forms/file-browser
   $('.custom-file-input').on('change', function (e) {
-    console.log('done2');
     handleFile(e);
+
     $(this).next('.custom-file-label').html($(this)[0].files[0].name);
   })
+
+
+
+  $("button#update").click(function (e) {
+    // 多重送信を防ぐため通信完了までボタンをdisableにする
+    var button = $(this);
+    button.attr("disabled", true);
+
+    // 各フィールドから値を取得してJSONデータを作成
+    console.log(output);
+    $.ajax({
+      url: "/sheetJS",
+      type: "POST",
+      data: { output: output },
+      dataType: "JSON",
+      cache: false,
+      success: function (data) {
+        console.log("POST success");
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        console.log("POST false");
+        console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+        console.log("textStatus     : " + textStatus);
+        console.log("errorThrown    : " + errorThrown.message);
+      }
+    });
+  });
+
 });
+

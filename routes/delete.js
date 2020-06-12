@@ -2,6 +2,7 @@ const post = require('../lib/post');
 const mklog = require('../lib/mklog');
 
 function Delete(req, res){
+  console.log(req.query.pname)
   post.destroy({
     where: {
       id: req.query.id
@@ -9,7 +10,9 @@ function Delete(req, res){
   }).then((deleteData) =>{
     mklog.log("delete id = " + req.query.id, req);
     post.findAll({
-      order: [['project', 'ASC']]
+      where: {
+        project: req.query.pname
+      }
     }).then((posts) =>{
       res.render('chart', {
         xlsk: posts

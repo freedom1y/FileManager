@@ -51,6 +51,7 @@ app.post('/aptest', routes.aptest.aptest);
 app.get('/sheetJS', routes.sheetJS.Get);
 app.post('/sheetJS', routes.sheetJS.Post);
 app.post('/test', routes.test);
+app.get('/test', routes.test);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -6,6 +6,36 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <%= data %>
+    <form action="test" accept-charset="UTF-8" method="post">
+        <input type="text"   name="hoge"></input>
+        <input type="text"   name="fuga"></input>
+        <input type="submit" name="submit"></input>
+    </form>
 </body>
+    
+<script>
+    $('form').submit(function(){
+        var data = $('form').serializeArray();  // ①form to json
+        data = parseJson(data); // ②json to 欲しい形
+        // ③送信
+        $.ajax({
+        type:          'post',
+        dataType:      'json',
+        contentType:   'application/json',
+        scriptCharset: 'utf-8',
+        data:          JSON.stringify(data)
+        })
+        console.log(data);
+    }
+    
+    // ②変換関数：json to 欲しい形
+    var parseJson = function(data) {
+        var returnJson = {};
+        for (idx = 0; idx < data.length; idx++) {
+        returnJson[data[idx].name] = data[idx].value
+        }
+        return returnJson;
+    }
+    
+</script>
 </html>

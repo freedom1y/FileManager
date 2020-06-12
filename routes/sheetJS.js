@@ -22,7 +22,7 @@ function Post(req, res) {
       var compDt = new Date(worksheet[i][Object.keys(worksheet[i])[5]]);
       compDt.setHours(compDt.getHours() + 9);
       post.create({
-        project: "aiueo",
+        project: req.body.projectName,
         task: worksheet[i][Object.keys(worksheet[i])[0]],
         person: worksheet[i][Object.keys(worksheet[i])[1]],
         progress: worksheet[i][Object.keys(worksheet[i])[2]],
@@ -36,7 +36,7 @@ function Post(req, res) {
       });
     } else {
       post.create({
-        project: "aiueo",
+        project: req.body.projectName,
         task: worksheet[i][Object.keys(worksheet[i])[0]],
         person: worksheet[i][Object.keys(worksheet[i])[1]],
         progress: worksheet[i][Object.keys(worksheet[i])[2]],

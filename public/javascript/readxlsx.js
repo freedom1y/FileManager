@@ -1,5 +1,9 @@
 var X = XLSX;
 var output = "";
+var fileName = "";
+var projectName = "";
+var button = $("button#update");
+
 // ファイル選択時のメイン処理
 function handleFile(e) {
 
@@ -34,7 +38,16 @@ function fixdata(data) {
 
 // ワークブックのデータをjsonに変換
 function to_json(workbook) {
-  // var result = {};
+  if(fileName.indexOf('_案件一覧') === -1){
+    console.log('ファイル形式が一致しません');
+    button.attr("disabled", true);
+    $('.not-fileName').html('ファイル形式が一致しません');
+    return;
+  }
+  projectName = fileName.split('_')[0];
+  button.attr("disabled", false);
+  console.log(projectName);
+
   let sheetNameList = workbook.SheetNames;                       // シート名一覧オブジェクト
   let workSheet = workbook.Sheets[sheetNameList[0]];
   // let colNames = [workSheet['H4'].w,
@@ -61,22 +74,25 @@ $(document).ready(function () {
   $('.custom-file-input').on('change', function (e) {
     handleFile(e);
 
-    $(this).next('.custom-file-label').html($(this)[0].files[0].name);
+    fileName = $(this)[0].files[0].name;
   })
 
 
 
   $("button#update").click(function (e) {
+    $('.not-fileName').html('アップロードが完了しました。');
     // 多重送信を防ぐため通信完了までボタンをdisableにする
-    var button = $(this);
     button.attr("disabled", true);
 
     // 各フィールドから値を取得してJSONデータを作成
     console.log(output);
     $.ajax({
-      url: "/sheetJS",
+      url: "/upload",
       type: "POST",
-      data: { output: output },
+      data: { 
+        output: output,
+        projectName: projectName 
+      },
       dataType: "JSON",
       cache: false,
       success: function (data) {

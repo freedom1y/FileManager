@@ -49,7 +49,7 @@ app.get('/chart/sortTaskType', routes.chart.sortTaskType);
 //test
 app.post('/aptest', routes.aptest.aptest);
 // app.get('/sheetJS', routes.sheetJS.Get);
-app.post('/sheetJS', routes.sheetJS.Post);
+// app.post('/sheetJS', routes.sheetJS.Post);
 app.post('/test', routes.test);
 app.get('/test', routes.test);
 

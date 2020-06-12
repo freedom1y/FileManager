@@ -11,20 +11,17 @@
         <img src="/images/logo.jpg">
     </div>
     <h1 class="title">工数管理システム</h1>
-        <%= userName + "としてログインしています" %>
     <p class="description">
-        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        <br>
-        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
+        エクセルファイルをアップロードし、Web上で工数管理を行う  
     </p>
+    <h3><%= userName + "としてログインしています" %></h3>
     <ul>
         <li><a href = "/projectList" class="button"  >プロジェクト一覧</a></li><br>
         <li><a href = "/upload" class="button"  >ファイルアップロード</a></li><br>
         <% if ( userName === 'lexsol') { %>
             <li><a href = "/approve" class="button"  >承認</a></li><br>
         <% } %>
-        <li><a href = "/logout" class="button"  >ログアウト</a></li><br>
-        
+        <li><a href = "/logout" class="button"  >ログアウト</a></li><br>       
     </ul>
     <% if (typeof fileName !== 'undefined') { %>
         <P><%= fileName %></P>

@@ -87,7 +87,11 @@ $(document).ready(function () {
         console.log("XMLHttpRequest : " + XMLHttpRequest.status);
         console.log("textStatus     : " + textStatus);
         console.log("errorThrown    : " + errorThrown.message);
+      },
+      complete: function() {      // 成功・失敗に関わらず通信が終了した際の処理
+          button.attr("disabled", false);  // ボタンを再び enableにする
       }
+
     });
   });
 

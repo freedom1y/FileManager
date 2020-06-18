@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>工数</title>
+    <title>工数一覧</title>
     <link rel="stylesheet" href="/css/style.css">
     <script type="text/javascript">
 
@@ -38,11 +38,12 @@
         <div class="top-image">
             <h1><a href="/index"><img src="/images/logo.jpg" alt="LexSol"></a></h1>
         </div>
-        <h1 class="title">工数</h1>
+        <h1 class="title">工数一覧</h1>
 
 
         <% if (typeof xlsk !== 'undefined') { %>
             <% var projectName = '' %>
+            <% var sum_manHour = 0 %>
             <% for ( row in xlsk ) { %>
                 <% if (projectName !== xlsk[row].project) { %>
                     <% projectName = xlsk[row].project %>
@@ -88,11 +89,29 @@
                     <th>
                         <input type="button" class="clear-decoration" value="削除" onClick="disp('<%= xlsk[row].project %>',<%= xlsk[row].id %>)">
                     </th>
+
                 </tr>
+                <% sum_manHour += xlsk[row].manHour %>
             <% } %>
+            <tr>
+                <th>合計</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th><%= sum_manHour %></th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+            </tr>
             </table>
         <% }%>
 
+        <br>
+        <a href="/projectList" class="button">プロジェクト一覧に戻る</a>
         <br>
         <a href="/index" class="button">ホームに戻る</a>
     </div>

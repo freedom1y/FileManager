@@ -109,7 +109,7 @@ function sortTaskType(req, res) {
     where: {
       project: req.query.pname
     },
-    order: [['project', 'ASC']]
+    order: [['project', 'ASC'],['taskType', 'ASC']]
   }).then((posts) => {
     res.render('chart', {
       xlsk: posts

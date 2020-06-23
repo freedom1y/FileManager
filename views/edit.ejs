@@ -19,6 +19,11 @@
         <h2><%=editTarget.project %></h2>
         <table border="1" width="50%" height="70%">
             <tr>
+                <th>記入日</th>
+                <th>記入者</th>
+                <th>タイトル</th>
+                <th>不具合・要望内容</th>
+                <th>PGM_ID</th>
                 <th>対応</th>
                 <th>対応者</th>
                 <th>進捗</th>
@@ -32,8 +37,13 @@
 
             <form method="post"　action="/edit">
                 <tr>
+                    <th><input type="text" name="enterDate" size="15" value="<%=editTarget.enterDate %>"></th>
+                    <th><input type="text" name="enterPerson" size="15" value="<%=editTarget.enterPerson %>"></th>
+                    <th><input type="text" name="title" size="15" value="<%=editTarget.title %>"></th>
+                    <th><input type="text" name="content" size="15" value="<%=editTarget.content %>"></th>
+                    <th><input type="text" name="pgmId" size="15" value="<%=editTarget.pgmId %>"></th>
                     <th><input type="text" name="task" size="15" value="<%=editTarget.task %>"></th>
-                    <th><input type="text" name="person" size="15" value="<%=editTarget.person %>"></th>
+                    <th><input type="text" name="taskPerson" size="15" value="<%=editTarget.taskPerson %>"></th>
                     <th><input type="text" name="progress" size="15" value="<%=editTarget.progress %>"></th>
                     <th><input type="text" name="importance" size="15" value="<%=editTarget.importance %>"></th>
                     <th><input type="date" name="taskDate" size="15" value="<%=editTarget.taskDate %>"></th>

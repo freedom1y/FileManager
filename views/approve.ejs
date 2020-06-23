@@ -28,6 +28,11 @@
                     <h2><%= xlsk[row].project %></h2>
                     <table border="1" width="50%" height="70%">
                         <tr>
+                            <th>記入日</th>
+                            <th>記入者</th>
+                            <th>タイトル</th>
+                            <th>不具合・要望内容</th>
+                            <th>PGM_ID</th>
                             <th>対応</th>
                             <th>対応者</th>
                             <th>進捗</th>
@@ -41,8 +46,13 @@
                         </tr>
                 <% } %>
                 <tr>
+                    <th><%= xlsk[row].enterDate %></th>
+                    <th><%= xlsk[row].enterPerson %></th>
+                    <th><%= xlsk[row].title %></th>
+                    <th><%= xlsk[row].content %></th>
+                    <th><%= xlsk[row].pgmId %></th>
                     <th><%= xlsk[row].task %></th>
-                    <th><%= xlsk[row].person %></th>
+                    <th><%= xlsk[row].taskPerson %></th>
                     <th><%= xlsk[row].progress %></th>
                     <th><%= xlsk[row].importance %></th>
                     <th><%= xlsk[row].taskDate %></th>

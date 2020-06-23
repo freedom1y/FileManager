@@ -12,13 +12,12 @@ function Get(req, res) {
   });
 }
 
-function sortTask(req, res) {
+function sortEnterDate(req, res) {
   Post.findAll({
     where: {
       project: req.query.pname
     },
-    order: [['project', 'ASC'],['task', 'ASC']]
-  //order の後の配列の中に配列を入る．増やしていけば前から順にソートされていく．
+    order: [['project', 'ASC'],['enterDate', 'ASC']]
   }).then((posts) => {
     res.render('chart', {
       xlsk: posts
@@ -26,12 +25,77 @@ function sortTask(req, res) {
   });
 }
 
-function sortPerson(req, res) {
+function sortEnterPerson(req, res) {
   Post.findAll({
     where: {
       project: req.query.pname
     },
-    order: [['project', 'ASC'],['person', 'ASC']]
+    order: [['project', 'ASC'],['enterPerson', 'ASC']]
+  }).then((posts) => {
+    res.render('chart', {
+      xlsk: posts
+    });
+  });
+}
+
+function sortTitle(req, res) {
+  Post.findAll({
+    where: {
+      project: req.query.pname
+    },
+    order: [['project', 'ASC'],['title', 'ASC']]
+  }).then((posts) => {
+    res.render('chart', {
+      xlsk: posts
+    });
+  });
+}
+
+function sortContent(req, res) {
+  Post.findAll({
+    where: {
+      project: req.query.pname
+    },
+    order: [['project', 'ASC'],['content', 'ASC']]
+  }).then((posts) => {
+    res.render('chart', {
+      xlsk: posts
+    });
+  });
+}
+
+function sortPGM_ID(req, res) {
+  Post.findAll({
+    where: {
+      project: req.query.pname
+    },
+    order: [['project', 'ASC'],['pgmId', 'ASC']]
+  }).then((posts) => {
+    res.render('chart', {
+      xlsk: posts
+    });
+  });
+}
+
+function sortTask(req, res) {
+  Post.findAll({
+    where: {
+      project: req.query.pname
+    },
+    order: [['project', 'ASC'],['task', 'ASC']]
+  }).then((posts) => {
+    res.render('chart', {
+      xlsk: posts
+    });
+  });
+}
+
+function sortTaskPerson(req, res) {
+  Post.findAll({
+    where: {
+      project: req.query.pname
+    },
+    order: [['project', 'ASC'],['taskPerson', 'ASC']]
   }).then((posts) => {
     res.render('chart', {
       xlsk: posts
@@ -120,8 +184,13 @@ function sortTaskType(req, res) {
 
 module.exports = {
   Get, 
+  sortEnterDate,
+  sortEnterPerson,
+  sortTitle,
+  sortContent,
+  sortPGM_ID,
   sortTask, 
-  sortPerson, 
+  sortTaskPerson, 
   sortProgress, 
   sortImportance, 
   sortTaskDate, 

@@ -38,14 +38,20 @@ app.post('/approve', routes.approve.Post);
 app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
 // ソート処理のルーティング
+app.get('/chart/sortEnterDate', routes.chart.sortEnterDate);
+app.get('/chart/sortEnterPerson', routes.chart.sortEnterPerson);
+app.get('/chart/sortTitle', routes.chart.sortTitle);
+app.get('/chart/sortContent', routes.chart.sortContent);
+app.get('/chart/sortPGM_ID', routes.chart.sortPGM_ID);
 app.get('/chart/sortTask', routes.chart.sortTask);
-app.get('/chart/sortPerson', routes.chart.sortPerson);
+app.get('/chart/sortTaskPerson', routes.chart.sortTaskPerson);
 app.get('/chart/sortProgress', routes.chart.sortProgress);
 app.get('/chart/sortImportance', routes.chart.sortImportance);
 app.get('/chart/sortTaskDate', routes.chart.sortTaskDate);
 app.get('/chart/sortCompDate', routes.chart.sortCompDate);
 app.get('/chart/sortManHour', routes.chart.sortManHour);
 app.get('/chart/sortTaskType', routes.chart.sortTaskType);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

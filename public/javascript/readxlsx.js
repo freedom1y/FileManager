@@ -51,6 +51,12 @@ function to_json(workbook) {
   let sheetNameList = workbook.SheetNames;                       // シート名一覧オブジェクト
   let workSheet = workbook.Sheets[sheetNameList[0]];
   // let colNames = [workSheet['H4'].w,
+  workSheet['C4'].v
+  workSheet['D4'].w
+  workSheet['E4'].w
+  workSheet['F4'].w
+  workSheet['G4'].w
+  workSheet['H4'].w
   workSheet['I4'].w,
   workSheet['J4'].w,
   workSheet['K4'].w,
@@ -61,7 +67,7 @@ function to_json(workbook) {
   workSheet['P4'].w;
 
   let endCol = workSheet['!ref'].match(/\:[A-Z+]([0-9]+)/)[1];  // エクセルデータの末端の行数を取得する
-  workSheet['!ref'] = `H4:P${endCol}`;                          // 取得したいセルの範囲を指定し直す。H4からP列の末端行まで
+  workSheet['!ref'] = `C4:P${endCol}`;                          // 取得したいセルの範囲を指定し直す。H4からP列の末端行まで
   let workSheet_json = X.utils.sheet_to_json(workSheet);        // JSONオブジェクトとして取得
 
   return workSheet_json;

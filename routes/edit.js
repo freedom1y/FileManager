@@ -23,8 +23,13 @@ function Post(req, res) {
     }
   }).then((updateData) => {
     updateData.update({
+      enterDate: req.body.enterDate,
+      enterPerson: req.body.enterPerson,
+      title: req.body.title,
+      content: req.body.content,
+      pgmId: req.body.pgmId,
       task: req.body.task,
-      person: req.body.person,
+      taskPerson: req.body.taskPerson,
       progress: req.body.progress,
       importance: req.body.importance,
       taskDate: req.body.taskDate,

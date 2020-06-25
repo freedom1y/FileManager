@@ -6,49 +6,39 @@ function Get(req, res) {
 
 function Post(req, res) {
   console.log(req.body);
-  console.log('post done')
-  // res.render('sheetJS');
 
   var worksheet = req.body.output.slice();
-  console.log(Object.keys(worksheet[0]));
-  console.log(Object.keys(worksheet[0])[0]);
-  console.log(worksheet[0]);
+  //console.log(Object.keys(worksheet[0]));
+  //console.log(Object.keys(worksheet[0])[0]);
+  //console.log(worksheet[0]);
 
 
   for (var i = 0; i < worksheet.length; i++) {
-    var taskDt = new Date(worksheet[i][Object.keys(worksheet[i])[4]]);
+    var enterDt = new Date(worksheet[i][Object.keys(worksheet[i])[0]]);
+    enterDt.setHours(enterDt.getHours() + 9);
+    var taskDt = new Date(worksheet[i][Object.keys(worksheet[i])[9]]);
     taskDt.setHours(taskDt.getHours() + 9);
-    if (Object.keys(worksheet[i]).length > 8) {
-      var compDt = new Date(worksheet[i][Object.keys(worksheet[i])[5]]);
-      compDt.setHours(compDt.getHours() + 9);
-      post.create({
-        project: req.body.projectName,
-        task: worksheet[i][Object.keys(worksheet[i])[0]],
-        person: worksheet[i][Object.keys(worksheet[i])[1]],
-        progress: worksheet[i][Object.keys(worksheet[i])[2]],
-        importance: worksheet[i][Object.keys(worksheet[i])[3]],
-        taskDate: taskDt,
-        compDate: compDt,
-        manHour: worksheet[i][Object.keys(worksheet[i])[6]],
-        taskType: worksheet[i][Object.keys(worksheet[i])[7]],
-        note: worksheet[i][Object.keys(worksheet[i])[8]],
-        flag: 0
-      });
-    } else {
-      post.create({
-        project: req.body.projectName,
-        task: worksheet[i][Object.keys(worksheet[i])[0]],
-        person: worksheet[i][Object.keys(worksheet[i])[1]],
-        progress: worksheet[i][Object.keys(worksheet[i])[2]],
-        importance: worksheet[i][Object.keys(worksheet[i])[3]],
-        taskDate: taskDt,
-        compDate: null,
-        manHour: worksheet[i][Object.keys(worksheet[i])[5]],
-        taskType: worksheet[i][Object.keys(worksheet[i])[6]],
-        note: worksheet[i][Object.keys(worksheet[i])[7]],
-        flag: 0
-      });
-    }
+    var compDt = new Date(worksheet[i][Object.keys(worksheet[i])[10]]);
+    compDt.setHours(compDt.getHours() + 9);
+
+    post.create({
+      project: req.body.projectName,
+      enterDate: enterDt,
+      enterPerson: worksheet[i][Object.keys(worksheet[i])[1]],
+      title: worksheet[i][Object.keys(worksheet[i])[2]].replace(/\n/g, '<br>'),
+      content: worksheet[i][Object.keys(worksheet[i])[3]].replace(/\n/g, '<br>'),
+      pgmId: worksheet[i][Object.keys(worksheet[i])[4]].replace(/\n/g, '<br>'),
+      task: worksheet[i][Object.keys(worksheet[i])[5]].replace(/\n/g, '<br>'),
+      taskPerson: worksheet[i][Object.keys(worksheet[i])[6]],
+      progress: worksheet[i][Object.keys(worksheet[i])[7]],
+      importance: worksheet[i][Object.keys(worksheet[i])[8]],
+      taskDate: taskDt,
+      compDate: compDt,
+      manHour: worksheet[i][Object.keys(worksheet[i])[11]],
+      taskType: worksheet[i][Object.keys(worksheet[i])[12]],
+      note: worksheet[i][Object.keys(worksheet[i])[13]],
+      flag: 0
+    });
   }
 }
 

@@ -13,20 +13,10 @@
 
             // 「OK」時の処理開始 ＋ 確認ダイアログの表示
             if (window.confirm('本当に削除しますか？')) {
-
                 location.href = "/delete?id=" + id + "&pname=" + pname; // example_confirm.html へジャンプ
-
-            }
-            // 「OK」時の処理終了
-
-            // 「キャンセル」時の処理開始
-            else {
-
+            }else {
                 window.alert('キャンセルされました'); // 警告ダイアログを表示
-
             }
-            // 「キャンセル」時の処理終了
-
         }
 
     </script>
@@ -49,52 +39,67 @@
                     <% projectName = xlsk[row].project %>
                         </table>
                         <h2><%= xlsk[row].project %></h2>
-                        <table border="1" width="50%" height="70%">
+                        <table border="1" cellspacing="0">
                             <tr>
-                                <th><a href="/chart/sortTask?pname=<%= xlsk[row].project %>">対応</a></th>
-                                <th><a href="/chart/sortPerson?pname=<%= xlsk[row].project %>">対応者</a></th>
+                                <th width="6%"><a href="/chart/sortEnterDate?pname=<%= xlsk[row].project %>">記入日</a></th>
+                                <th><a href="/chart/sortEnterPerson?pname=<%= xlsk[row].project %>">記入者</a></th>
+                                <th width="10%"><a href="/chart/sortTitle?pname=<%= xlsk[row].project %>">タイトル</a></th>
+                                <th width="15%"><a href="/chart/sortContent?pname=<%= xlsk[row].project %>">不具合・要望内容</a></th>
+                                <th width="15%"><a href="/chart/sortPGM_ID?pname=<%= xlsk[row].project %>">PGM_ID</a></th>
+                                <th width="20%"><a href="/chart/sortTask?pname=<%= xlsk[row].project %>">対応</a></th>
+                                <th><a href="/chart/sortTaskPerson?pname=<%= xlsk[row].project %>">対応者</a></th>
                                 <th><a href="/chart/sortProgress?pname=<%= xlsk[row].project %>">進捗</a></th>
                                 <th><a href="/chart/sortImportance?pname=<%= xlsk[row].project %>">重要度</a></th>
-                                <th><a href="/chart/sortTaskDate?pname=<%= xlsk[row].project %>">対応予定日</a></th>
-                                <th><a href="/chart/sortCompDate?pname=<%= xlsk[row].project %>">完了日</a></th>
+                                <th width="6%"><a href="/chart/sortTaskDate?pname=<%= xlsk[row].project %>">対応予定日</a></th>
+                                <th width="6%"><a href="/chart/sortCompDate?pname=<%= xlsk[row].project %>">完了日</a></th>
                                 <th><a href="/chart/sortManHour?pname=<%= xlsk[row].project %>">工数(人日)</a></th>
                                 <th><a href="/chart/sortTaskType?pname=<%= xlsk[row].project %>">種別</a></th>
                                 <th>備考</th>
                                 <th>承認状態</th>
-                                <th>編集</th>
-                                <th>削除</th>
+                                <th width="3%" nowrap>編集</th>
+                                <th width="3%" nowrap>削除</th>
                             </tr>
                 <% } %>
                 <tr class='flag<%= xlsk[row].flag%>'>
-                    <th><%= xlsk[row].task %></th>
-                    <th><%= xlsk[row].person %></th>
-                    <th><%= xlsk[row].progress %></th>
-                    <th><%= xlsk[row].importance %></th>
-                    <th><%= xlsk[row].taskDate %></th>
-                    <th><%= xlsk[row].compDate %></th>
-                    <th><%= xlsk[row].manHour %></th>
-                    <th><%= xlsk[row].taskType %></th>
-                    <th><%= xlsk[row].note %></th>
-                    <th><% if(xlsk[row].flag === 1){ %>
+                    <td><%= xlsk[row].enterDate %></th>
+                    <td><%= xlsk[row].enterPerson %></th>
+                    <td align="left"><%- xlsk[row].title %></th>
+                    <td align="left"><%- xlsk[row].content %></th>
+                    <td align="left"><%- xlsk[row].pgmId %></th>
+                    <td align="left"><%- xlsk[row].task %></th>
+                    <td><%= xlsk[row].taskPerson %></th>
+                    <td><%= xlsk[row].progress %></th>
+                    <td><%= xlsk[row].importance %></th>
+                    <td><%= xlsk[row].taskDate %></th>
+                    <td><%= xlsk[row].compDate %></th>
+                    <td><%= xlsk[row].manHour %></th>
+                    <td><%= xlsk[row].taskType %></th>
+                    <td><%= xlsk[row].note %></th>
+                    <td><% if(xlsk[row].flag === 1){ %>
                             <p>承認待ち</p>
                         <%}else if(xlsk[row].flag === 2){%>
                             <p>非承認</p>
                         <%} else{%>
                             <p>承認済み</p>
                         <%} %>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         <a href="/edit?id=<%=xlsk[row].id %>">編集</a>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         <input type="button" class="clear-decoration" value="削除" onClick="disp('<%= xlsk[row].project %>',<%= xlsk[row].id %>)">
-                    </th>
+                    </td>
 
                 </tr>
                 <% sum_manHour += xlsk[row].manHour %>
             <% } %>
             <tr>
                 <th>合計</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
                 <th>-</th>
                 <th>-</th>
                 <th>-</th>

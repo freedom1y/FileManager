@@ -89,6 +89,7 @@ $(document).ready(function () {
     $('.not-fileName').html('アップロードが完了しました。');
     // 多重送信を防ぐため通信完了までボタンをdisableにする
     button.attr("disabled", true);
+    button.attr("style", "background-color:#cccccc");
 
     // 各フィールドから値を取得してJSONデータを作成
     console.log(output);
@@ -112,6 +113,7 @@ $(document).ready(function () {
       },
       complete: function() {      // 成功・失敗に関わらず通信が終了した際の処理
           button.attr("disabled", false);  // ボタンを再び enableにする
+          button.attr("style", "background-color:#ffffff");
       }
 
     });

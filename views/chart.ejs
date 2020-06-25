@@ -84,10 +84,10 @@
                         <%} %>
                     </td>
                     <td>
-                        <a href="/edit?id=<%=xlsk[row].id %>">編集</a>
+                        <a href="/edit?id=<%=xlsk[row].id %>" class="btn-square">編集</a>
                     </td>
                     <td>
-                        <input type="button" class="clear-decoration" value="削除" onClick="disp('<%= xlsk[row].project %>',<%= xlsk[row].id %>)">
+                        <input type="button" class="btn-square" value="削除" onClick="disp('<%= xlsk[row].project %>',<%= xlsk[row].id %>)">
                     </td>
 
                 </tr>

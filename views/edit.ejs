@@ -17,7 +17,7 @@
         </div>
         <h1 class="title">編集</h1>
         <h2><%=editTarget.project %></h2>
-        <table border="1" cellspacing="0">
+        <table border="1" cellspacing="0" class="edit_table">
             <tr>
                 <th>記入日</th>
                 <th>記入者</th>
@@ -26,32 +26,57 @@
                 <th>PGM_ID</th>
                 <th>対応</th>
                 <th>対応者</th>
-                <th>進捗</th>
-                <th>重要度</th>
-                <th>対応予定日</th>
-                <th>完了日</th>
-                <th>工数(人日)</th>
-                <th>種別</th>
-                <th>備考</th>
             </tr>
 
             <form method="post"　action="/edit">
                 <tr>
-                    <th><input type="text" name="enterDate" size="15" value="<%=editTarget.enterDate %>"></th>
-                    <th><input type="text" name="enterPerson" size="15" value="<%=editTarget.enterPerson %>"></th>
-                    <th><input type="text" name="title" size="15" value="<%=editTarget.title %>"></th>
-                    <th><input type="text" name="content" size="15" value="<%=editTarget.content %>"></th>
-                    <th><input type="text" name="pgmId" size="15" value="<%=editTarget.pgmId %>"></th>
-                    <th><input type="text" name="task" size="15" value="<%=editTarget.task %>"></th>
-                    <th><input type="text" name="taskPerson" size="15" value="<%=editTarget.taskPerson %>"></th>
-                    <th><input type="text" name="progress" size="15" value="<%=editTarget.progress %>"></th>
-                    <th><input type="text" name="importance" size="15" value="<%=editTarget.importance %>"></th>
-                    <th><input type="date" name="taskDate" size="15" value="<%=editTarget.taskDate %>"></th>
-                    <th><input type="date" name="compDate" size="15" value="<%=editTarget.compDate %>"></th>
-                    <th><input type="text" name="manHour" size="15" value="<%=editTarget.manHour %>"></th>
-                    <th><input type="text" name="taskType" size="15" value="<%=editTarget.taskType %>"></th>
-                    <th><input type="text" name="note" size="15" value="<%=editTarget.note %>"></th>
+                    <td><input type="text" name="enterDate" size="15" value="<%=editTarget.enterDate %>"></td>
+                    <td><input type="text" name="enterPerson" size="15" value="<%=editTarget.enterPerson %>"></td>
+                    <td><textarea type="text" name="title" ><%=editTarget.title %></textarea></td>
+                    <td><textarea type="text" name="content"><%=editTarget.content %></textarea></td>
+                    <td><input type="text" name="pgmId" size="15" value="<%=editTarget.pgmId %>"></td>
+                    <td><textarea type="text" name="task"><%=editTarget.task %></textarea></td>
+                    <td><input type="text" name="taskPerson" size="15" value="<%=editTarget.taskPerson %>"></td>
                 </tr>
+                <tr>
+                    <th>進捗</th>
+                    <th>重要度</th>
+                    <th>対応予定日</th>
+                    <th>完了日</th>
+                    <th>工数(人日)</th>
+                    <th>種別</th>
+                    <th>備考</th>
+                </tr>
+    
+                <form method="post"　action="/edit">
+                    <tr>
+                        <td><input list="progressDatalist" name="progress" size="15" value="<%=editTarget.progress %>"></td>
+                        <td><input list="importanceDatalist" name="importance" size="15" value="<%=editTarget.importance %>"></td>
+                        <td><input type="date" name="taskDate" size="15" value="<%=editTarget.taskDate %>"></td>
+                        <td><input type="date" name="compDate" size="15" value="<%=editTarget.compDate %>"></td>
+                        <td><input type="text" name="manHour" size="15" value="<%=editTarget.manHour %>"></td>
+                        <td><input type="text" name="taskType" size="15" value="<%=editTarget.taskType %>"></td>
+                        <td><textarea type="text" name="note"><%=editTarget.note %></textarea></td>
+                        <datalist id="importanceDatalist">
+                            <option value="高"></option>
+                            <option value="中"></option>
+                            <option value="低"></option>
+                            <option value="-"></option>
+                        </datalist>
+                        <datalist id="progressDatalist">
+                            <option value="未着手"></option>
+                            <option value="仕様確認"></option>
+                            <option value="仕様待ち"></option>
+                            <option value="開発中"></option>
+                            <option value="開発完"></option>
+                            <option value="社内テスト中"></option>
+                            <option value="社内テスト完"></option>
+                            <option value="社外テスト中"></option>
+                            <option value="社外テスト完"></option>
+                            <option value="リリース待ち"></option>
+                            <option value="完了"></option>
+                        </datalist>
+                    </tr>
         </table>
         <% if (typeof updateMsg !== 'undefined') { %>
             <h3><%= updateMsg %></h3>

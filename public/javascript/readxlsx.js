@@ -6,7 +6,7 @@ var button = $("button#update");
 
 // ファイル選択時のメイン処理
 function handleFile(e) {
-
+  console.log(e)
   var files = e.target.files;
   var f = files[0];
 
@@ -21,6 +21,7 @@ function handleFile(e) {
     });
 
     output = to_json(wb);// JSONが返ってくる
+    
   };
   reader.readAsArrayBuffer(f);
 }
@@ -30,8 +31,7 @@ function fixdata(data) {
   var o = "",
     l = 0,
     w = 10240;
-  for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w,
-    l * w + w)));
+  for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
   o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
   return o;
 }

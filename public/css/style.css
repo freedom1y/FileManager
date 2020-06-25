@@ -74,7 +74,14 @@ a:hover {
   border-bottom: none;/*線を消す*/
 }
 #appcol {
-  width: 10%;
+  width: 5%;
+}
+
+.radio {
+  width: 20px;
+  height: 20px;
+  top: 4px;
+  position: relative;
 }
 
 /* 0625わかつき追加分 */

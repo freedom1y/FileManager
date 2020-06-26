@@ -32,10 +32,10 @@
                 <tr>
                     <td><input type="text" name="enterDate" size="15" value="<%=editTarget.enterDate %>"></td>
                     <td><input type="text" name="enterPerson" size="15" value="<%=editTarget.enterPerson %>"></td>
-                    <td><textarea type="text" name="title" ><%=editTarget.title %></textarea></td>
-                    <td><textarea type="text" name="content"><%=editTarget.content %></textarea></td>
-                    <td><input type="text" name="pgmId" size="15" value="<%=editTarget.pgmId %>"></td>
-                    <td><textarea type="text" name="task"><%=editTarget.task %></textarea></td>
+                    <td><textarea type="text" name="title" ><%= editTarget.title.replace(/<br>/g, '\n') %></textarea></td>
+                    <td><textarea type="text" name="content"><%= editTarget.content.replace(/<br>/g, '\n') %></textarea></td>
+                    <td><textarea type="text" name="pgmId"><%= editTarget.pgmId.replace(/<br>/g, '\n') %></textarea></td>
+                    <td><textarea type="text" name="task"><%= editTarget.task.replace(/<br>/g, '\n') %></textarea></td>
                     <td><input type="text" name="taskPerson" size="15" value="<%=editTarget.taskPerson %>"></td>
                 </tr>
                 <tr>

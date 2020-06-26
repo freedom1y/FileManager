@@ -28,6 +28,7 @@
                     <h2><%= xlsk[row].project %></h2>
                     <table border="1" width="50%" height="70%">
                         <tr>
+                            <th colspan="2" id="appcol">承認</th>
                             <th>記入日</th>
                             <th>記入者</th>
                             <th>タイトル</th>
@@ -41,31 +42,30 @@
                             <th>完了日</th>
                             <th>工数(人日)</th>
                             <th>種別</th>
-                            <th>備考</th>
-                            <th colspan="2">承認</th>                           
+                            <th>備考</th>            
                         </tr>
                 <% } %>
                 <tr>
-                    <th><%= xlsk[row].enterDate %></th>
-                    <th><%= xlsk[row].enterPerson %></th>
-                    <th><%= xlsk[row].title %></th>
-                    <th><%= xlsk[row].content %></th>
-                    <th><%= xlsk[row].pgmId %></th>
-                    <th><%= xlsk[row].task %></th>
-                    <th><%= xlsk[row].taskPerson %></th>
-                    <th><%= xlsk[row].progress %></th>
-                    <th><%= xlsk[row].importance %></th>
-                    <th><%= xlsk[row].taskDate %></th>
-                    <th><%= xlsk[row].compDate %></th>
-                    <th><%= xlsk[row].manHour %></th>
-                    <th><%= xlsk[row].taskType %></th>
-                    <th><%= xlsk[row].note %></th>
-                    <th>
-                        <input type="radio" name='<%=xlsk[row].id%>' value='y'>Y
-                    </th>
-                    <th>
-                        <input type="radio" name='<%=xlsk[row].id%>' value='n'>N
-                    </th>
+                    <td>
+                        <label><input type="radio" name='<%=xlsk[row].id%>' value='y' class="radio">Y</label>
+                    </td>
+                    <td>
+                        <label><input type="radio" name='<%=xlsk[row].id%>' value='n' class="radio">N</label>
+                    </td>
+                    <td><%= xlsk[row].enterDate %></td>
+                    <td><%= xlsk[row].enterPerson %></td>
+                    <td><%= xlsk[row].title %></td>
+                    <td><%= xlsk[row].content %></td>
+                    <td><%= xlsk[row].pgmId %></td>
+                    <td><%= xlsk[row].task %></td>
+                    <td><%= xlsk[row].taskPerson %></td>
+                    <td><%= xlsk[row].progress %></td>
+                    <td><%= xlsk[row].importance %></td>
+                    <td><%= xlsk[row].taskDate %></td>
+                    <td><%= xlsk[row].compDate %></td>
+                    <td><%= xlsk[row].manHour %></td>
+                    <td><%= xlsk[row].taskType %></td>
+                    <td><%= xlsk[row].note %></td>
                 </tr>                 
             <% } %>
         
@@ -79,6 +79,7 @@
 
         <input type="submit" value="承認を確定" class='button'>
         </form>
+        <br>
         <a href="/index" class="button">ホームに戻る</a>
     </div>
 </body>

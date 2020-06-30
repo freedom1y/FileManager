@@ -83,10 +83,10 @@
                             <p>承認済み</p>
                         <%} %>
                     </td>
-                    <td>
-                        <a href="/edit?id=<%=xlsk[row].id %>" class="btn-square">編集</a>
+                    <td nowrap>
+                        <a href="/edit?id=<%=xlsk[row].id %>" class="btn-square" >編集</a>
                     </td>
-                    <td>
+                    <td nowrap> 
                         <input type="button" class="btn-square" value="削除" onClick="disp('<%= xlsk[row].project %>',<%= xlsk[row].id %>)">
                     </td>
 

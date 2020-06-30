@@ -8,10 +8,6 @@ function Post(req, res) {
   console.log(req.body);
 
   var worksheet = req.body.output.slice();
-  //console.log(Object.keys(worksheet[0]));
-  //console.log(Object.keys(worksheet[0])[0]);
-  //console.log(worksheet[0]);
-
 
   for (var i = 0; i < worksheet.length; i++) {
     var enterDt = new Date(worksheet[i][Object.keys(worksheet[i])[0]]);

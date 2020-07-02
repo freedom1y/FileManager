@@ -47,12 +47,11 @@ function to_json(workbook) {
   }
   projectName = fileName.split('_')[0];
   button.attr("disabled", false);
-  // console.log(projectName);
 
   let sheetNameList = workbook.SheetNames;                       // シート名一覧オブジェクト
   let workSheet = workbook.Sheets[sheetNameList[0]];
   let colNames = [
-                  workSheet['C4'].w,
+                  workSheet['C4'].v,
                   workSheet['D4'].w,
                   workSheet['E4'].w,
                   workSheet['F4'].w,
@@ -61,13 +60,12 @@ function to_json(workbook) {
                   workSheet['I4'].w,
                   workSheet['J4'].w,
                   workSheet['K4'].w,
-                  workSheet['L4'].w,
-                  workSheet['M4'].w,
+                  workSheet['L4'].v,
+                  workSheet['M4'].v,
                   workSheet['N4'].w,
                   workSheet['O4'].w,
                   workSheet['P4'].w
                 ];
-  // console.log(colNames);
 
   let endCol = workSheet['!ref'].match(/\:[A-Z+]([0-9]+)/)[1];  // エクセルデータの末端の行数を取得する
   workSheet['!ref'] = `C4:P${endCol}`;                          // 取得したいセルの範囲を指定し直す。H4からP列の末端行まで
@@ -75,40 +73,25 @@ function to_json(workbook) {
   let maxNum = 0;
   const newArray = Object.keys(workSheet).filter(element => (element.match(/^[C-P]\d+$/)));
   for(let i = 0; i < newArray.length; i++) maxNum = Math.max(maxNum, Number(newArray[i].slice(1)));
-  // console.log(workSheet);
-
-  // for(let i = 5; i <= maxNum; i++){
-
-  //   if(i > 5){
-  //     if(newArray.indexOf("C"+i) === -1) workSheet["C"+i] = {w: workSheet[]}
-  //   }
-  // }
-  // altWorkSheet = {};
+  
   for(let i = 5; i <= maxNum; i++){
-    workSheet["C" + i] = {};
-    workSheet["D" + i] = {};
-    workSheet["E" + i] = {};
-    workSheet["F" + i] = {};
-    workSheet["G" + i] = {};
-    workSheet["H" + i] = {};
-    workSheet["I" + i] = {};
-    workSheet["J" + i] = {};
-    workSheet["K" + i] = {};
-    workSheet["L" + i] = {};
-    workSheet["M" + i] = {};
-    workSheet["N" + i] = {};
-    workSheet["O" + i] = {};
-    workSheet["P" + i] = {};
-  }
-  // for(let i = 0; i < newArray.length; i++){
-  //   altWorkSheet[newArray[i]] = workSheet[newArray[i]];
-  // }
-  // console.log(altWorkSheet);
-  for(let i = 6; i <= maxNum; i++){
-    if(Object.keys(workSheet["C" + i]).length === 0 && Object.keys(workSheet["C" + (i - 1)]).length !== 0) workSheet["C" + i] = workSheet["C" + (i - 1)];
-    if(Object.keys(workSheet["D" + i]).length === 0 && Object.keys(workSheet["D" + (i - 1)]).length !== 0) workSheet["D" + i] = workSheet["D" + (i - 1)];
-    if(Object.keys(workSheet["E" + i]).length === 0 && Object.keys(workSheet["E" + (i - 1)]).length !== 0) workSheet["E" + i] = workSheet["E" + (i - 1)];
-    if(Object.keys(workSheet["F" + i]).length === 0 && Object.keys(workSheet["F" + (i - 1)]).length !== 0) workSheet["F" + i] = workSheet["F" + (i - 1)];
+    if(!("G"+i in workSheet)) workSheet["G"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
+    if(!("H"+i in workSheet)) workSheet["H"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
+    if(!("I"+i in workSheet)) workSheet["I"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
+    if(!("J"+i in workSheet)) workSheet["J"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
+    if(!("K"+i in workSheet)) workSheet["K"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
+    if(!("L"+i in workSheet)) workSheet["L"+i] = workSheet["C5"]; // 対応予定日が空の場合、記入日を入れておく
+    if(!("M"+i in workSheet)) workSheet["M"+i] = workSheet["C5"]; // 完了日が空の場合、記入日を入れておく
+    if(!("N"+i in workSheet)) workSheet["N"+i] = {t: "n", v: 0, w: "0"};
+    if(!("O"+i in workSheet)) workSheet["O"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
+    if(!("P"+i in workSheet)) workSheet["P"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
+
+    if(i > 5){
+      if(!("C"+i in workSheet)) workSheet["C"+i] = workSheet["C"+(i-1)];
+      if(!("D"+i in workSheet)) workSheet["D"+i] = workSheet["D"+(i-1)];
+      if(!("E"+i in workSheet)) workSheet["E"+i] = workSheet["E"+(i-1)];
+      if(!("F"+i in workSheet)) workSheet["F"+i] = workSheet["F"+(i-1)];
+    }
   }
   console.log(workSheet);
 
@@ -116,7 +99,6 @@ function to_json(workbook) {
   console.log(workSheet_json);
   return workSheet_json;
 }
-//  .[B-P]+\d
 
 
 // 画面初期化

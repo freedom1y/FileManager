@@ -4,6 +4,7 @@ var fileName = "";
 var projectName = "";
 var button = $("button#update");
 
+
 // ファイル選択時のメイン処理
 function handleFile(e) {
   // console.log(e)
@@ -22,8 +23,10 @@ function handleFile(e) {
     console.log(wb)
     output = to_json(wb);// JSONが返ってくる
     console.log(output)
-    
+
   };
+
+
   reader.readAsArrayBuffer(f);
 }
 
@@ -39,7 +42,7 @@ function fixdata(data) {
 
 // ワークブックのデータをjsonに変換
 function to_json(workbook) {
-  if(fileName.indexOf('_案件一覧') === -1){
+  if (fileName.indexOf('_案件一覧') === -1) {
     console.log('ファイル形式が一致しません');
     button.attr("disabled", true);
     $('.not-fileName').html('ファイル形式が一致しません');
@@ -51,46 +54,47 @@ function to_json(workbook) {
   let sheetNameList = workbook.SheetNames;                       // シート名一覧オブジェクト
   let workSheet = workbook.Sheets[sheetNameList[0]];
   let colNames = [
-                  workSheet['C4'].v,
-                  workSheet['D4'].w,
-                  workSheet['E4'].w,
-                  workSheet['F4'].w,
-                  workSheet['G4'].w,
-                  workSheet['H4'].w,
-                  workSheet['I4'].w,
-                  workSheet['J4'].w,
-                  workSheet['K4'].w,
-                  workSheet['L4'].v,
-                  workSheet['M4'].v,
-                  workSheet['N4'].w,
-                  workSheet['O4'].w,
-                  workSheet['P4'].w
-                ];
+    workSheet['C4'].v,
+    workSheet['D4'].w,
+    workSheet['E4'].w,
+    workSheet['F4'].w,
+    workSheet['G4'].w,
+    workSheet['H4'].w,
+    workSheet['I4'].w,
+    workSheet['J4'].w,
+    workSheet['K4'].w,
+    workSheet['L4'].v,
+    workSheet['M4'].v,
+    workSheet['N4'].w,
+    workSheet['O4'].w,
+    workSheet['P4'].w
+  ];
 
   let endCol = workSheet['!ref'].match(/\:[A-Z+]([0-9]+)/)[1];  // エクセルデータの末端の行数を取得する
   workSheet['!ref'] = `C4:P${endCol}`;                          // 取得したいセルの範囲を指定し直す。H4からP列の末端行まで
   // console.log(Object.keys(workSheet));
   let maxNum = 0;
   const newArray = Object.keys(workSheet).filter(element => (element.match(/^[C-P]\d+$/)));
-  for(let i = 0; i < newArray.length; i++) maxNum = Math.max(maxNum, Number(newArray[i].slice(1)));
-  
-  for(let i = 5; i <= maxNum; i++){
-    if(!("G"+i in workSheet)) workSheet["G"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
-    if(!("H"+i in workSheet)) workSheet["H"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
-    if(!("I"+i in workSheet)) workSheet["I"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
-    if(!("J"+i in workSheet)) workSheet["J"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
-    if(!("K"+i in workSheet)) workSheet["K"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
-    if(!("L"+i in workSheet)) workSheet["L"+i] = workSheet["C5"]; // 対応予定日が空の場合、記入日を入れておく
-    if(!("M"+i in workSheet)) workSheet["M"+i] = workSheet["C5"]; // 完了日が空の場合、記入日を入れておく
-    if(!("N"+i in workSheet)) workSheet["N"+i] = {t: "n", v: 0, w: "0"};
-    if(!("O"+i in workSheet)) workSheet["O"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
-    if(!("P"+i in workSheet)) workSheet["P"+i] = {t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-"};
+  for (let i = 0; i < newArray.length; i++) maxNum = Math.max(maxNum, Number(newArray[i].slice(1)));
 
-    if(i > 5){
-      if(!("C"+i in workSheet)) workSheet["C"+i] = workSheet["C"+(i-1)];
-      if(!("D"+i in workSheet)) workSheet["D"+i] = workSheet["D"+(i-1)];
-      if(!("E"+i in workSheet)) workSheet["E"+i] = workSheet["E"+(i-1)];
-      if(!("F"+i in workSheet)) workSheet["F"+i] = workSheet["F"+(i-1)];
+  // パディング
+  for (let i = 5; i <= maxNum; i++) {
+    if (!("G" + i in workSheet)) workSheet["G" + i] = { t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-" };
+    if (!("H" + i in workSheet)) workSheet["H" + i] = { t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-" };
+    if (!("I" + i in workSheet)) workSheet["I" + i] = { t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-" };
+    if (!("J" + i in workSheet)) workSheet["J" + i] = { t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-" };
+    if (!("K" + i in workSheet)) workSheet["K" + i] = { t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-" };
+    if (!("L" + i in workSheet)) workSheet["L" + i] = workSheet["C5"]; // 対応予定日が空の場合、記入日を入れておく
+    if (!("M" + i in workSheet)) workSheet["M" + i] = workSheet["C5"]; // 完了日が空の場合、記入日を入れておく
+    if (!("N" + i in workSheet)) workSheet["N" + i] = { t: "n", v: 0, w: "0" };
+    if (!("O" + i in workSheet)) workSheet["O" + i] = { t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-" };
+    if (!("P" + i in workSheet)) workSheet["P" + i] = { t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-" };
+
+    if (i > 5) {
+      if (!("C" + i in workSheet)) workSheet["C" + i] = workSheet["C" + (i - 1)];
+      if (!("D" + i in workSheet)) workSheet["D" + i] = workSheet["D" + (i - 1)];
+      if (!("E" + i in workSheet)) workSheet["E" + i] = workSheet["E" + (i - 1)];
+      if (!("F" + i in workSheet)) workSheet["F" + i] = workSheet["F" + (i - 1)];
     }
   }
   console.log(workSheet);
@@ -108,6 +112,67 @@ $(document).ready(function () {
   $('.custom-file-input').on('change', function (e) {
     handleFile(e);
     fileName = $(this)[0].files[0].name;
+
+    ////////////getでDBになかったやつを返してくれるnodeのjsにアクセス////////
+    //ajaxでget，nodeでDBに検索をかけて，DBに存在しないものをreturn
+    //帰ってきたらその行の数tableをappendして増やす
+    // console.log(output);
+    // console.log(fileName);
+    // console.log(output.length);
+    // for (let i = 0; i < output.length; i++) {
+    //   //テーブルの行を追加する式
+    //   $('#tbl1').append('<tr><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td><td>' + '-'
+    //       + '</td></tr>'
+    //   );
+    // }
+    // $.ajax({
+    //   type: "get",
+    //   url: "#",
+    //   data: {
+    //     output: output,
+    //     projectName: projectName
+    //   },
+    //   dataType: "json"
+    // }).then(
+    //   //第一引数が通信成功時の処理　第二引数が通信失敗時の処理
+    //   data => {
+    //     for (let i = 0; i < data.length; i++) {
+    //       //テーブルの行を追加する式
+    //       $('#tbl1').append('<tr><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td><td>' + '-'
+    //           + '</td></tr>'
+    //       );
+    //     }
+    //   },
+    //   error => alert('読み込み失敗')
+    // );
+
+    ///////////////////////////ここまで/////////////////////////////////
   })
 
 
@@ -123,9 +188,9 @@ $(document).ready(function () {
     $.ajax({
       url: "/upload",
       type: "POST",
-      data: { 
+      data: {
         output: output,
-        projectName: projectName 
+        projectName: projectName
       },
       dataType: "JSON",
       cache: false,
@@ -138,9 +203,9 @@ $(document).ready(function () {
         console.log("textStatus     : " + textStatus);
         console.log("errorThrown    : " + errorThrown.message);
       },
-      complete: function() {      // 成功・失敗に関わらず通信が終了した際の処理
-          button.attr("disabled", false);  // ボタンを再び enableにする
-          button.attr("style", "background-color:#ffffff");
+      complete: function () {      // 成功・失敗に関わらず通信が終了した際の処理
+        button.attr("disabled", false);  // ボタンを再び enableにする
+        button.attr("style", "background-color:#ffffff");
       }
 
     });

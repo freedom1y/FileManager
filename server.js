@@ -15,10 +15,11 @@ const Details = require('./models/details');
 const Account = require('./models/account');
 File.sync().then(() => {
   BugContent.belongsTo(File, {foreignKey: 'fileId'});
-  BugContent.sync();
   Details.belongsTo(File, {foreignKey: 'fileId'});
-  Details.belongsTo(BugContent, {foreignKey: 'bugId'});
-  Details.sync();
+  BugContent.sync().then(() => {
+    Details.belongsTo(BugContent, {foreignKey: 'bugId'});
+    Details.sync();
+  });
   Account.belongsTo(File, {foreignKey: 'accountId'});
   Account.sync();
 });

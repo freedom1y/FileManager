@@ -6,6 +6,8 @@ const Account = require('../models/account');
 
 function Get(req, res) {
   res.render('sheetJS');
+  // 主キーと外部キーを同一の値に保つため、以下の関数を使う
+  File.max('fileId').then((a) => console.log(a));
 }
 
 function Post(req, res) {
@@ -13,8 +15,29 @@ function Post(req, res) {
 
   var worksheet = req.body.output.slice();
 
+  Account.create({
+    accountName: "lexsol"
+  })
+
+  File.create({
+    fileName: req.body.projectName,
+    status: 1
+  });
+
+  var enterDt = new Date(worksheet[0][Object.keys(worksheet[0])[0]]);
+  enterDt.setHours(enterDt.getHours() + 9);
+
+  BugContent.create({
+    fileId: File.max('fileId'),
+    title: worksheet[0][Object.keys(worksheet[0])[2]].replace(/\n/g, '<br>'),
+    bugContent: worksheet[0][Object.keys(worksheet[0])[3]].replace(/\n/g, '<br>'),
+    writer: worksheet[0][Object.keys(worksheet[0])[1]],
+    writeDate: enterDt
+  });
+  var title = worksheet[0][Object.keys(worksheet[0])[2]];
+
   for (var i = 0; i < worksheet.length; i++) {
-    var enterDt = new Date(worksheet[i][Object.keys(worksheet[i])[0]]);
+    enterDt = new Date(worksheet[i][Object.keys(worksheet[i])[0]]);
     enterDt.setHours(enterDt.getHours() + 9);
     var taskDt = new Date(worksheet[i][Object.keys(worksheet[i])[9]]);
     taskDt.setHours(taskDt.getHours() + 9);
@@ -40,19 +63,20 @@ function Post(req, res) {
       flag: 0
     });*/
 
-    File.create({
-      fileName: req.body.projectName,
-      status: 1
-    });
-
-    BugContent.create({
-      title: worksheet[i][Object.keys(worksheet[i])[2]].replace(/\n/g, '<br>'),
-      bugContent: worksheet[i][Object.keys(worksheet[i])[3]].replace(/\n/g, '<br>'),
-      writer: worksheet[i][Object.keys(worksheet[i])[1]],
-      writeDate: enterDt
-    });
+    if(title !== worksheet[i][Object.keys(worksheet[i])[2]]){
+      BugContent.create({
+        fileId: File.max('fileId'),
+        title: worksheet[i][Object.keys(worksheet[i])[2]].replace(/\n/g, '<br>'),
+        bugContent: worksheet[i][Object.keys(worksheet[i])[3]].replace(/\n/g, '<br>'),
+        writer: worksheet[i][Object.keys(worksheet[i])[1]],
+        writeDate: enterDt
+      });
+      title = worksheet[i][Object.keys(worksheet[i])[2]];
+    }
 
     Details.create({
+      fileId: File.max('fileId'),
+      bugId: BugContent.max('bugId'),
       pgmId: worksheet[i][Object.keys(worksheet[i])[4]].replace(/\n/g, '<br>'),
       task: worksheet[i][Object.keys(worksheet[i])[5]].replace(/\n/g, '<br>'),
       taskPerson: worksheet[i][Object.keys(worksheet[i])[6]],
@@ -64,10 +88,6 @@ function Post(req, res) {
       taskType: worksheet[i][Object.keys(worksheet[i])[12]],
       note: worksheet[i][Object.keys(worksheet[i])[13]]
     });
-
-    Account.create({
-      accountName: "lexsol"
-    })
   }
 }
 

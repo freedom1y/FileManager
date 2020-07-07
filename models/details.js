@@ -6,7 +6,6 @@ const Details = loader.database.define('Details', {
   fileId: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true,
     allowNull: false
   },
   bugId: {
@@ -17,6 +16,7 @@ const Details = loader.database.define('Details', {
   detailsId: {
     type: Sequelize.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
     allowNull: false
   },
   pgmId:{

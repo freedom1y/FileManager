@@ -51,6 +51,7 @@ app.get('/chart/sortTaskDate', routes.chart.sortTaskDate);
 app.get('/chart/sortCompDate', routes.chart.sortCompDate);
 app.get('/chart/sortManHour', routes.chart.sortManHour);
 app.get('/chart/sortTaskType', routes.chart.sortTaskType);
+app.get('/chart/sortTaskType', routes.chart.sortTaskType);
 
 
 // catch 404 and forward to error handler

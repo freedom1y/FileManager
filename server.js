@@ -53,6 +53,9 @@ app.get('/approve', routes.approve.Get);
 app.post('/approve', routes.approve.Post);
 app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
+app.get('/testSlack', routes.testSlack.Get);
+app.post('/testSlack', routes.testSlack.Post);
+
 // ソート処理のルーティング
 app.get('/chart/sortEnterDate', routes.chart.sortEnterDate);
 app.get('/chart/sortEnterPerson', routes.chart.sortEnterPerson);

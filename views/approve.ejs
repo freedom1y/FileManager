@@ -80,6 +80,20 @@
         <input type="submit" value="承認を確定" class='button'>
         </form>
         <a href="/index" class="button">ホームに戻る</a>
+        <form method="post" action="/testSlack">
+            <input list="userName" name="userId" size="15">
+            <datalist id="userName">
+            <!-- ここではアカウント名のリストをもらってforでoptionを生成するのがいいかな -->
+                <option value="わかちこ"></option>
+                <option value="ゆぴお"></option>
+                <option value="はみげ"></option>
+                <option value="おるみ"></option>
+                <option value="およぴ"></option>
+                <option value="おぐれ"></option>
+            </datalist>
+
+            <input type="submit" value="slackへ通知">
+        </form>
     </div>
 </body>
 

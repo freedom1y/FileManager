@@ -9,6 +9,10 @@ const Account = loader.database.define('account', {
     autoIncrement: true,
     allowNull: false
   },
+  slackId: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   accountName: {
     type: Sequelize.STRING,
     allowNull: false

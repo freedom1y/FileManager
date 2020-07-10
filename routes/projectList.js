@@ -1,4 +1,3 @@
-const Post = require('../lib/post');
 const File = require('../models/file');
 
 module.exports = function(req, res) {

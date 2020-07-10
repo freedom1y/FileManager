@@ -1,19 +1,39 @@
-const Post = require('../lib/post');
+const File = require('../models/file');
+const BugContent = require('../models/bugContent');
+const Details = require('../models/details');
+const Account = require('../models/account');
 
 function Get(req, res) {
-  Post.findAll({
+  File.findOne({
     where: {
-      project: req.query.pname
+      fileName: req.query.pname
     }
-  }).then((posts) => {
-    res.render('chart', {
-      xlsk: posts
+  }).then((file) => {
+    Details.findAll({
+      include: [{
+          model: BugContent,
+          required: true,
+          attributes: [
+            'fileId',
+            'bugId',
+            'title',
+            'bugContent',
+            'writer',
+            'writeDate'
+          ]
+        }],
+      where: {fileId: file.fileId},
+      // order
+    }).then((data) => {
+      res.render('chart', {
+        xlsk: data
+      });
     });
   });
 }
 
 function sortEnterDate(req, res) {
-  Post.findAll({
+  /* Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -22,11 +42,11 @@ function sortEnterDate(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 function sortEnterPerson(req, res) {
-  Post.findAll({
+  /*Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -35,11 +55,11 @@ function sortEnterPerson(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 function sortTitle(req, res) {
-  Post.findAll({
+  /*Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -48,11 +68,11 @@ function sortTitle(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 function sortContent(req, res) {
-  Post.findAll({
+  /*Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -61,11 +81,11 @@ function sortContent(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 function sortPGM_ID(req, res) {
-  Post.findAll({
+  /*Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -74,11 +94,11 @@ function sortPGM_ID(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 function sortTask(req, res) {
-  Post.findAll({
+  /*Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -87,11 +107,11 @@ function sortTask(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 function sortTaskPerson(req, res) {
-  Post.findAll({
+  /*Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -100,11 +120,11 @@ function sortTaskPerson(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 function sortProgress(req, res) {
-  Post.findAll({
+  /*Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -113,11 +133,11 @@ function sortProgress(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 function sortImportance(req, res) {
-  Post.findAll({
+  /*Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -126,11 +146,11 @@ function sortImportance(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 function sortTaskDate(req, res) {
-  Post.findAll({
+  /*Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -139,11 +159,11 @@ function sortTaskDate(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 function sortCompDate(req, res) {
-  Post.findAll({
+  /*Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -152,11 +172,11 @@ function sortCompDate(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 function sortManHour(req, res) {
-  Post.findAll({
+  /*Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -165,11 +185,11 @@ function sortManHour(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 function sortTaskType(req, res) {
-  Post.findAll({
+  /*Post.findAll({
     where: {
       project: req.query.pname
     },
@@ -178,7 +198,7 @@ function sortTaskType(req, res) {
     res.render('chart', {
       xlsk: posts
     });
-  });
+  });*/
 }
 
 

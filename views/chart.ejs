@@ -32,28 +32,28 @@
 
 
         <% if (typeof xlsk !== 'undefined') { %>
-            <% var projectName = '' %>
+            <% var fileName = '' %>
             <% var sum_manHour = 0 %>
             <% for ( row in xlsk ) { %>
-                <% if (projectName !== xlsk[row].project) { %>
-                    <% projectName = xlsk[row].project %>
+                <% if (fileName !== xlsk[row].fileName) { %>
+                    <% fileName = xlsk[row].fileName %>
                         </table>
                         <h2><%= xlsk[row].project %></h2>
                         <table class="chart-table" border="1" cellspacing="0">
                             <tr>
-                                <th width="6%"><a href="/chart/sortEnterDate?pname=<%= xlsk[row].project %>">記入日</a></th>
-                                <th><a href="/chart/sortEnterPerson?pname=<%= xlsk[row].project %>">記入者</a></th>
-                                <th width="10%"><a href="/chart/sortTitle?pname=<%= xlsk[row].project %>">タイトル</a></th>
-                                <th width="15%"><a href="/chart/sortContent?pname=<%= xlsk[row].project %>">不具合・要望内容</a></th>
-                                <th width="15%"><a href="/chart/sortPGM_ID?pname=<%= xlsk[row].project %>">PGM_ID</a></th>
-                                <th width="20%"><a href="/chart/sortTask?pname=<%= xlsk[row].project %>">対応</a></th>
-                                <th><a href="/chart/sortTaskPerson?pname=<%= xlsk[row].project %>">対応者</a></th>
-                                <th><a href="/chart/sortProgress?pname=<%= xlsk[row].project %>">進捗</a></th>
-                                <th><a href="/chart/sortImportance?pname=<%= xlsk[row].project %>">重要度</a></th>
-                                <th width="6%"><a href="/chart/sortTaskDate?pname=<%= xlsk[row].project %>">対応予定日</a></th>
-                                <th width="6%"><a href="/chart/sortCompDate?pname=<%= xlsk[row].project %>">完了日</a></th>
-                                <th><a href="/chart/sortManHour?pname=<%= xlsk[row].project %>">工数(人日)</a></th>
-                                <th><a href="/chart/sortTaskType?pname=<%= xlsk[row].project %>">種別</a></th>
+                                <th width="6%"><a href="/chart/sortEnterDate?pname=<%= xlsk[row].fileName %>">記入日</a></th>
+                                <th><a href="/chart/sortEnterPerson?pname=<%= xlsk[row].fileName %>">記入者</a></th>
+                                <th width="10%"><a href="/chart/sortTitle?pname=<%= xlsk[row].fileName %>">タイトル</a></th>
+                                <th width="15%"><a href="/chart/sortContent?pname=<%= xlsk[row].fileName %>">不具合・要望内容</a></th>
+                                <th width="15%"><a href="/chart/sortPGM_ID?pname=<%= xlsk[row].fileName %>">PGM_ID</a></th>
+                                <th width="20%"><a href="/chart/sortTask?pname=<%= xlsk[row].fileName %>">対応</a></th>
+                                <th><a href="/chart/sortTaskPerson?pname=<%= xlsk[row].fileName %>">対応者</a></th>
+                                <th><a href="/chart/sortProgress?pname=<%= xlsk[row].fileName %>">進捗</a></th>
+                                <th><a href="/chart/sortImportance?pname=<%= xlsk[row].fileName %>">重要度</a></th>
+                                <th width="6%"><a href="/chart/sortTaskDate?pname=<%= xlsk[row].fileName %>">対応予定日</a></th>
+                                <th width="6%"><a href="/chart/sortCompDate?pname=<%= xlsk[row].fileName %>">完了日</a></th>
+                                <th><a href="/chart/sortManHour?pname=<%= xlsk[row].fileName %>">工数(人日)</a></th>
+                                <th><a href="/chart/sortTaskType?pname=<%= xlsk[row].fileName %>">種別</a></th>
                                 <th>備考</th>
                                 <th>承認状態</th>
                                 <th width="3%" nowrap>編集</th>
@@ -61,10 +61,10 @@
                             </tr>
                 <% } %>
                 <tr class='flag<%= xlsk[row].flag%>'>
-                    <td><%= xlsk[row].enterDate %></td>
-                    <td><%= xlsk[row].enterPerson %></td>
-                    <td align="left"><%- xlsk[row].title %></td>
-                    <td align="left"><%- xlsk[row].content %></td>
+                    <td><%= xlsk[row].BugContent.writeDate %></td>
+                    <td><%= xlsk[row].BugContent.writer %></td>
+                    <td align="left"><%- xlsk[row].BugContent.title %></td>
+                    <td align="left"><%- xlsk[row].BugContent.ntent %></td>
                     <td align="left"><%- xlsk[row].pgmId %></td>
                     <td align="left"><%- xlsk[row].task %></td>
                     <td><%= xlsk[row].taskPerson %></td>
@@ -87,7 +87,7 @@
                         <a href="/edit?id=<%=xlsk[row].id %>" class="btn-square">編集</a>
                     </td>
                     <td nowrap>
-                        <input type="button" class="btn-square" value="削除" onClick="disp('<%= xlsk[row].project %>',<%= xlsk[row].id %>)">
+                        <input type="button" class="btn-square" value="削除" onClick="disp('<%= xlsk[row].fileName %>',<%= xlsk[row].id %>)">
                     </td>
                 </tr>
                 <% sum_manHour += xlsk[row].manHour %>

@@ -8,6 +8,22 @@ const bodyParser = require('body-parser');
 const lib = all(__dirname + '/lib'); // libディレクトリ直下のファイルを一括読み込み
 const routes = all(__dirname + '/routes');
 
+// モデルの読み込み
+const File = require('./models/file');
+const BugContent = require('./models/bugContent');
+const Details = require('./models/details');
+const Account = require('./models/account');
+File.sync().then(() => {
+  BugContent.belongsTo(File, {foreignKey: 'fileId'});
+  Details.belongsTo(File, {foreignKey: 'fileId'});
+  BugContent.sync().then(() => {
+    Details.belongsTo(BugContent, {foreignKey: 'bugId'});
+    Details.sync();
+  });
+  Account.belongsTo(File, {foreignKey: 'accountId'});
+  Account.sync();
+});
+
 
 const app = express();
 app.use(helmet());
@@ -37,6 +53,9 @@ app.get('/approve', routes.approve.Get);
 app.post('/approve', routes.approve.Post);
 app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
+app.get('/testSlack', routes.testSlack.Get);
+app.post('/testSlack', routes.testSlack.Post);
+
 // ソート処理のルーティング
 app.get('/chart/sortEnterDate', routes.chart.sortEnterDate);
 app.get('/chart/sortEnterPerson', routes.chart.sortEnterPerson);

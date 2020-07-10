@@ -28,6 +28,23 @@
             <% } %>
             <li><a href="/logout" class="button">ログアウト</a></li><br>
         </ul>
+        
+        <form method="post" action="/testSlack">
+            <input list="userName" name="userId" size="15">
+            <datalist id="userName">
+                <!-- ここではアカウント名のリストをもらってforでoptionを生成するのがいいかな -->
+                <option value="わかちこ"></option>
+                <option value="ゆぴお"></option>
+                <option value="はみげ"></option>
+                <option value="おるみ"></option>
+                <option value="およぴ"></option>
+                <option value="おぐれ"></option>
+            </datalist>
+
+            <input type="submit" value="slackへ通知">
+        </form>
+
+
         <% if (typeof fileName !== 'undefined') { %>
         <P><%= fileName %></P>
         <% } %>

@@ -9,7 +9,6 @@ function Get(req, res) {
 }
 
 function Post(req, res) {
-  //console.log(req.body);
   worksheet = req.body.output.slice();
 
   File.create({
@@ -18,6 +17,7 @@ function Post(req, res) {
   }).then(() => {
     File.max('fileId').then((num) => {
       fileId = num;
+      
       Account.create({
         slackId: "L123",
         accountName: "lexsol"
@@ -33,8 +33,8 @@ function Post(req, res) {
         writer: worksheet[0][Object.keys(worksheet[0])[1]],
         writeDate: writeDt
       }).then(() => {
-        BugContent.max('bugId').then((num) => {
-          bugId = num;
+        BugContent.max('bugId').then((bugNum) => {
+          bugId = bugNum;
           DetailsResister();
         });
       });
@@ -45,6 +45,7 @@ function Post(req, res) {
 
 function DetailsResister(){
   var title = worksheet[0][Object.keys(worksheet[0])[2]];
+
   
   for (var i = 0; i < worksheet.length; i++) {
     var writeDt = new Date(worksheet[i][Object.keys(worksheet[i])[0]]);

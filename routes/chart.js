@@ -9,24 +9,29 @@ function Get(req, res) {
       fileName: req.query.pname
     }
   }).then((file) => {
-    Details.findAll({
+    BugContent.findAll({
       include: [{
-          model: BugContent,
-          required: true,
+          model: Details,
           attributes: [
-            'fileId',
-            'bugId',
-            'title',
-            'bugContent',
-            'writer',
-            'writeDate'
+            'detailsId',
+            'pgmId',
+            'task',
+            'taskPerson',
+            'progress',
+            'importance',
+            'taskDate',
+            'compDate',
+            'manHour',
+            'taskType',
+            'note'
           ]
         }],
       where: {fileId: file.fileId},
-      // order
+      order:[['bugId', 'ASC']]
     }).then((data) => {
       res.render('chart', {
-        xlsk: data
+        xlsk: data,
+        fileName: req.query.pname
       });
     });
   });

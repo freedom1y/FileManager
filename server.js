@@ -14,10 +14,19 @@ const BugContent = require('./models/bugContent');
 const Details = require('./models/details');
 const Account = require('./models/account');
 File.sync().then(() => {
-  BugContent.belongsTo(File, {foreignKey: 'fileId'});
-  Details.belongsTo(File, {foreignKey: 'fileId'});
+  File.hasMany(BugContent, {
+    foreignKey: 'fileId',
+    sourceKey: 'fileId'
+  });
+  File.hasMany(Details, {
+    foreignKey: 'fileId',
+    sourceKey: 'fileId'
+  });
   BugContent.sync().then(() => {
-    Details.belongsTo(BugContent, {foreignKey: 'bugId'});
+    BugContent.hasMany(Details, {
+      foreignKey: 'bugId',
+      sourceKey: 'bugId'
+    });
     Details.sync();
   });
   Account.belongsTo(File, {foreignKey: 'accountId'});

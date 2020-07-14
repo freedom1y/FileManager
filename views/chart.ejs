@@ -32,66 +32,71 @@
 
 
         <% if (typeof xlsk !== 'undefined') { %>
-            <% var fileName = '' %>
+            <% var name = '' %>
             <% var sum_manHour = 0 %>
             <% for ( row in xlsk ) { %>
-                <% if (fileName !== xlsk[row].fileName) { %>
-                    <% fileName = xlsk[row].fileName %>
-                        </table>
-                        <h2><%= xlsk[row].project %></h2>
-                        <table class="chart-table" border="1" cellspacing="0">
-                            <tr>
-                                <th width="6%"><a href="/chart/sortEnterDate?pname=<%= xlsk[row].fileName %>">記入日</a></th>
-                                <th><a href="/chart/sortEnterPerson?pname=<%= xlsk[row].fileName %>">記入者</a></th>
-                                <th width="10%"><a href="/chart/sortTitle?pname=<%= xlsk[row].fileName %>">タイトル</a></th>
-                                <th width="15%"><a href="/chart/sortContent?pname=<%= xlsk[row].fileName %>">不具合・要望内容</a></th>
-                                <th width="15%"><a href="/chart/sortPGM_ID?pname=<%= xlsk[row].fileName %>">PGM_ID</a></th>
-                                <th width="20%"><a href="/chart/sortTask?pname=<%= xlsk[row].fileName %>">対応</a></th>
-                                <th><a href="/chart/sortTaskPerson?pname=<%= xlsk[row].fileName %>">対応者</a></th>
-                                <th><a href="/chart/sortProgress?pname=<%= xlsk[row].fileName %>">進捗</a></th>
-                                <th><a href="/chart/sortImportance?pname=<%= xlsk[row].fileName %>">重要度</a></th>
-                                <th width="6%"><a href="/chart/sortTaskDate?pname=<%= xlsk[row].fileName %>">対応予定日</a></th>
-                                <th width="6%"><a href="/chart/sortCompDate?pname=<%= xlsk[row].fileName %>">完了日</a></th>
-                                <th><a href="/chart/sortManHour?pname=<%= xlsk[row].fileName %>">工数(人日)</a></th>
-                                <th><a href="/chart/sortTaskType?pname=<%= xlsk[row].fileName %>">種別</a></th>
-                                <th>備考</th>
-                                <th>承認状態</th>
-                                <th width="3%" nowrap>編集</th>
-                                <th width="3%" nowrap>削除</th>
-                            </tr>
+                <% let loopNum = 0 %>
+                <% loopNum = xlsk[row].Details.length %>
+                <% for ( let i = 0; i < loopNum; i++ ) { %>
+                    <% if (name !== fileName) { %>
+                        <% name = fileName %>
+                            </table>
+                            <h2><%= fileName %></h2>
+                            <table class="chart-table" border="1" cellspacing="0">
+                                <tr>
+                                    <th width="6%"><a href="/chart/sortEnterDate?pname=<%= fileName %>">記入日</a></th>
+                                    <th><a href="/chart/sortEnterPerson?pname=<%= fileName %>">記入者</a></th>
+                                    <th width="10%"><a href="/chart/sortTitle?pname=<%= fileName %>">タイトル</a></th>
+                                    <th width="15%"><a href="/chart/sortContent?pname=<%= fileName %>">不具合・要望内容</a></th>
+                                    <th width="15%"><a href="/chart/sortPGM_ID?pname=<%= fileName %>">PGM_ID</a></th>
+                                    <th width="20%"><a href="/chart/sortTask?pname=<%= fileName %>">対応</a></th>
+                                    <th><a href="/chart/sortTaskPerson?pname=<%= fileName %>">対応者</a></th>
+                                    <th><a href="/chart/sortProgress?pname=<%= fileName %>">進捗</a></th>
+                                    <th><a href="/chart/sortImportance?pname=<%= fileName %>">重要度</a></th>
+                                    <th width="6%"><a href="/chart/sortTaskDate?pname=<%= fileName %>">対応予定日</a></th>
+                                    <th width="6%"><a href="/chart/sortCompDate?pname=<%= fileName %>">完了日</a></th>
+                                    <th><a href="/chart/sortManHour?pname=<%= fileName %>">工数(人日)</a></th>
+                                    <th><a href="/chart/sortTaskType?pname=<%= fileName %>">種別</a></th>
+                                    <th>備考</th>
+                                    <th>承認状態</th>
+                                    <th width="3%" nowrap>編集</th>
+                                    <th width="3%" nowrap>削除</th>
+                                </tr>
+                    <% } %>
+                    <tr class='flag<%= xlsk[row].flag%>'>
+                        <td><%= xlsk[row].writeDate %></td>
+                        <td><%= xlsk[row].writer %></td>
+                        <td align="left"><%- xlsk[row].title %></td>
+                        <td align="left"><%- xlsk[row].bugContent %></td>
+                        <td align="left"><%- xlsk[row].Details[i].pgmId %></td>
+                        <td align="left"><%- xlsk[row].Details[i].task %></td>
+                        <td><%= xlsk[row].Details[i].taskPerson %></td>
+                        <td><%= xlsk[row].Details[i].progress %></td>
+                        <td><%= xlsk[row].Details[i].importance %></td>
+                        <td><%= xlsk[row].Details[i].taskDate %></td>
+                        <td><%= xlsk[row].Details[i].compDate %></td>
+                        <td><%= xlsk[row].Details[i].manHour %></td>
+                        <td><%= xlsk[row].Details[i].taskType %></td>
+                        <td><%= xlsk[row].Details[i].note %></td>
+                        <td><% if(xlsk[row].flag === 1){ %>
+                                <p>承認待ち</p>
+                            <%}else if(xlsk[row].flag === 2){%>
+                                <p>非承認</p>
+                            <%} else{%>
+                                <p>承認済み</p>
+                            <%} %>
+                        </td>
+                        <td nowrap>
+                            <a href="/edit?id=<%=xlsk[row].id %>" class="btn-square">編集</a>
+                        </td>
+                        <td nowrap>
+                            <input type="button" class="btn-square" value="削除" onClick="disp('<%= fileName %>',<%= xlsk[row].id %>)">
+                        </td>
+                    </tr>
+                    <% sum_manHour += xlsk[row].Details[i].manHour %>
                 <% } %>
-                <tr class='flag<%= xlsk[row].flag%>'>
-                    <td><%= xlsk[row].BugContent.writeDate %></td>
-                    <td><%= xlsk[row].BugContent.writer %></td>
-                    <td align="left"><%- xlsk[row].BugContent.title %></td>
-                    <td align="left"><%- xlsk[row].BugContent.ntent %></td>
-                    <td align="left"><%- xlsk[row].pgmId %></td>
-                    <td align="left"><%- xlsk[row].task %></td>
-                    <td><%= xlsk[row].taskPerson %></td>
-                    <td><%= xlsk[row].progress %></td>
-                    <td><%= xlsk[row].importance %></td>
-                    <td><%= xlsk[row].taskDate %></td>
-                    <td><%= xlsk[row].compDate %></td>
-                    <td><%= xlsk[row].manHour %></td>
-                    <td><%= xlsk[row].taskType %></td>
-                    <td><%= xlsk[row].note %></td>
-                    <td><% if(xlsk[row].flag === 1){ %>
-                            <p>承認待ち</p>
-                        <%}else if(xlsk[row].flag === 2){%>
-                            <p>非承認</p>
-                        <%} else{%>
-                            <p>承認済み</p>
-                        <%} %>
-                    </td>
-                    <td nowrap>
-                        <a href="/edit?id=<%=xlsk[row].id %>" class="btn-square">編集</a>
-                    </td>
-                    <td nowrap>
-                        <input type="button" class="btn-square" value="削除" onClick="disp('<%= xlsk[row].fileName %>',<%= xlsk[row].id %>)">
-                    </td>
-                </tr>
-                <% sum_manHour += xlsk[row].manHour %>
             <% } %>
+
             <tr>
                 <th>合計</th>
                 <th>-</th>

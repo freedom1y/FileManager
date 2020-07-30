@@ -1,13 +1,11 @@
-const Post = require('../lib/post');
 const File = require('../models/file');
 
 module.exports = function(req, res) {
   File.findAll({
     order: [['fileId', 'DESC']]
-  }).then((posts) => {
-    console.log(posts);
+  }).then((file) => {
     res.render('projectList', {
-      xlsk: posts
+      xlsk: file
     });
   });
 }

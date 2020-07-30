@@ -55,6 +55,9 @@ app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
 app.get('/testSlack', routes.testSlack.Get);
 app.post('/testSlack', routes.testSlack.Post);
+app.get('/registAccount', routes.hundleRegistAccount.Get);
+app.post('/registAccount', routes.hundleRegistAccount.Post);
+
 
 // ソート処理のルーティング
 app.get('/chart/sortEnterDate', routes.chart.sortEnterDate);

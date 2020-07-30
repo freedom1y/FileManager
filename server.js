@@ -14,10 +14,19 @@ const BugContent = require('./models/bugContent');
 const Details = require('./models/details');
 const Account = require('./models/account');
 File.sync().then(() => {
-  BugContent.belongsTo(File, {foreignKey: 'fileId'});
-  Details.belongsTo(File, {foreignKey: 'fileId'});
+  File.hasMany(BugContent, {
+    foreignKey: 'fileId',
+    sourceKey: 'fileId'
+  });
+  File.hasMany(Details, {
+    foreignKey: 'fileId',
+    sourceKey: 'fileId'
+  });
   BugContent.sync().then(() => {
-    Details.belongsTo(BugContent, {foreignKey: 'bugId'});
+    BugContent.hasMany(Details, {
+      foreignKey: 'bugId',
+      sourceKey: 'bugId'
+    });
     Details.sync();
   });
   Account.belongsTo(File, {foreignKey: 'accountId'});
@@ -55,6 +64,9 @@ app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
 app.get('/testSlack', routes.testSlack.Get);
 app.post('/testSlack', routes.testSlack.Post);
+app.get('/registAccount', routes.hundleRegistAccount.Get);
+app.post('/registAccount', routes.hundleRegistAccount.Post);
+
 
 // ソート処理のルーティング
 app.get('/chart/sortEnterDate', routes.chart.sortEnterDate);

@@ -2,7 +2,7 @@
 const loader = require('./sequelize-loader');
 const Sequelize = loader.Sequelize;
 
-const BugContent = loader.database.define('bugContent', {
+const BugContent = loader.database.define('BugContent', {
   fileId: {
     type: Sequelize.INTEGER,
     primaryKey: true,

@@ -29,7 +29,7 @@ File.sync().then(() => {
     });
     Details.sync();
   });
-  Account.belongsTo(File, {foreignKey: 'accountId'});
+  File.belongsTo(Account, {foreignKey: 'status'});
   Account.sync();
 });
 
@@ -64,8 +64,8 @@ app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
 app.get('/testSlack', routes.testSlack.Get);
 app.post('/testSlack', routes.testSlack.Post);
-app.get('/registAccount', routes.hundleRegistAccount.Get);
-app.post('/registAccount', routes.hundleRegistAccount.Post);
+app.get('/registAccount', routes.registAccount.Get);
+app.post('/registAccount', routes.registAccount.Post);
 
 
 // ソート処理のルーティング

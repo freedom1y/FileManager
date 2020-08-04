@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>承認待ち</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="top-wrapper">
+
+        <div class="top-image">
+            <h1><a href="/index"><img src="/images/logo.jpg" alt="LexSol"></a></h1>
+        </div>
+        <h1 class="title">承認待ち</h1>
+
+
+        <% if (typeof xlsk !== 'undefined') { %>
+            <% var fileName = '' %>
+            <% for ( row in xlsk ) { %>
+                <% if (fileName !== xlsk[row].File.fileName) { %>
+                  <% fileName = xlsk[row].File.fileName %>
+                    <!-- <h2><a href="/chart?pname=<%= fileName %>" ><%= fileName %></a></h2>
+                    <h2><a href="/approve"><%= fileName %></a></h2>-->
+
+                    <table border="1" cellspacing="0">
+                        <tr>
+                            <td><%= fileName %></td>
+                            <td><%= xlsk[row].accountName %></td>
+                            <td><a href="/approve">認証</a></td>
+                        </tr>
+                    </table>
+
+                <% } %>
+                
+            <% } %>
+        <% }%>
+
+        <br>
+        <a href="/index" class="button">ホームに戻る</a>
+    </div>
+</body>
+
+</html>

@@ -58,6 +58,7 @@ app.get('/projectList', routes.projectList);
 app.get('/edit', routes.edit.Get);
 app.post('/edit', routes.edit.Post);
 app.get('/delete', routes.delete.Delete);
+app.get('/approveList', routes.approveList.Get);
 app.get('/approve', routes.approve.Get);
 app.post('/approve', routes.approve.Post);
 app.get('/logout', routes.logout);

@@ -33,10 +33,10 @@
                     <td><input type="text" name="enterDate" size="15" value="<%=editTarget.enterDate %>"></td>
                     <td><input type="text" name="enterPerson" size="15" value="<%=editTarget.enterPerson %>"></td>
                     <td><textarea type="text" name="title" ><%= editTarget.title.replace(/<br>/g, '\n') %></textarea></td>
-                    <td><textarea type="text" name="content"><%= editTarget.content.replace(/<br>/g, '\n') %></textarea></td>
-                    <td><textarea type="text" name="pgmId"><%= editTarget.pgmId.replace(/<br>/g, '\n') %></textarea></td>
-                    <td><textarea type="text" name="task"><%= editTarget.task.replace(/<br>/g, '\n') %></textarea></td>
-                    <td><input type="text" name="taskPerson" size="15" value="<%=editTarget.taskPerson %>"></td>
+                    <td><textarea type="text" name="bugContent"><%= editTarget.bugContent.replace(/<br>/g, '\n') %></textarea></td>
+                    <td><textarea type="text" name="pgmId"><%= editTarget.Details[0].pgmId.replace(/<br>/g, '\n') %></textarea></td>
+                    <td><textarea type="text" name="task"><%= editTarget.Details[0].task.replace(/<br>/g, '\n') %></textarea></td>
+                    <td><input type="text" name="taskPerson" size="15" value="<%=editTarget.Details[0].taskPerson %>"></td>
                 </tr>
                 <tr>
                     <th>進捗</th>
@@ -50,13 +50,13 @@
     
                 <form method="post"　action="/edit">
                     <tr>
-                        <td><input list="progressDatalist" name="progress" size="15" value="<%=editTarget.progress %>"></td>
-                        <td><input list="importanceDatalist" name="importance" size="15" value="<%=editTarget.importance %>"></td>
-                        <td><input type="date" name="taskDate" size="15" value="<%=editTarget.taskDate %>"></td>
-                        <td><input type="date" name="compDate" size="15" value="<%=editTarget.compDate %>"></td>
-                        <td><input type="text" name="manHour" size="15" value="<%=editTarget.manHour %>"></td>
-                        <td><input type="text" name="taskType" size="15" value="<%=editTarget.taskType %>"></td>
-                        <td><textarea type="text" name="note"><%- editTarget.note %></textarea></td>
+                        <td><input list="progressDatalist" name="progress" size="15" value="<%=editTarget.Details[0].progress %>"></td>
+                        <td><input list="importanceDatalist" name="importance" size="15" value="<%=editTarget.Details[0].importance %>"></td>
+                        <td><input type="date" name="taskDate" size="15" value="<%=editTarget.Details[0].taskDate %>"></td>
+                        <td><input type="date" name="compDate" size="15" value="<%=editTarget.Details[0].compDate %>"></td>
+                        <td><input type="text" name="manHour" size="15" value="<%=editTarget.Details[0].manHour %>"></td>
+                        <td><input type="text" name="taskType" size="15" value="<%=editTarget.Details[0].taskType %>"></td>
+                        <td><textarea type="text" name="note"><%- editTarget.Details[0].note %></textarea></td>
                         <datalist id="importanceDatalist">
                             <option value="高"></option>
                             <option value="中"></option>

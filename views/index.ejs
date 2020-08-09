@@ -11,7 +11,6 @@
 
 <body>
     <div class="top-wrapper">
-<<<<<<< HEAD
         <div class="top-image">
             <img src="/images/logo.jpg">
         </div>
@@ -46,25 +45,7 @@
 
 
         <% if (typeof fileName !== 'undefined') { %>
-=======
-    <div class="top-image">
-        <img src="/images/logo.jpg">
-    </div>
-    <h1 class="title">工数管理システム</h1>
-    <p class="description">
-        エクセルファイルをアップロードし、Web上で工数管理を行う  
-    </p>
-    <h3><%= userName + "としてログインしています" %></h3>
-    <ul>
-        <li><a href = "/projectList" class="button"  >プロジェクト一覧</a></li><br>
-        <li><a href = "/upload" class="button"  >ファイルアップロード</a></li><br>
-        <% if ( userName === 'lexsol') { %> <!-- 管理者ユーザー名を記述 -->
-            <li><a href = "/approveList" class="button"  >承認</a></li><br>
-        <% } %>
-        <li><a href = "/logout" class="button"  >ログアウト</a></li><br>       
-    </ul>
-    <% if (typeof fileName !== 'undefined') { %>
->>>>>>> 2f23d819ad03136aba366966aa32e471a0ab89c5
+
         <P><%= fileName %></P>
         <% } %>
     </div>

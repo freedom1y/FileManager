@@ -1,19 +1,41 @@
-const post = require('../lib/post');
+const File = require('../models/file');
+const BugContent = require('../models/bugContent');
+const Details = require('../models/details');
+const Account = require('../models/account');
 const mklog = require('../lib/mklog');
 const auth = require('basic-auth');
 
 // GETリクエスト
 function Get(req, res) {
-  post.findOne({
-    where: {
-      id: req.query.id
-    }
+  console.log(req.query)
+  BugContent.findOne({
+    include: [{
+        model: Details,
+        where: {detailsId: req.query.details},
+        // attributes: [
+        //   'detailsId',
+        //   'pgmId',
+        //   'task',
+        //   'taskPerson',
+        //   'progress',
+        //   'importance',
+        //   'taskDate',
+        //   'compDate',
+        //   'manHour',
+        //   'taskType',
+        //   'note'
+        // ]
+      }],
+    where: {bugId: req.query.bugId}
   }).then((post) => {
+    console.log(post)
     res.render('edit', {
       editTarget: post
     });
   });
 }
+
+
 
 // POSTリクエスト
 function Post(req, res) {

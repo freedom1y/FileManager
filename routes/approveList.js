@@ -5,22 +5,24 @@ const Op = Sequelize.Op;
 
 function Get(req, res) {
     /*File.findAll({
-        include: [{
-            model: Account,
-            attributes: [
-              'accountId',
-              'slackId',
-              'accountName',
-            ]
-          }],
-        where: {
-            status: { [Op.ne]: 1 }
-        },
-        order: [['fileId', 'DESC']]
+      include: [{
+          model: Account,
+          attributes: [
+            'accountId',
+            'slackId',
+            'accountName',
+            'password'
+          ]
+        }],
+      where: {
+          status: { [Op.ne]: 1 }
+      },
+      order: [['status', 'DESC']]
     }).then((data) => {
-        res.render('approveList', {
-          xlsk: data,
-        });
+      console.log(data);
+      res.render('approveList', {
+        xlsk: data,
+      });
     });*/
     
     

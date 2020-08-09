@@ -16,6 +16,10 @@ const Account = loader.database.define('Account', {
   accountName: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
 }, {
     freezeTableName: true,

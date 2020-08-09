@@ -27,8 +27,9 @@ function Post(req, res) {
           fileId = num;
           
           Account.create({
-            slackId: "L123",
-            accountName: "lexsol"
+            slackId: "lexsol",
+            accountName: "lexsol",
+            password: "L123"
           });
         
           BugContentRegister();

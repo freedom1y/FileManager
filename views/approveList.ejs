@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-</html>
-
 <head>
     <meta charset="UTF-8">
-    <title>承認待ち</title>
+    <title>承認待ちリスト</title>
     <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript">
+
+        function disp(fileName, pass){
+
+            // 入力ダイアログを表示 ＋ 入力内容を passIn に代入
+            passIn = window.prompt("パスワードを入力してください", "");
+
+            if(passIn == pass){
+                location.href = "/approve?project=" + fileName;
+            }
+            else if(passIn != "" && passIn != null)
+            {
+                window.alert('パスワードが間違っています');
+            }
+            else　// 空の場合やキャンセルした場合は警告ダイアログを表示
+            {
+                window.alert('キャンセルされました');
+            }
+
+        }
+
+    </script>
 </head>
 
 <body>
@@ -15,28 +35,37 @@
         <div class="top-image">
             <h1><a href="/index"><img src="/images/logo.jpg" alt="LexSol"></a></h1>
         </div>
-        <h1 class="title">承認待ち</h1>
+        <h1 class="title">承認待ちリスト</h1>
 
 
-        <% if (typeof xlsk !== 'undefined') { %>
+        <% if (xlsk.length > 0) { %>
             <% var fileName = '' %>
+
+            <table class="chart-table" border="1" cellspacing="0">
+                <tr>
+                    <th>プロジェクト名</th>
+                    <th>承認アカウント</th>
+                    <th>認証</th>
+                </tr>
+
             <% for ( row in xlsk ) { %>
                 <% if (fileName !== xlsk[row].File.fileName) { %>
                   <% fileName = xlsk[row].File.fileName %>
                     <!-- <h2><a href="/chart?pname=<%= fileName %>" ><%= fileName %></a></h2>
                     <h2><a href="/approve"><%= fileName %></a></h2>-->
 
-                    <table border="1" cellspacing="0">
                         <tr>
                             <td><%= fileName %></td>
                             <td><%= xlsk[row].accountName %></td>
-                            <td><a href="/approve">認証</a></td>
+                            <td>
+                                <input type="button" class="btn-square" value="認証" onClick="disp('<%= fileName %>', '<%= xlsk[row].password %>')">
+                            </td>
                         </tr>
-                    </table>
 
-                <% } %>
-                
+                <% } %>    
             <% } %>
+
+            </table>
         <% }%>
 
         <br>

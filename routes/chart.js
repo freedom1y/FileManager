@@ -4,13 +4,11 @@ const Details = require('../models/details');
 const Account = require('../models/account');
 
 function Get(req, res) {
-  console.log(req.query)
   File.findOne({
     where: {
       fileId: req.query.pname
     }
   }).then((file) => {
-    console.log(file)
     BugContent.findAll({
       include: [{
           model: Details,

@@ -8,7 +8,8 @@ function Get(req, res) {
 function Post(req, res) {
   Account.create({
     slackId: req.body.slackId,
-    accountName: req.body.name
+    accountName: req.body.name,
+    password: req.body.passWord
   })
 
   // Account.findAll({

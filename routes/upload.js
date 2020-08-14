@@ -9,7 +9,7 @@ function Get(req, res) {
 function Post(req, res) {
   analyze.xlskObject(req.file.originalname);
   res.render('upload', {data: req.file.originalname});
-  mklog.log('UploadFile ' + req.file.originalname, req);
+  // mklog.log('UploadFile ' + req.file.originalname, req);
 }
 
 module.exports = {

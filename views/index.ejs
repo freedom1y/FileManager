@@ -1,33 +1,56 @@
 <!DOCTYPE html>
-<html lang="ja"></html>
+<html lang="ja">
+
+</html>
+
 <head>
     <meta charset="UTF-8">
     <title>TOP</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
     <div class="top-wrapper">
-    <div class="top-image">
-        <img src="/images/logo.jpg">
-    </div>
-    <h1 class="title">工数管理システム</h1>
-    <p class="description">
-        エクセルファイルをアップロードし、Web上で工数管理を行う  
-    </p>
-    <h3><%= userName + "としてログインしています" %></h3>
-    <ul>
-        <li><a href = "/projectList" class="button"  >プロジェクト一覧</a></li><br>
-        <li><a href = "/upload" class="button"  >ファイルアップロード</a></li><br>
-        <% if ( userName === 'lexsol') { %> <!-- 管理者ユーザー名を記述 -->
-            <li><a href = "/approveList" class="button"  >承認</a></li><br>
-        <% } %>
-        <li><a href = "/logout" class="button"  >ログアウト</a></li><br>       
-    </ul>
-    <% if (typeof fileName !== 'undefined') { %>
+        <div class="top-image">
+            <img src="/images/logo.jpg">
+        </div>
+        <h1 class="title">工数管理システム</h1>
+        <p class="description">
+            エクセルファイルをアップロードし、Web上で工数管理を行う
+        </p>
+        <h3><%= userName + "としてログインしています" %></h3>
+        <ul>
+            <li><a href="/projectList" class="button">プロジェクト一覧</a></li><br>
+            <li><a href="/upload" class="button">ファイルアップロード</a></li><br>
+            <% if ( userName === 'lexsol') { %>
+            <!-- 管理者ユーザー名を記述 -->
+            <li><a href="/approve" class="button">承認</a></li><br>
+            <li><a href="/registAccount" class="button">新規アカウント登録</a></li><br>
+            <% } %>
+            <li><a href="/logout" class="button">ログアウト</a></li><br>
+        </ul>
+
+        <form method="post" action="/testSlack">
+            <input list="userName" name="userId" size="15">
+            <datalist id="userName">
+                <!-- ここではアカウント名のリストをもらってforでoptionを生成するのがいいかな -->
+                <option value="若月"></option>
+                <option value="UJKKBGFK7"></option>
+                <option value="市原"></option>
+                <option value="UJCEP0YJE"></option>
+            </datalist>
+
+            <input type="submit" value="slackへ通知">
+        </form>
+
+
+        <% if (typeof fileName !== 'undefined') { %>
+
         <P><%= fileName %></P>
-    <% } %>
+        <% } %>
     </div>
 
-    
+
 </body>
+
 </html>

@@ -27,13 +27,16 @@
                 <th>対応</th>
                 <th>対応者</th>
             </tr>
-
             <form method="post"　action="/edit">
                 <tr>
-                    <td><input type="text" name="enterDate" size="15" value="<%=editTarget.enterDate %>"></td>
-                    <td><input type="text" name="enterPerson" size="15" value="<%=editTarget.enterPerson %>"></td>
+                    <!-- <td><input type="text" name="enterDate" size="15" value="<%=editTarget.writeDate %>"></td>
+                    <td><input type="text" name="enterPerson" size="15" value="<%=editTarget.writer %>"></td>
                     <td><textarea type="text" name="title" ><%= editTarget.title.replace(/<br>/g, '\n') %></textarea></td>
-                    <td><textarea type="text" name="bugContent"><%= editTarget.bugContent.replace(/<br>/g, '\n') %></textarea></td>
+                    <td><textarea type="text" name="bugContent"><%= editTarget.bugContent.replace(/<br>/g, '\n') %></textarea></td> -->
+                    <td><%=editTarget.writeDate %></td>
+                    <td><%=editTarget.writer %></td>
+                    <td><%= editTarget.title.replace(/<br>/g, '\n') %></td>
+                    <td><%= editTarget.bugContent.replace(/<br>/g, '\n') %></td>
                     <td><textarea type="text" name="pgmId"><%= editTarget.Details[0].pgmId.replace(/<br>/g, '\n') %></textarea></td>
                     <td><textarea type="text" name="task"><%= editTarget.Details[0].task.replace(/<br>/g, '\n') %></textarea></td>
                     <td><input type="text" name="taskPerson" size="15" value="<%=editTarget.Details[0].taskPerson %>"></td>
@@ -83,7 +86,7 @@
         <% } %>
         <br>
             <input type="submit" value="編集を完了する" class="button">
-            <a href="/chart?pname=<%=editTarget.project%>" class="button">戻る</a>
+            <a href="/chart?pname=<%=editTarget.fileId%>" class="button">戻る</a>
         </form>
         
     </div>

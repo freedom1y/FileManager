@@ -11,41 +11,55 @@ function Get(req, res) {
 function Post(req, res) {
   worksheet = req.body.output.slice();
 
-  File.create({
-    fileName: req.body.projectName,
-    status: 1
-  }).then(() => {
-    File.max('fileId').then((num) => {
-      fileId = num;
-      
-      Account.create({
-        slackId: "L123",
-        accountName: "lexsol"
-      })
-    
-      var writeDt = new Date(worksheet[0][Object.keys(worksheet[0])[0]]);
-      writeDt.setHours(writeDt.getHours() + 9);
-    
-      BugContent.create({
-        fileId: fileId,
-        title: worksheet[0][Object.keys(worksheet[0])[2]].replace(/\n/g, '<br>'),
-        bugContent: worksheet[0][Object.keys(worksheet[0])[3]].replace(/\n/g, '<br>'),
-        writer: worksheet[0][Object.keys(worksheet[0])[1]],
-        writeDate: writeDt
+  File.findOne({
+    where: { fileName: req.body.projectName }
+  }).then(data => {
+    if (data) {
+      fileId = data.fileId;
+      BugContentRegister();
+
+    } else {
+      File.create({
+        fileName: req.body.projectName,
+        status: 1
       }).then(() => {
-        BugContent.max('bugId').then((bugNum) => {
-          bugId = bugNum;
-          DetailsResister();
+        File.max('fileId').then((num) => {
+          fileId = num;
+          
+          Account.create({
+            slackId: "lexsol",
+            accountName: "lexsol",
+            password: "L123"
+          });
+        
+          BugContentRegister();
         });
       });
 
+    }
+  });
+}
+
+function BugContentRegister(){
+  var writeDt = new Date(worksheet[0][Object.keys(worksheet[0])[0]]);
+  writeDt.setHours(writeDt.getHours() + 9);
+
+  BugContent.create({
+    fileId: fileId,
+    title: worksheet[0][Object.keys(worksheet[0])[2]].replace(/\n/g, '<br>'),
+    bugContent: worksheet[0][Object.keys(worksheet[0])[3]].replace(/\n/g, '<br>'),
+    writer: worksheet[0][Object.keys(worksheet[0])[1]],
+    writeDate: writeDt
+  }).then(() => {
+    BugContent.max('bugId').then((bugNum) => {
+      bugId = bugNum;
+      DetailsRegister();
     });
   });
 }
 
-function DetailsResister(){
+function DetailsRegister(){
   var title = worksheet[0][Object.keys(worksheet[0])[2]];
-
   
   for (var i = 0; i < worksheet.length; i++) {
     var writeDt = new Date(worksheet[i][Object.keys(worksheet[i])[0]]);
@@ -83,6 +97,7 @@ function DetailsResister(){
     });
   }
 }
+
 
 module.exports = {
   Get, Post

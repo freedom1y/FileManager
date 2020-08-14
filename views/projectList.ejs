@@ -46,7 +46,7 @@
             <% for ( row in xlsk ) { %>
                 <% if (fileName !== xlsk[row].fileName) { %>
                   <% fileName = xlsk[row].fileName %>
-                    <h2><a href="/chart?pname=<%= fileName %>" ><%= fileName %></a></h2>
+                    <h2><a href="/chart?pname=<%= xlsk[row].fileId %>" ><%= fileName %></a></h2>
                 <% } %>
                 
             <% } %>

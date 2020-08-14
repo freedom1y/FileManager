@@ -24,7 +24,7 @@
             <li><a href="/upload" class="button">ファイルアップロード</a></li><br>
             <% if ( userName === 'lexsol') { %>
             <!-- 管理者ユーザー名を記述 -->
-            <li><a href="/approve" class="button">承認</a></li><br>
+            <li><a href="/approveList" class="button">承認</a></li><br>
             <li><a href="/registAccount" class="button">新規アカウント登録</a></li><br>
             <% } %>
             <li><a href="/logout" class="button">ログアウト</a></li><br>
@@ -45,6 +45,7 @@
 
 
         <% if (typeof fileName !== 'undefined') { %>
+
         <P><%= fileName %></P>
         <% } %>
     </div>

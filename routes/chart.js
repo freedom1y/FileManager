@@ -6,7 +6,7 @@ const Account = require('../models/account');
 function Get(req, res) {
   File.findOne({
     where: {
-      fileName: req.query.pname
+      fileId: req.query.pname
     }
   }).then((file) => {
     BugContent.findAll({
@@ -31,7 +31,7 @@ function Get(req, res) {
     }).then((data) => {
       res.render('chart', {
         xlsk: data,
-        fileName: req.query.pname
+        fileName: file.fileName
       });
     });
   });

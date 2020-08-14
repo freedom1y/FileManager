@@ -9,10 +9,10 @@ const lib = all(__dirname + '/lib'); // libディレクトリ直下のファイ�
 const routes = all(__dirname + '/routes');
 
 // モデルの読み込み
+const Account = require('./models/account');
 const File = require('./models/file');
 const BugContent = require('./models/bugContent');
 const Details = require('./models/details');
-const Account = require('./models/account');
 File.sync().then(() => {
   File.hasMany(BugContent, {
     foreignKey: 'fileId',
@@ -29,8 +29,12 @@ File.sync().then(() => {
     });
     Details.sync();
   });
-  File.belongsTo(Account, {foreignKey: 'status'});
-  Account.sync();
+  Account.sync().then(() => {
+    Account.hasMany(File, {
+      foreignKey: 'status',
+      sourceKey: 'accountId'
+    });
+  });
 });
 
 
@@ -58,6 +62,7 @@ app.get('/projectList', routes.projectList);
 app.get('/edit', routes.edit.Get);
 app.post('/edit', routes.edit.Post);
 app.get('/delete', routes.delete.Delete);
+app.get('/approveList', routes.approveList.Get);
 app.get('/approve', routes.approve.Get);
 app.post('/approve', routes.approve.Post);
 app.get('/logout', routes.logout);

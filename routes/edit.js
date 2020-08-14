@@ -1,32 +1,33 @@
-const post = require('../lib/post');
+const File = require('../models/file');
+const BugContent = require('../models/bugContent');
+const Details = require('../models/details');
+const Account = require('../models/account');
 const mklog = require('../lib/mklog');
 const auth = require('basic-auth');
 
 // GETリクエスト
 function Get(req, res) {
-  post.findOne({
-    where: {
-      id: req.query.id
-    }
-  }).then((post) => {
+  BugContent.findOne({
+    include: [{
+      model: Details,
+      where: { detailsId: req.query.details }
+    }],
+    where: { bugId: req.query.bugId }
+  }).then((data) => {
     res.render('edit', {
-      editTarget: post
+      editTarget: data
     });
   });
 }
 
+
+
 // POSTリクエスト
 function Post(req, res) {
-  post.findOne({
-    where: {
-      id: req.query.id
-    }
-  }).then((updateData) => {
-    updateData.update({
-      enterDate: req.body.enterDate,
-      enterPerson: req.body.enterPerson,
-      title: req.body.title,
-      content: req.body.content,
+  Details.findOne({
+    where: { detailsId: req.query.details }
+  }).then((updatedata) => {
+    updatedata.update({
       pgmId: req.body.pgmId,
       task: req.body.task,
       taskPerson: req.body.taskPerson,
@@ -36,14 +37,20 @@ function Post(req, res) {
       compDate: req.body.compDate,
       manHour: req.body.manHour,
       taskType: req.body.taskType,
-      note: req.body.note,
-      flag: 1
-    });
-    const userInfo = auth(req); 
-    mklog.log('update rowid=' + req.query.id, req);
-    res.render('edit', {
-      editTarget: updateData,
-      updateMsg: "更新完了"
+      note: req.body.note
+    }).then(() => {
+      BugContent.findOne({
+        include: [{
+          model: Details,
+          where: { detailsId: req.query.details }
+        }],
+        where: { bugId: req.query.bugId }
+      }).then((data) => {
+        res.render('edit', {
+          editTarget: data,
+          updateMsg: "更新完了"
+        });
+      });
     });
   });
 }

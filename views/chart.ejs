@@ -13,7 +13,7 @@
 
             // 「OK」時の処理開始 ＋ 確認ダイアログの表示
             if (window.confirm('本当に削除しますか？')) {
-                location.href = "/delete?id=" + id + "&pname=" + pname; // example_confirm.html へジャンプ
+                location.href = "/delete?id=" + id + "&pname=" + pname;
             }else {
                 window.alert('キャンセルされました'); // 警告ダイアログを表示
             }
@@ -90,7 +90,7 @@
                             <a href="/edit?bugId=<%=xlsk[row].bugId %>&details=<%=xlsk[row].Details[i].detailsId %>" class="btn-square">編集</a>
                         </td>
                         <td nowrap>
-                            <input type="button" class="btn-square" value="削除" onClick="disp('<%= fileName %>',<%= xlsk[row].id %>)">
+                            <input type="button" class="btn-square" value="削除" onClick="disp('<%= fileName %>', '<%= xlsk[row].id %>')">
                         </td>
                     </tr>
                     <% sum_manHour += xlsk[row].Details[i].manHour %>

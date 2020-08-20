@@ -182,7 +182,7 @@ $(document).ready(function () {
     // 多重送信を防ぐため通信完了までボタンをdisableにする
     button.attr("disabled", true);
     button.attr("style", "background-color:#cccccc");
-
+    status = $("input[name='status'").val();
     // 各フィールドから値を取得してJSONデータを作成
     console.log(output);
     $.ajax({
@@ -190,7 +190,8 @@ $(document).ready(function () {
       type: "POST",
       data: {
         output: output,
-        projectName: projectName
+        projectName: projectName,
+        status: status
       },
       dataType: "JSON",
       cache: false,

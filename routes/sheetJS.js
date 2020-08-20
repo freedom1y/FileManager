@@ -5,12 +5,19 @@ const Account = require('../models/account');
 var worksheet, fileId, bugId;
 
 function Get(req, res) {
-  res.render('sheetJS');
+  Account.findAll({
+    order: [['accountId', 'ASC']]
+  }).then((accounts) =>{
+    // console.log(accounts[0].accountId)
+    res.render('sheetJS',{
+      accounts: accounts
+    });
+  })
 }
 
 function Post(req, res) {
   worksheet = req.body.output.slice();
-
+  console.log(req)
   File.findOne({
     where: { fileName: req.body.projectName }
   }).then(data => {
@@ -21,16 +28,16 @@ function Post(req, res) {
     } else {
       File.create({
         fileName: req.body.projectName,
-        status: 1
+        status: req.body.status
       }).then(() => {
         File.max('fileId').then((num) => {
           fileId = num;
           
-          Account.create({
-            slackId: "lexsol",
-            accountName: "lexsol",
-            password: "L123"
-          });
+          // Account.create({
+          //   slackId: "lexsol",
+          //   accountName: "lexsol",
+          //   password: "L123"
+          // });
         
           BugContentRegister();
         });

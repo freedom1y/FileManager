@@ -23,13 +23,13 @@
         <input type="file" class="custom-file-input" id="customFile">
       </div>
       <div>
+        <!-- このページは静的ｊｓで送信しているのでsheetJS.jsにデータを送るには静的jsのreadxlsxをいじる -->
         <p>承認依頼先<input list="accounts" name="status"></p>
         <datalist id="accounts">
           <% if (typeof accounts !== 'undefined') { %>
           <% console.log(accounts) %>
           <% for (row in accounts){ %>
-          <% console.log(row) %>
-          <option value="<%=accounts[row].slackId%>" label="<%=accounts[row].accountName%>"></option>
+          <option value="<%=accounts[row].accountId%>" label="<%=accounts[row].accountName%>"></option>
           <% } %>
           <% } %>
         </datalist>

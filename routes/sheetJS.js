@@ -17,7 +17,7 @@ function Get(req, res) {
 
 function Post(req, res) {
   worksheet = req.body.output.slice();
-
+  console.log(req)
   File.findOne({
     where: { fileName: req.body.projectName }
   }).then(data => {
@@ -28,16 +28,16 @@ function Post(req, res) {
     } else {
       File.create({
         fileName: req.body.projectName,
-        status: 1
+        status: req.body.status
       }).then(() => {
         File.max('fileId').then((num) => {
           fileId = num;
           
-          Account.create({
-            slackId: "lexsol",
-            accountName: "lexsol",
-            password: "L123"
-          });
+          // Account.create({
+          //   slackId: "lexsol",
+          //   accountName: "lexsol",
+          //   password: "L123"
+          // });
         
           BugContentRegister();
         });

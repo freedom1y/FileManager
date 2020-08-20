@@ -5,7 +5,14 @@ const Account = require('../models/account');
 var worksheet, fileId, bugId;
 
 function Get(req, res) {
-  res.render('sheetJS');
+  Account.findAll({
+    order: [['accountId', 'ASC']]
+  }).then((accounts) =>{
+    // console.log(accounts[0].accountId)
+    res.render('sheetJS',{
+      accounts: accounts
+    });
+  })
 }
 
 function Post(req, res) {

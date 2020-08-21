@@ -178,38 +178,44 @@ $(document).ready(function () {
 
 
   $("button#update").click(function (e) {
-    $('.not-fileName').html('アップロードが完了しました。');
-    // 多重送信を防ぐため通信完了までボタンをdisableにする
-    button.attr("disabled", true);
-    button.attr("style", "background-color:#cccccc");
-    status = $("input[name='status'").val();
-    // 各フィールドから値を取得してJSONデータを作成
-    console.log(output);
-    $.ajax({
-      url: "/upload",
-      type: "POST",
-      data: {
-        output: output,
-        projectName: projectName,
-        status: status
-      },
-      dataType: "JSON",
-      cache: false,
-      success: function (data) {
-        console.log("POST success");
-      },
-      error: function (XMLHttpRequest, textStatus, errorThrown) {
-        console.log("POST false");
-        console.log("XMLHttpRequest : " + XMLHttpRequest.status);
-        console.log("textStatus     : " + textStatus);
-        console.log("errorThrown    : " + errorThrown.message);
-      },
-      complete: function () {      // 成功・失敗に関わらず通信が終了した際の処理
-        button.attr("disabled", false);  // ボタンを再び enableにする
-        button.attr("style", "background-color:#ffffff");
-      }
-
-    });
+    console.log($("#status").val())
+    if ($("#customFile").val().length == 0 ){
+      $('.not-fileName').html('【エラー】ファイルが選択されていませんん');
+    }else if ($("#status").val().length == 0 ){
+      $('.not-fileName').html('【エラー】承認依頼先が指定されていません');
+    }else{
+      $('.not-fileName').html('アップロードが完了しました。');
+      // 多重送信を防ぐため通信完了までボタンをdisableにする
+      button.attr("disabled", true);
+      button.attr("style", "background-color:#cccccc");
+      status = $("input[name='status'").val();
+      // 各フィールドから値を取得してJSONデータを作成
+      console.log(output);
+      $.ajax({
+        url: "/upload",
+        type: "POST",
+        data: {
+          output: output,
+          projectName: projectName,
+          status: status
+        },
+        dataType: "JSON",
+        cache: false,
+        success: function (data) {
+          console.log("POST success");
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+          console.log("POST false");
+          console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+          console.log("textStatus     : " + textStatus);
+          console.log("errorThrown    : " + errorThrown.message);
+        },
+        complete: function () {      // 成功・失敗に関わらず通信が終了した際の処理
+          button.attr("disabled", false);  // ボタンを再び enableにする
+          button.attr("style", "background-color:#ffffff");
+        }
+      });
+    }
   });
 
 });

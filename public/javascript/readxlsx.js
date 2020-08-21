@@ -178,7 +178,6 @@ $(document).ready(function () {
 
 
   $("button#update").click(function (e) {
-    console.log($("#status").val())
     if ($("#customFile").val().length == 0 ){
       $('.not-fileName').html('【エラー】ファイルが選択されていませんん');
     }else if ($("#status").val().length == 0 ){

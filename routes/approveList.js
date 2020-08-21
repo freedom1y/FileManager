@@ -34,7 +34,6 @@ function Get(req, res) {
         // },
         order: [['accountId', 'DESC']]
     }).then((data) => {
-        // console.log(data[1].Files[0].fileName);
         res.render('approveList', {
           xlsk: data,
         });

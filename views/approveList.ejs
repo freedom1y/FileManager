@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="/css/style.css">
     <script type="text/javascript">
 
-        function disp(fileName, pass) {
+        function disp(fileId, pass) {
 
             // 入力ダイアログを表示 ＋ 入力内容を passIn に代入
             passIn = window.prompt("パスワードを入力してください", "");
 
             if (passIn == pass) {
-                location.href = "/approve?project=" + fileName;
+                location.href = "/approve?id=" + fileId;
             }
             else if (passIn != "" && passIn != null) {
                 window.alert('パスワードが間違っています');
@@ -59,7 +59,7 @@
                                 <td><%= xlsk[row].accountName %></td>
                                 <td>
                                     <input type="button" class="btn-square" value="認証"
-                                        onClick="disp('<%= fileName %>', '<%= xlsk[row].password %>')">
+                                        onClick="disp('<%= xlsk[row].Files[file_num].fileId %>', '<%= xlsk[row].password %>')">
                                 </td>
                             </tr>
                         <% } %>

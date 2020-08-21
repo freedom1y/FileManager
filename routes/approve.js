@@ -1,80 +1,67 @@
-const post = require('../lib/post');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
-var approveMsg = "";
+const File = require('../models/file');
+const BugContent = require('../models/bugContent');
+const Details = require('../models/details');
+const Account = require('../models/account');
 const mklog = require('../lib/mklog');
-const auth = require('basic-auth');
 
 // GETリクエスト
 function Get(req, res) {
-  approveMsg = "";
-  post.findAll({
+  File.findOne({
     where: {
-      flag: 1
-    },
-    order: [['project', 'ASC']]
-  }).then((posts) => {
-    res.render('approve', {
-      xlsk: posts,
-      approveMsg: approveMsg
+      fileId: req.query.id
+    }
+  }).then((file) => {
+    BugContent.findAll({
+      include: [{
+          model: Details,
+        }],
+      where: {fileId: file.fileId},
+      order:[['bugId', 'ASC']]
+
+    }).then((data) => {
+      Account.findAll({
+        order: [['accountId', 'ASC']]
+      }).then((accounts) =>{
+        res.render('approve', {
+          xlsk: data,
+          accounts: accounts,
+          fileName: file.fileName
+        });
+      })
     });
+
   });
 }
 
 // POSTリクエスト
 function Post(req, res) {
-  approveMsg = "承認しました";
+  File.findOne({
+    where: { fileId: req.body.fileId }
+  }).then((file) => {
+    file.update({
+      status: req.body.accountId
+    });
 
-  //承認ID、非承認IDに分ける
-  let appIds = [];
-  let unappIds = [];
-  for (let i = 0; i < Object.keys(req.body).length; i++) {
-    if (req.body[Object.keys(req.body)[i]] === 'y') {
-      appIds.push(Number(Object.keys(req.body)[i]));
-    } else if(req.body[Object.keys(req.body)[i]] === 'n') {
-      unappIds.push(Number(Object.keys(req.body)[i]));
-    }
-  }
+    BugContent.findAll({
+      include: [{
+          model: Details,
+        }],
+      where: {fileId: file.fileId},
+      order:[['bugId', 'ASC']]
 
-  if(appIds.length){
-    post.findAll({
-      where: {
-        id: { [Op.in]: appIds }
-      }
-    }).then((updateData) => {
-      updateData.forEach((data) => {
-        data.update({
-          flag: 0
+    }).then((data) => {
+      Account.findAll({
+        order: [['accountId', 'ASC']]
+      }).then((accounts) =>{
+        res.render('approve', {
+          xlsk: data,
+          accounts: accounts,
+          fileName: file.fileName,
+          updateMsg: "承認完了"
         });
-      });
-      mklog.log('approve rowid=' + appIds, req);
+      })
     });
-  };
-  
-  if(unappIds.length){
-    post.findAll({
-      where: {
-        id: { [Op.in]: unappIds }
-      }
-    }).then((updateData) => {
-      updateData.forEach((data) => {
-        data.update({
-          flag: 2
-        });
-      });
-      mklog.log('unapprove rowid=' + unappIds, req);
-    });
-  }
-  post.findAll({
-    where: {
-      flag: 1,
-      id: { [Op.notIn]: appIds.concat(unappIds) }
-    }
-  }).then((posts) => {
-    res.render('approve', {
-      xlsk: posts,
-      approveMsg: approveMsg
-    });
+
   });
 }
 

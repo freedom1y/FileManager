@@ -17,65 +17,91 @@
         </div>
         <h1 class="title">承認</h1>
 
-
         <% if (typeof xlsk !== 'undefined') { %>
-            <% var projectName = '' %>
+            <% var name = '' %>
+            <% var sum_manHour = 0 %>
             <% for ( row in xlsk ) { %>
-                <form action="/approve" method="post">
-                <% if (projectName !== xlsk[row].project) { %>
-                    <% projectName = xlsk[row].project %>
-                    </table>
-                    <h2><%= xlsk[row].project %></h2>
-                    <table border="1" width="50%" height="70%">
-                        <tr>
-                            <th colspan="2" id="appcol">承認</th>
-                            <th>記入日</th>
-                            <th>記入者</th>
-                            <th>タイトル</th>
-                            <th>不具合・要望内容</th>
-                            <th>PGM_ID</th>
-                            <th>対応</th>
-                            <th>対応者</th>
-                            <th>進捗</th>
-                            <th>重要度</th>
-                            <th>対応予定日</th>
-                            <th>完了日</th>
-                            <th>工数(人日)</th>
-                            <th>種別</th>
-                            <th>備考</th>            
-                        </tr>
+                <% let loopNum = 0 %>
+                <% loopNum = xlsk[row].Details.length %>
+                <% for ( let i = 0; i < loopNum; i++ ) { %>
+                    <% if (name !== fileName) { %>
+                        <% name = fileName %>
+                            </table>
+                            <h2><%= fileName %></h2>
+                            <table class="chart-table" border="1" cellspacing="0">
+                                <tr>
+                                    <th width="6%"><a href="/chart/sortEnterDate?pname=<%= fileName %>">記入日</a></th>
+                                    <th><a href="/chart/sortEnterPerson?pname=<%= fileName %>">記入者</a></th>
+                                    <th width="10%"><a href="/chart/sortTitle?pname=<%= fileName %>">タイトル</a></th>
+                                    <th width="15%"><a href="/chart/sortContent?pname=<%= fileName %>">不具合・要望内容</a></th>
+                                    <th width="15%"><a href="/chart/sortPGM_ID?pname=<%= fileName %>">PGM_ID</a></th>
+                                    <th width="20%"><a href="/chart/sortTask?pname=<%= fileName %>">対応</a></th>
+                                    <th><a href="/chart/sortTaskPerson?pname=<%= fileName %>">対応者</a></th>
+                                    <th><a href="/chart/sortProgress?pname=<%= fileName %>">進捗</a></th>
+                                    <th><a href="/chart/sortImportance?pname=<%= fileName %>">重要度</a></th>
+                                    <th width="6%"><a href="/chart/sortTaskDate?pname=<%= fileName %>">対応予定日</a></th>
+                                    <th width="6%"><a href="/chart/sortCompDate?pname=<%= fileName %>">完了日</a></th>
+                                    <th><a href="/chart/sortManHour?pname=<%= fileName %>">工数(人日)</a></th>
+                                    <th><a href="/chart/sortTaskType?pname=<%= fileName %>">種別</a></th>
+                                    <th>備考</th>
+                                </tr>
+                    <% } %>
+                    <tr class='flag<%= xlsk[row].flag%>'>
+                        <td><%= xlsk[row].writeDate %></td>
+                        <td><%= xlsk[row].writer %></td>
+                        <td align="left"><%- xlsk[row].title %></td>
+                        <td align="left"><%- xlsk[row].bugContent %></td>
+                        <td align="left"><%- xlsk[row].Details[i].pgmId %></td>
+                        <td align="left"><%- xlsk[row].Details[i].task %></td>
+                        <td><%= xlsk[row].Details[i].taskPerson %></td>
+                        <td><%= xlsk[row].Details[i].progress %></td>
+                        <td><%= xlsk[row].Details[i].importance %></td>
+                        <td><%= xlsk[row].Details[i].taskDate %></td>
+                        <td><%= xlsk[row].Details[i].compDate %></td>
+                        <td><%= xlsk[row].Details[i].manHour %></td>
+                        <td><%= xlsk[row].Details[i].taskType %></td>
+                        <td><%= xlsk[row].Details[i].note %></td>
+                    </tr>
+                    <% sum_manHour += xlsk[row].Details[i].manHour %>
                 <% } %>
-                <tr>
-                    <td>
-                        <label><input type="radio" name='<%=xlsk[row].id%>' value='y' class="radio">Y</label>
-                    </td>
-                    <td>
-                        <label><input type="radio" name='<%=xlsk[row].id%>' value='n' class="radio">N</label>
-                    </td>
-                    <td><%= xlsk[row].enterDate %></td>
-                    <td><%= xlsk[row].enterPerson %></td>
-                    <td align="left"><%= xlsk[row].title %></td>
-                    <td align="left"><%= xlsk[row].content %></td>
-                    <td align="left"><%= xlsk[row].pgmId %></td>
-                    <td align="left"><%= xlsk[row].task %></td>
-                    <td><%= xlsk[row].taskPerson %></td>
-                    <td><%= xlsk[row].progress %></td>
-                    <td><%= xlsk[row].importance %></td>
-                    <td><%= xlsk[row].taskDate %></td>
-                    <td><%= xlsk[row].compDate %></td>
-                    <td><%= xlsk[row].manHour %></td>
-                    <td><%= xlsk[row].taskType %></td>
-                    <td><%= xlsk[row].note %></td>
-                </tr>                 
             <% } %>
-        
-        </table>
+
+            <tr>
+                <th>合計</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th>-</th>
+                <th><%= sum_manHour %></th>
+                <th>-</th>
+                <th>-</th>
+            </tr>
+            </table>
         <% }%>
 
-        <% if (approveMsg) { %>
-            <h3><%= approveMsg %></h3>
-        <% } %>
-        <br>
+        <form action="/approve" method="post">
+
+            <p>承認依頼先<input list="accounts" name="accountId"></p>
+            <datalist id="accounts">
+              <% if (typeof accounts !== 'undefined') { %>
+              <% for (row in accounts){ %>
+              <option value="<%=accounts[row].accountId%>" label="<%=accounts[row].accountName%>"></option>
+              <% } %>
+              <% } %>
+            </datalist>
+
+            <input type="hidden" value="<%=xlsk[0].fileId %>" name="fileId">
+
+            <% if (typeof updateMsg !== 'undefined') { %>
+                <h3><%= updateMsg %></h3>
+            <% } %>
+            <br>
 
         <input type="submit" value="承認を確定" class='button'>
         </form>

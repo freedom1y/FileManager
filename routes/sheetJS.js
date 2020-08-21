@@ -2,6 +2,8 @@ const File = require('../models/file');
 const BugContent = require('../models/bugContent');
 const Details = require('../models/details');
 const Account = require('../models/account');
+const toSlack = require('../lib/slackNotice');
+
 var worksheet, fileId, bugId;
 
 function Get(req, res) {
@@ -17,7 +19,7 @@ function Get(req, res) {
 
 function Post(req, res) {
   worksheet = req.body.output.slice();
-  console.log(req)
+  // console.log(req)
   File.findOne({
     where: { fileName: req.body.projectName }
   }).then(data => {
@@ -44,6 +46,11 @@ function Post(req, res) {
       });
 
     }
+    Account.findOne({
+      where: { accountId: req.body.status }
+    }).then((account) =>{
+      toSlack.notice({ id: account.slackId });
+    })
   });
 }
 

@@ -69,6 +69,8 @@ app.get('/logout', routes.logout);
 app.get('/favicon.ico', routes.favicon);
 app.get('/testSlack', routes.testSlack.Get);
 app.post('/testSlack', routes.testSlack.Post);
+app.get('/noticeSlack', routes.noticeSlack.Get);
+app.post('/noticeSlack', routes.noticeSlack.Post)
 app.get('/registAccount', routes.registAccount.Get);
 app.post('/registAccount', routes.registAccount.Post);
 

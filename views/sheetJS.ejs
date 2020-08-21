@@ -27,7 +27,6 @@
         <p>承認依頼先<input list="accounts" name="status"></p>
         <datalist id="accounts">
           <% if (typeof accounts !== 'undefined') { %>
-          <% console.log(accounts) %>
           <% for (row in accounts){ %>
           <option value="<%=accounts[row].accountId%>" label="<%=accounts[row].accountName%>"></option>
           <% } %>

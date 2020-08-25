@@ -16,6 +16,14 @@ const File = loader.database.define('File', {
   status: {
     type: Sequelize.INTEGER,
     allowNull: false
+  },
+  firstStatus:{
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  comment:{
+    type: Sequelize.TEXT,
+    allowNull: true
   }
 }, {
     freezeTableName: true,

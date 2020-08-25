@@ -35,34 +35,85 @@ function Get(req, res) {
 
 // POSTリクエスト
 function Post(req, res) {
-  File.findOne({
-    where: { fileId: req.body.fileId }
-  }).then((file) => {
-    file.update({
-      status: req.body.accountId
-    });
+  if(typeof req.body.notApprove === 'undefined'){
+    File.findOne({
+      where: { fileId: req.body.fileId }
 
-    BugContent.findAll({
-      include: [{
-          model: Details,
-        }],
-      where: {fileId: file.fileId},
-      order:[['bugId', 'ASC']]
+    }).then((file) => {
+      BugContent.findAll({
+        include: [{
+            model: Details,
+          }],
+        where: {fileId: file.fileId},
+        order:[['bugId', 'ASC']]
 
-    }).then((data) => {
-      Account.findAll({
-        order: [['accountId', 'ASC']]
-      }).then((accounts) =>{
-        res.render('approve', {
-          xlsk: data,
-          accounts: accounts,
-          fileName: file.fileName,
-          updateMsg: "承認完了"
+      }).then((data) => {
+        Account.findAll({
+          order: [['accountId', 'ASC']]
+
+        }).then((accounts) =>{
+          var flag = false;
+          var num = Number(req.body.accountId);
+          for(row in accounts){
+            if(accounts[row].accountId === num){
+              flag = true;
+            }
+          }
+
+          if(flag){
+            file.update({
+              status: req.body.accountId
+            });    
+            res.render('approve', {
+              xlsk: data,
+              accounts: accounts,
+              fileName: file.fileName,
+              updateMsg: "承認完了"
+            });
+          }else{
+            res.render('approve', {
+              xlsk: data,
+              accounts: accounts,
+              fileName: file.fileName,
+              updateMsg: "依頼先が存在しません"
+            });
+          }
+
         });
-      })
+      });
     });
 
-  });
+  }else{
+    File.findOne({
+      where: { fileId: req.body.fileId }
+
+    }).then((file) => {
+      BugContent.findAll({
+        include: [{
+            model: Details,
+          }],
+        where: {fileId: file.fileId},
+        order:[['bugId', 'ASC']]
+
+      }).then((data) => {
+        Account.findAll({
+          order: [['accountId', 'ASC']]
+
+        }).then((accounts) =>{
+          file.update({
+            status: file.firstStatus
+          });    
+          res.render('approve', {
+            xlsk: data,
+            accounts: accounts,
+            fileName: file.fileName,
+            notApproveMsg: "非承認完了"
+          });
+
+        });
+      });
+    });
+  }
 }
 
 module.exports = {

@@ -58,6 +58,7 @@
                                     <th><a href="/chart/sortManHour?pname=<%= fileName %>">工数(人日)</a></th>
                                     <th><a href="/chart/sortTaskType?pname=<%= fileName %>">種別</a></th>
                                     <th>備考</th>
+                                    <th nowrap>承認依頼先</th>
                                     <th width="3%" nowrap>編集</th>
                                     <th width="3%" nowrap>削除</th>
                                 </tr>
@@ -77,6 +78,7 @@
                         <td><%= xlsk[row].Details[i].manHour %></td>
                         <td><%= xlsk[row].Details[i].taskType %></td>
                         <td><%= xlsk[row].Details[i].note %></td>
+                        <td><%= accountName %></td>
                         <td nowrap>
                             <a href="/edit?bugId=<%=xlsk[row].bugId %>&details=<%=xlsk[row].Details[i].detailsId %>" class="btn-square">編集</a>
                         </td>
@@ -101,6 +103,7 @@
                 <th>-</th>
                 <th>-</th>
                 <th><%= sum_manHour %></th>
+                <th>-</th>
                 <th>-</th>
                 <th>-</th>
                 <th>-</th>

@@ -9,29 +9,23 @@ function Get(req, res) {
       fileId: req.query.pname
     }
   }).then((file) => {
-    BugContent.findAll({
-      include: [{
-          model: Details,
-          attributes: [
-            'detailsId',
-            'pgmId',
-            'task',
-            'taskPerson',
-            'progress',
-            'importance',
-            'taskDate',
-            'compDate',
-            'manHour',
-            'taskType',
-            'note'
-          ]
-        }],
-      where: {fileId: file.fileId},
-      order:[['bugId', 'ASC']]
-    }).then((data) => {
-      res.render('chart', {
-        xlsk: data,
-        fileName: file.fileName
+    Account.findOne({
+      where: {
+        accountId: file.status
+      }
+    }).then((account) => {
+      BugContent.findAll({
+        include: [{
+            model: Details,
+          }],
+        where: {fileId: file.fileId},
+        order:[['bugId', 'ASC']]
+      }).then((data) => {
+        res.render('chart', {
+          accountName: account.accountName,
+          xlsk: data,
+          fileName: file.fileName
+        });
       });
     });
   });

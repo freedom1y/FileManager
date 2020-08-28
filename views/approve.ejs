@@ -89,13 +89,13 @@
             <h3><%= updateMsg %></h3>
         <% }else if (typeof notApproveMsg !== 'undefined') { %>
             <h3><%= notApproveMsg %></h3>
-        <% } %> %>
+        <% } %>
 
         <form action="/approve" method="post">
 
             <p>承認依頼先<input list="accounts" name="accountId"></p>
             <datalist id="accounts">
-                
+
                 <% if (typeof accounts !== 'undefined') { %>
                     <% for (row in accounts){ %>
                         <option value="<%=accounts[row].accountId%>" label="<%=accounts[row].accountName%>"></option>
@@ -115,7 +115,7 @@
 
             <input type="hidden" value="<%=xlsk[0].fileId %>" name="fileId">
             <input type="hidden" value="1" name="notApprove">
-            
+
             <input type="submit" value="非承認" class='button'>
         </form>
         <a href="/index" class="button">ホームに戻る</a>

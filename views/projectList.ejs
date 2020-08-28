@@ -35,26 +35,45 @@
 <body>
     <div class="top-wrapper">
 
-        <div class="top-image">
-            <h1><a href="/index"><img src="/images/logo.jpg" alt="LexSol"></a></h1>
-        </div>
+      <div class="top-image">
+        　　<a href="/index"><font color="#FF4F02">Lex</font><font color="#00008B">Sol</font></a>
+          <!--<img src="/images/logo.jpg">-->
+      </div>
         <h1 class="title">プロジェクト一覧</h1>
-
-
+        <div id="menu-bar">
+        <ul>
+            <li><a href="/projectList" class="button">プロジェクト一覧</a></li><br>
+            <li><a href="/upload" class="button">ファイルアップロード</a></li><br>
+            <!-- 管理者ユーザー名を記述 -->
+            <li><a href="/approveList" class="button">承認</a></li><br>
+            <li><a href="/registAccount" class="button">新規アカウント登録</a></li><br>
+            <li><a href="/logout" class="button">ログアウト</a></li><br>
+        </ul>
+      </div>
+      <div class="main">
         <% if (typeof xlsk !== 'undefined') { %>
             <% var fileName = '' %>
+            <table class="chart-table" border="1" cellspacing="0">
+                <tr>
+                    <th width="6%">プロジェクト名</th>
+                  </tr>
             <% for ( row in xlsk ) { %>
                 <% if (fileName !== xlsk[row].fileName) { %>
                   <% fileName = xlsk[row].fileName %>
-                    <h2><a href="/chart?pname=<%= xlsk[row].fileId %>" ><%= fileName %></a></h2>
+                  <tr class='flag<%= xlsk[row].flag%>'>
+                    <td><a href="/chart?pname=<%= xlsk[row].fileId %>" ><%= fileName %></a></td>
+                  </tr>
+                    <!--<h2><a href="/chart?pname=<%= xlsk[row].fileId %>" ><%= fileName %></a></h2>-->
                 <% } %>
-                
+
+
             <% } %>
+          </table>
+
         <% }%>
 
-        <br>
-        <a href="/index" class="button">ホームに戻る</a>
-    </div>
+        </div>
+      </div>
 </body>
 
 </html>

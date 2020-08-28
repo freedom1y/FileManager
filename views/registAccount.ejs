@@ -11,19 +11,29 @@
 
 <body>
     <div class="top-wrapper">
-        <div class="top-image">
-            <img src="/images/logo.jpg">
-        </div>
+      <div class="top-image">
+        　　<a href="/index"><font color="#FF4F02">Lex</font><font color="#00008B">Sol</font></a>
+          <!--<img src="/images/logo.jpg">-->
+      </div>
         <h1 class="title">アカウント登録</h1>
-        
+        <div id="menu-bar">
+        <ul>
+            <li><a href="/projectList" class="button">プロジェクト一覧</a></li><br>
+            <li><a href="/upload" class="button">ファイルアップロード</a></li><br>
+            <!-- 管理者ユーザー名を記述 -->
+            <li><a href="/approveList" class="button">承認</a></li><br>
+            <li><a href="/registAccount" class="button">新規アカウント登録</a></li><br>
+            <li><a href="/logout" class="button">ログアウト</a></li><br>
+        </ul>
+        </div>
+        <div class="main">
         <form action="registAccount" method="POST">
           <input type="text" name="name" placeholder="名前">
           <input type="text" name="slackId" placeholder="Slack ID">
           <input type="password" name="passWord" placeholder="パスワード">
           <input type="submit" value="登録">
-          <a href="/index" class="button">ホームに戻る</a>
         </form>
-
+</div>
 </body>
 
 </html>

@@ -31,12 +31,22 @@
 <body>
     <div class="top-wrapper">
 
-        <div class="top-image">
-            <h1><a href="/index"><img src="/images/logo.jpg" alt="LexSol"></a></h1>
-        </div>
+      <div class="top-image">
+        　　<a href="/index"><font color="#FF4F02">Lex</font><font color="#00008B">Sol</font></a>
+          <!--<img src="/images/logo.jpg">-->
+      </div>
         <h1 class="title">承認待ちリスト</h1>
-
-
+        <div id="menu-bar">
+        <ul>
+            <li><a href="/projectList" class="button">プロジェクト一覧</a></li><br>
+            <li><a href="/upload" class="button">ファイルアップロード</a></li><br>
+            <!-- 管理者ユーザー名を記述 -->
+            <li><a href="/approveList" class="button">承認</a></li><br>
+            <li><a href="/registAccount" class="button">新規アカウント登録</a></li><br>
+            <li><a href="/logout" class="button">ログアウト</a></li><br>
+        </ul>
+      </div>
+      <div class="main">
         <% if (xlsk.length > 0) { %>
         <% var fileName = '' %>
 
@@ -70,9 +80,8 @@
         </table>
         <% }%>
 
-        <br>
-        <a href="/index" class="button">ホームに戻る</a>
     </div>
+  </div>
 </body>
 
 </html>

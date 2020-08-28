@@ -24,13 +24,23 @@
 
 <body>
     <div class="top-wrapper">
-
-        <div class="top-image">
-            <h1><a href="/index"><img src="/images/logo.jpg" alt="LexSol"></a></h1>
+      <div class="top-image">
+        　　<a href="/index"><font color="#FF4F02">Lex</font><font color="#00008B">Sol</font></a>
+          <!--<img src="/images/logo.jpg">-->
+      </div>
         </div>
         <h1 class="title">工数一覧</h1>
-
-
+        <div id="menu-bar">
+        <ul>
+            <li><a href="/projectList" class="button">プロジェクト一覧</a></li><br>
+            <li><a href="/upload" class="button">ファイルアップロード</a></li><br>
+            <!-- 管理者ユーザー名を記述 -->
+            <li><a href="/approveList" class="button">承認</a></li><br>
+            <li><a href="/registAccount" class="button">新規アカウント登録</a></li><br>
+            <li><a href="/logout" class="button">ログアウト</a></li><br>
+        </ul>
+        </div>
+        <div class="main">
         <% if (typeof xlsk !== 'undefined') { %>
             <% var name = '' %>
             <% var sum_manHour = 0 %>
@@ -41,7 +51,7 @@
                     <% if (name !== fileName) { %>
                         <% name = fileName %>
                             </table>
-                            <h2><%= fileName %></h2>
+                            <h2 align="center"><%= fileName %></h2>
                             <table class="chart-table" border="1" cellspacing="0">
                                 <tr>
                                     <th width="6%"><a href="/chart/sortEnterDate?pname=<%= fileName %>">記入日</a></th>
@@ -114,8 +124,8 @@
 
         <br>
         <a href="/projectList" class="button">プロジェクト一覧に戻る</a>
-        <a href="/index" class="button">ホームに戻る</a>
     </div>
+  </div>
 </body>
 
 </html>

@@ -20,9 +20,9 @@ function handleFile(e) {
       type: 'base64',
       cellDates: true,
     });
-    console.log(wb)
+    // console.log(wb)
     output = to_json(wb);// JSONが返ってくる
-    console.log(output)
+    // console.log(output)
 
   };
 

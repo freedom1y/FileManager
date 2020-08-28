@@ -101,7 +101,8 @@ function Post(req, res) {
 
         }).then((accounts) =>{
           file.update({
-            status: file.firstStatus
+            status: file.firstStatus,
+            comment: req.body.comment
           });    
           res.render('approve', {
             xlsk: data,

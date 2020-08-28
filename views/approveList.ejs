@@ -44,7 +44,8 @@
             <tr>
                 <th>プロジェクト名</th>
                 <th>承認アカウント</th>
-                <th>認証</th>
+                <th width="50%">コメント</th>
+                <th nowrap>認証</th>
             </tr>
 
             <% for ( row in xlsk ) { %>
@@ -52,11 +53,10 @@
                     <% for ( file_num in xlsk[row].Files ) { %>
                         <% if (fileName !== xlsk[row].Files[file_num]) { %>
                             <% fileName = xlsk[row].Files[file_num].fileName %>
-                            <!-- <h2><a href="/chart?pname=<%= fileName %>" ><%= fileName %></a></h2>
-                                    <h2><a href="/approve"><%= fileName %></a></h2>-->
                             <tr>
                                 <td><%= fileName %></td>
                                 <td><%= xlsk[row].accountName %></td>
+                                <td align="left"><%= xlsk[row].Files[file_num].comment %></td>
                                 <td>
                                     <input type="button" class="btn-square" value="認証"
                                         onClick="disp('<%= xlsk[row].Files[file_num].fileId %>', '<%= xlsk[row].password %>')">

@@ -4,40 +4,17 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 function Get(req, res) {
-    /*File.findAll({
-      include: [{
-          model: Account,
-          attributes: [
-            'accountId',
-            'slackId',
-            'accountName',
-            'password'
-          ]
-        }],
-      where: {
-          status: { [Op.ne]: 1 }
-      },
-      order: [['status', 'DESC']]
-    }).then((data) => {
-      console.log(data);
-      res.render('approveList', {
-        xlsk: data,
-      });
-    });*/
-    
-    Account.findAll({
-        include: [{
-            model: File
-          }],
-        // where: {
-        //     accountId: { [Op.ne]: 1 }
-        // },
-        order: [['accountId', 'DESC']]
-    }).then((data) => {
-        res.render('approveList', {
-          xlsk: data,
-        });
+  Account.findAll({
+    include: [{
+        model: File
+      }],
+    order: [['accountId', 'DESC']]
+
+  }).then((data) => {
+    res.render('approveList', {
+      xlsk: data,
     });
+  });
 }
 
 module.exports = {

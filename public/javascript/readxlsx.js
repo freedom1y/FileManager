@@ -189,7 +189,6 @@ $(document).ready(function () {
       $('.not-fileName').html('【エラー】承認依頼先が指定されていません');
     }else if (accountArray.indexOf(Number($("#status").val())) == -1){
       $('.not-fileName').html('【エラー】このアカウントは存在しません');
-      console.log('no account')
     }else{
       $('.not-fileName').html('アップロードが完了しました。');
       // 多重送信を防ぐため通信完了までボタンをdisableにする

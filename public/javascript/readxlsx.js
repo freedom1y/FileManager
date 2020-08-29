@@ -20,9 +20,9 @@ function handleFile(e) {
       type: 'base64',
       cellDates: true,
     });
-    console.log(wb)
+    // console.log(wb)
     output = to_json(wb);// JSONが返ってくる
-    console.log(output)
+    // console.log(output)
 
   };
 
@@ -178,11 +178,18 @@ $(document).ready(function () {
 
 
   $("button#update").click(function (e) {
-    console.log($("#status").val())
+    var accountArray = [];
+    for(var i = 0; i < $('option').length; i++){
+      accountArray.push(Number($('option')[i].value));
+    }
+
     if ($("#customFile").val().length == 0 ){
-      $('.not-fileName').html('【エラー】ファイルが選択されていませんん');
+      $('.not-fileName').html('【エラー】ファイルが選択されていません');
     }else if ($("#status").val().length == 0 ){
       $('.not-fileName').html('【エラー】承認依頼先が指定されていません');
+    }else if (accountArray.indexOf(Number($("#status").val())) == -1){
+      $('.not-fileName').html('【エラー】このアカウントは存在しません');
+      console.log('no account')
     }else{
       $('.not-fileName').html('アップロードが完了しました。');
       // 多重送信を防ぐため通信完了までボタンをdisableにする
@@ -193,11 +200,12 @@ $(document).ready(function () {
       console.log(output);
       $.ajax({
         url: "/upload",
-        type: "POST",
+        type: "post",
         data: {
           output: output,
           projectName: projectName,
-          status: status
+          status: status,
+          accountId: status
         },
         dataType: "JSON",
         cache: false,

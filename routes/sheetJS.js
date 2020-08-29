@@ -8,9 +8,10 @@ var worksheet, fileId, bugId;
 function Get(req, res) {
   Account.findAll({
     order: [['accountId', 'ASC']]
-  }).then((accounts) =>{
-    res.render('sheetJS',{
-      accounts: accounts
+  }).then((accounts) => {
+    res.render('sheetJS', {
+      accounts: accounts,
+      msg: 'ファイルと承認依頼先を選択してください'
     });
   })
 }
@@ -20,38 +21,54 @@ function Post(req, res) {
   File.findOne({
     where: { fileName: req.body.projectName }
   }).then(data => {
-    if (data) {
-      fileId = data.fileId;
-      BugContentRegister();
 
-    } else {
-      File.create({
-        fileName: req.body.projectName,
-        status: req.body.status,
-        firstStatus: req.body.status
-      }).then(() => {
-        File.max('fileId').then((num) => {
-          fileId = num;
-          
-          // Account.create({
-          //   slackId: "lexsol",
-          //   accountName: "lexsol",
-          //   password: "L123"
-          // });
-        
+    Account.findAll({
+      order: [['accountId', 'ASC']]
+    }).then((accounts) => {
+      var flag = false;
+      var num = Number(req.body.accountId);
+      for (row in accounts) {
+        if (accounts[row].accountId === num) {
+          flag = true;
+        }
+      }
+
+      if (flag) {
+        if (data) {
+          fileId = data.fileId;
           BugContentRegister();
+        } else {
+          File.create({
+            fileName: req.body.projectName,
+            status: req.body.status,
+            firstStatus: req.body.status
+          }).then(() => {
+            File.max('fileId').then((num) => {
+              fileId = num;
+              BugContentRegister();
+            });
+          });
+        }
+        Account.findOne({
+          where: { accountId: req.body.status }
+        }).then((account) => {
+          toSlack.notice({ id: account.accountId });
         });
-      });
-    }
-    Account.findOne({
-      where: {accountId: req.body.status}
-    }).then((account) =>{
-      toSlack.notice({ id: account.accountId });
+        res.render('sheetJS', {
+          accounts: accounts,
+          successMsg: "アップロード完了しました"
+        });
+      } else {
+        res.render('registAccount', {
+          accounts: accounts,
+          falseMsg: "アカウントが存在しません"
+        });
+      }
     });
   });
 }
 
-function BugContentRegister(){
+function BugContentRegister() {
   var writeDt = new Date(worksheet[0][Object.keys(worksheet[0])[0]]);
   writeDt.setHours(writeDt.getHours() + 9);
 
@@ -69,9 +86,9 @@ function BugContentRegister(){
   });
 }
 
-function DetailsRegister(){
+function DetailsRegister() {
   var title = worksheet[0][Object.keys(worksheet[0])[2]];
-  
+
   for (var i = 0; i < worksheet.length; i++) {
     var writeDt = new Date(worksheet[i][Object.keys(worksheet[i])[0]]);
     writeDt.setHours(writeDt.getHours() + 9);
@@ -80,7 +97,7 @@ function DetailsRegister(){
     var compDt = new Date(worksheet[i][Object.keys(worksheet[i])[10]]);
     compDt.setHours(compDt.getHours() + 9);
 
-    if(title !== worksheet[i][Object.keys(worksheet[i])[2]]){
+    if (title !== worksheet[i][Object.keys(worksheet[i])[2]]) {
       BugContent.create({
         fileId: fileId,
         title: worksheet[i][Object.keys(worksheet[i])[2]].replace(/\n/g, '<br>'),

@@ -28,19 +28,26 @@
         <datalist id="accounts">
           <% if (typeof accounts !== 'undefined') { %>
           <% for (row in accounts){ %>
-          <option value="<%=accounts[row].accountId%>" label="<%=accounts[row].accountName%>"></option>
+          <option value="<%=accounts[row].accountId%>" label="<%=accounts[row].accountName%>" id="accList"></option>
           <% } %>
           <% } %>
         </datalist>
       </div>
       <br>
-      <p class="not-fileName"></p>
+      <% if (typeof successMsg !== 'undefined') {%>
+        <% msg = successMsg %>
+      <% } else if (typeof falseMsg !== 'undefined'){%>
+        <% msg = falseMsg %>
+      <% } %>
+      <p class="not-fileName"><%= msg %><% console.log(msg)%></p>
     </form>
+
 
     <div class="button-area">
       <button id="update" type="button" class="button">送信</button>
       <a href="/index" class="button">ホームに戻る</a>
     </div>
+
 
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"

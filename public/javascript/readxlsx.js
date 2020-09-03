@@ -4,6 +4,7 @@ var fileName = "";
 var projectName = "";
 var button = $("button#update");
 
+// test
 
 // ファイル選択時のメイン処理
 function handleFile(e) {

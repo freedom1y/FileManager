@@ -7,7 +7,6 @@ var button = $("button#update");
 
 // ファイル選択時のメイン処理
 function handleFile(e) {
-  // console.log(e)
   var files = e.target.files;
   var f = files[0];
 
@@ -23,7 +22,6 @@ function handleFile(e) {
     // console.log(wb)
     output = to_json(wb);// JSONが返ってくる
     // console.log(output)
-
   };
 
 
@@ -112,67 +110,6 @@ $(document).ready(function () {
   $('.custom-file-input').on('change', function (e) {
     handleFile(e);
     fileName = $(this)[0].files[0].name;
-
-    ////////////getでDBになかったやつを返してくれるnodeのjsにアクセス////////
-    //ajaxでget，nodeでDBに検索をかけて，DBに存在しないものをreturn
-    //帰ってきたらその行の数tableをappendして増やす
-    // console.log(output);
-    // console.log(fileName);
-    // console.log(output.length);
-    // for (let i = 0; i < output.length; i++) {
-    //   //テーブルの行を追加する式
-    //   $('#tbl1').append('<tr><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td><td>' + '-'
-    //       + '</td></tr>'
-    //   );
-    // }
-    // $.ajax({
-    //   type: "get",
-    //   url: "#",
-    //   data: {
-    //     output: output,
-    //     projectName: projectName
-    //   },
-    //   dataType: "json"
-    // }).then(
-    //   //第一引数が通信成功時の処理　第二引数が通信失敗時の処理
-    //   data => {
-    //     for (let i = 0; i < data.length; i++) {
-    //       //テーブルの行を追加する式
-    //       $('#tbl1').append('<tr><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td><td>' + '-'
-    //           + '</td></tr>'
-    //       );
-    //     }
-    //   },
-    //   error => alert('読み込み失敗')
-    // );
-
-    ///////////////////////////ここまで/////////////////////////////////
   })
 
 

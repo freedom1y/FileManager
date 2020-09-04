@@ -9,9 +9,12 @@ function Get(req, res) {
   Account.findAll({
     order: [['accountId', 'ASC']]
   }).then((accounts) => {
-    res.render('sheetJS', {
-      accounts: accounts,
-      msg: 'ファイルと承認依頼先を選択してください'
+    Details.max('detailsId').then((num) => {
+      res.render('sheetJS', {
+        accounts: accounts,
+        msg: 'ファイルと承認依頼先を選択してください',
+        detailsId: num
+      });
     });
   })
 }

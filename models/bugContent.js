@@ -11,7 +11,7 @@ const BugContent = loader.database.define('BugContent', {
   bugId: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true,
+    // autoIncrement: true,
     allowNull: false
   },
   title: {

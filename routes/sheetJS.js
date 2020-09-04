@@ -3,17 +3,17 @@ const BugContent = require('../models/bugContent');
 const Details = require('../models/details');
 const Account = require('../models/account');
 const toSlack = require('../lib/slackNotice');
-var worksheet, fileId, bugId;
+var worksheet, fileId;
 
 function Get(req, res) {
   Account.findAll({
     order: [['accountId', 'ASC']]
   }).then((accounts) => {
-    Details.max('detailsId').then((num) => {
+    BugContent.max('bugId').then((num) => {
       res.render('sheetJS', {
         accounts: accounts,
         msg: 'ファイルと承認依頼先を選択してください',
-        detailsId: num
+        maxBugId: num + 1
       });
     });
   })
@@ -77,15 +77,13 @@ function BugContentRegister() {
 
   BugContent.create({
     fileId: fileId,
+    bugId: Number(worksheet[0][Object.keys(worksheet[0])[14]]),
     title: worksheet[0][Object.keys(worksheet[0])[2]].replace(/\n/g, '<br>'),
     bugContent: worksheet[0][Object.keys(worksheet[0])[3]].replace(/\n/g, '<br>'),
     writer: worksheet[0][Object.keys(worksheet[0])[1]],
     writeDate: writeDt
   }).then(() => {
-    BugContent.max('bugId').then((bugNum) => {
-      bugId = bugNum;
-      DetailsRegister();
-    });
+    DetailsRegister();
   });
 }
 
@@ -103,18 +101,18 @@ function DetailsRegister() {
     if (title !== worksheet[i][Object.keys(worksheet[i])[2]]) {
       BugContent.create({
         fileId: fileId,
+        bugId: Number(worksheet[i][Object.keys(worksheet[i])[14]]),
         title: worksheet[i][Object.keys(worksheet[i])[2]].replace(/\n/g, '<br>'),
         bugContent: worksheet[i][Object.keys(worksheet[i])[3]].replace(/\n/g, '<br>'),
         writer: worksheet[i][Object.keys(worksheet[i])[1]],
         writeDate: writeDt
       });
       title = worksheet[i][Object.keys(worksheet[i])[2]];
-      bugId++;
     }
-
+    
     Details.create({
       fileId: fileId,
-      bugId: bugId,
+      bugId: Number(worksheet[i][Object.keys(worksheet[i])[14]]),
       pgmId: worksheet[i][Object.keys(worksheet[i])[4]].replace(/\n/g, '<br>'),
       task: worksheet[i][Object.keys(worksheet[i])[5]].replace(/\n/g, '<br>'),
       taskPerson: worksheet[i][Object.keys(worksheet[i])[6]],

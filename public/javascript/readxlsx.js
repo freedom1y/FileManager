@@ -4,6 +4,7 @@ var fileName = "";
 var projectName = "";
 var button = $("button#update");
 
+// test
 
 // ファイル選択時のメイン処理
 function handleFile(e) {
@@ -40,6 +41,8 @@ function fixdata(data) {
 
 // ワークブックのデータをjsonに変換
 function to_json(workbook) {
+  var maxBugId = Number($('#maxId').text());//最大detailsIdを取得
+
   if (fileName.indexOf('_案件一覧') === -1) {
     console.log('ファイル形式が一致しません');
     button.attr("disabled", true);
@@ -51,30 +54,15 @@ function to_json(workbook) {
 
   let sheetNameList = workbook.SheetNames;                       // シート名一覧オブジェクト
   let workSheet = workbook.Sheets[sheetNameList[0]];
-  let colNames = [
-    workSheet['C4'].v,
-    workSheet['D4'].w,
-    workSheet['E4'].w,
-    workSheet['F4'].w,
-    workSheet['G4'].w,
-    workSheet['H4'].w,
-    workSheet['I4'].w,
-    workSheet['J4'].w,
-    workSheet['K4'].w,
-    workSheet['L4'].v,
-    workSheet['M4'].v,
-    workSheet['N4'].w,
-    workSheet['O4'].w,
-    workSheet['P4'].w
-  ];
 
   let endCol = workSheet['!ref'].match(/\:[A-Z+]([0-9]+)/)[1];  // エクセルデータの末端の行数を取得する
-  workSheet['!ref'] = `C4:P${endCol}`;                          // 取得したいセルの範囲を指定し直す。H4からP列の末端行まで
+  workSheet['!ref'] = `C4:Q${endCol}`;                          // 取得したいセルの範囲を指定し直す。H4からP列の末端行まで
   // console.log(Object.keys(workSheet));
   let maxNum = 0;
   const newArray = Object.keys(workSheet).filter(element => (element.match(/^[C-P]\d+$/)));
   for (let i = 0; i < newArray.length; i++) maxNum = Math.max(maxNum, Number(newArray[i].slice(1)));
 
+  workSheet["Q4"] = {h: "bugId", r: '<t>bugId</t><rPh sb="0" eb="2"><t>バグアイディー</t></rPh><phoneticPr fontId="3"/>'  , t: "s", v: "bugId", w: "bugId"};
   // パディング
   for (let i = 5; i <= maxNum; i++) {
     if (!("G" + i in workSheet)) workSheet["G" + i] = { t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-" };
@@ -89,16 +77,21 @@ function to_json(workbook) {
     if (!("P" + i in workSheet)) workSheet["P" + i] = { t: "s", v: "-", r: '<t>-</t><phoneticPr fontId="10"/>', h: "-", w: "-" };
 
     if (i > 5) {
-      if (!("C" + i in workSheet)) workSheet["C" + i] = workSheet["C" + (i - 1)];
+      if (!("C" + i in workSheet)) {
+        workSheet["C" + i] = workSheet["C" + (i - 1)];
+        maxBugId--;//bug１つに対して複数あった場合bugIdを進めないためのデクリメント
+      }
       if (!("D" + i in workSheet)) workSheet["D" + i] = workSheet["D" + (i - 1)];
       if (!("E" + i in workSheet)) workSheet["E" + i] = workSheet["E" + (i - 1)];
       if (!("F" + i in workSheet)) workSheet["F" + i] = workSheet["F" + (i - 1)];
     }
+
+    //各行の末尾にdetailsIdを追加　JSONの最後に追加 ここにきてるmaxDetailsIdは＋１されてる
+    workSheet["Q" + i] = { t: "n", v: maxBugId, w: maxBugId };
+    maxBugId++;
   }
   console.log(workSheet);
-
   let workSheet_json = X.utils.sheet_to_json(workSheet);        // JSONオブジェクトとして取得
-  console.log(workSheet_json);
   return workSheet_json;
 }
 
@@ -109,6 +102,7 @@ $(document).ready(function () {
   // http://cccabinet.jpn.org/bootstrap4/javascript/forms/file-browser
   $('.custom-file-input').on('change', function (e) {
     handleFile(e);
+    // console.log($('#maxId').text());
     fileName = $(this)[0].files[0].name;
   })
 

@@ -23,9 +23,10 @@ ul, li {
 }
 
 table {
-  margin-left: auto;
-  margin-right: auto;
-  width: 95%;
+  margin-left: 15%;
+  margin-right: 0px;
+  margin-top: 10px;
+  width: 80%;
 }
 
 th {
@@ -101,9 +102,11 @@ h1 {
 
 .title {
   font-size: 54px;
-  line-height: 66px;
+  line-height: 76px;
   letter-spacing: 2px;
-  margin-bottom: 24px;
+  text-align: center;
+  /*margin-bottom: 24px;*/
+  background-color: #B0C4DE;
 }
 
 .description {
@@ -113,15 +116,20 @@ h1 {
   margin-bottom: 40px;
 }
 
+.main {
+  margin-top: 30px;
+  margin-left: 7.5%
+}
+
 .button {
   width: 230px;
   height: 48px;
   text-align: center;
   line-height: 45px;
   font-weight: 600;
-  color: #42cea9;
-  background-color: #ffffff;
-  border: 2px solid #58d2b2;
+  color: white;
+  background-color: #6495ED;
+  border: 1px solid white;
   border-radius: 2px;
   margin-left: auto;
   margin-right: auto;
@@ -138,7 +146,15 @@ h1 {
 }
 
 .top-image {
-  text-align:center;
+  font-size: 30px;
+  font-weight: 900;
+  float: left;
+  background-color: #B0C4DE;
+}
+
+.top-image a {
+  display: inline;
+  font-size: 30px;
 }
 
 /* header ================================ */
@@ -228,7 +244,7 @@ header {
   text-decoration: none;
   color: #2d3133;
   font-size: 14px;
-  font-weight: bold; 
+  font-weight: bold;
   border: 0px;
 }
 
@@ -243,7 +259,7 @@ header {
 /* chart ================================ */
 
 .chart-table a:hover{
-  color: #EEEEEE;
+  color: #0000FF;
 }
 
 /* upload ================================ */
@@ -251,4 +267,20 @@ header {
 .button-area button:disabled {
   background: #ccc;
   color: #42cea9;
+}
+
+#menu-bar {
+  position: absolute;
+  float: left;
+  height: 100%;
+  width: 15%;
+  background-color: #BBBBBB;
+}
+
+#menu-bar ul {
+  margin-top: 40px;
+}
+
+#menu-bar .button {
+  width: 75%;
 }

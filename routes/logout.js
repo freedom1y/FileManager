@@ -3,17 +3,17 @@ const auth = require('basic-auth');
 
 module.exports = (req, res) => {
   // console.log('logout');
-  const userInfo = auth(req); 
+  const userInfo = auth(req);
   mklog.log('logout', req);
-  
+
   res.writeHead(401, {
     'Content-Type': 'text/html; charset=utf-8'
   });
-  
+
   res.end(
     '<!DOCTYPE html>' +
       '<html lang="ja">' +
-      
+
       '</html>' +
 
       '<head>' +
@@ -24,9 +24,6 @@ module.exports = (req, res) => {
 
       '<body>' +
         '<div class="top-wrapper">' +
-            '<div class="top-image">' +
-                '<img src="/images/logo.jpg">' +
-            '</div>' +
             '<p class="description">' +
                 'ログアウトしました。' +
             '</p>' +

@@ -7,18 +7,17 @@
     <meta charset="UTF-8">
     <title>TOP</title>
     <link rel="stylesheet" href="/css/style.css">
+    <!--<link rel="stylesheet" href="/css/bootstrap.css">-->
 </head>
 
 <body>
     <div class="top-wrapper">
         <div class="top-image">
-            <img src="/images/logo.jpg">
+          　　<font color="#FF4F02">Lex</font><font color="#00008B">Sol</font>
+            <!--<img src="/images/logo.jpg">-->
         </div>
         <h1 class="title">工数管理システム</h1>
-        <p class="description">
-            エクセルファイルをアップロードし、Web上で工数管理を行う
-        </p>
-        <h3><%= userName + "としてログインしています" %></h3>
+        <div id="menu-bar">
         <ul>
             <li><a href="/projectList" class="button">プロジェクト一覧</a></li><br>
             <li><a href="/upload" class="button">ファイルアップロード</a></li><br>
@@ -29,6 +28,12 @@
             <% } %>
             <li><a href="/logout" class="button">ログアウト</a></li><br>
         </ul>
+      </div>
+      <div class="main">
+        <p class="description">
+            エクセルファイルをアップロードし、Web上で工数管理を行う
+        </p>
+        <h3><%= userName + "としてログインしています" %></h3>
 
         <form method="post" action="/testSlack">
             <input list="userName" name="userId" size="15">
@@ -49,8 +54,10 @@
         <P><%= fileName %></P>
         <% } %>
     </div>
-
+</div>
 
 </body>
+<!--<script type="text/javascript" src="/javascript/bootstrap.bundle.js"></script>
+<script type="text/javascript" src="/javascript/jquery-3.5.1.js"></script>-->
 
 </html>

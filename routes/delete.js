@@ -1,31 +1,66 @@
-const post = require('../lib/post');
-const mklog = require('../lib/mklog');
+const File = require('../models/file');
+const BugContent = require('../models/bugContent');
+const Details = require('../models/details');
+const Account = require('../models/account');
 
-function Delete(req, res){
-  console.log(req.query.pname)
-  post.destroy({
+function Delete(req, res) {
+  Details.destroy({
     where: {
-      id: req.query.id
+      detailsId: req.query.detailsId
     }
-  }).then((deleteData) =>{
-    mklog.log("delete id = " + req.query.id, req);
-    post.findAll({
+  }).then(() => {
+    File.findOne({
       where: {
-        project: req.query.pname
+        fileId: req.query.fileId
       }
-    }).then((posts) =>{
-      res.render('chart', {
-        xlsk: posts
+    }).then((file) => {
+      Account.findOne({
+        where: {
+          accountId: file.status
+        }
+      }).then((account) => {
+        BugContent.findAll({
+          include: [{
+            model: Details,
+          }],
+          where: { fileId: file.fileId },
+          order: [['bugId', 'ASC']]
+        }).then((data) => {
+          res.render('chart', {
+            accountName: account.accountName,
+            xlsk: data,
+            fileName: file.fileName,
+            msg: "削除完了"
+          });
+        });
       });
     });
-    
   }).catch((err) => {
-    mklog.log("delete false", req);
-    post.findAll({
-      order: [['project', 'ASC']]
-    }).then((posts) =>{
-      res.render('chart', {
-        xlsk: posts
+    console.log("delete failed");
+    File.findOne({
+      where: {
+        fileId: req.query.fileId
+      }
+    }).then((file) => {
+      Account.findOne({
+        where: {
+          accountId: file.status
+        }
+      }).then((account) => {
+        BugContent.findAll({
+          include: [{
+            model: Details,
+          }],
+          where: { fileId: file.fileId },
+          order: [['bugId', 'ASC']]
+        }).then((data) => {
+          res.render('chart', {
+            accountName: account.accountName,
+            xlsk: data,
+            fileName: file.fileName,
+            msg: "削除失敗"
+          });
+        });
       });
     });
   });

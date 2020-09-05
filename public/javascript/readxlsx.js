@@ -42,7 +42,7 @@ function fixdata(data) {
 // ワークブックのデータをjsonに変換
 function to_json(workbook) {
   var maxBugId = Number($('#maxId').text());//最大detailsIdを取得
-
+  console.log(maxBugId);
   if (fileName.indexOf('_案件一覧') === -1) {
     console.log('ファイル形式が一致しません');
     button.attr("disabled", true);

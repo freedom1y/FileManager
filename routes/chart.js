@@ -21,7 +21,7 @@ function Get(req, res) {
         where: {fileId: file.fileId},
         order:[['bugId', 'ASC']]
       }).then((data) => {
-        if(!data){
+        if(data){
           res.render('chart', {
             accountName: account.accountName,
             xlsk: data,

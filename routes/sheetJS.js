@@ -10,6 +10,9 @@ function Get(req, res) {
     order: [['accountId', 'ASC']]
   }).then((accounts) => {
     BugContent.max('bugId').then((num) => {
+      if(isNaN(num)){
+        num = 0;
+      }
       res.render('sheetJS', {
         accounts: accounts,
         msg: 'ファイルと承認依頼先を選択してください',
